@@ -1471,6 +1471,8 @@ label ros_shutdown:
     hide screen ros_shutdown_tooltip_shutdown
     show screen please_wait("Завершение работы...")
     $ renpy.pause(1.0, hard=True)
+    hide screen please_wait
+    scene black
     $ renpy.quit()
 
 label ros_restart:
