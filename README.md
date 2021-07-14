@@ -12,6 +12,7 @@ I scroll through the ReactOS page on Twitter in my spare time, and one day I was
 # Cons
 1. Currently only Russian language is available. More languages will be available in the near future.
 2. Not all OS features are implemented, but I'll update this project occasionally. And you, of course, can help me, if you know the Ren'Py and/or Python language quite well.
+3. You can encounter some bugs and exceptions at this moment of time, because this "port" was made initially for Windows.
 
 # How to cook
 1. Download the latest version of the Ren'Py SDK: https://www.renpy.org/latest.html
