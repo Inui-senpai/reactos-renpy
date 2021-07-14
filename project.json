@@ -1,0 +1,1 @@
+{"display_name": "ReactOS on Ren'Py", "android_build": "Release", "renamed_all": true, "renamed_steam": true, "force_recompile": false, "build_update": true, "packages": ["mac", "pc"], "add_from": false}
