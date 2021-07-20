@@ -18,7 +18,7 @@ I scroll through the ReactOS page on Twitter in my spare time, and one day I was
 1. Download the latest version of the Ren'Py SDK: https://www.renpy.org/latest.html
 2. Click on the green "Code" and choose "Download ZIP" option
 3. Install the downloaded copy of the Ren'Py SDK, then open up its directory and create folder named "reactos_test" (or something like that)
-4. Extract the "game" folder from the downloaded ZIP archive
+4. Extract the "game" folder from the downloaded ZIP archive into the created folder
 5. Launch "renpy.exe"/"renpy-32.exe", "renpy.sh", "renpy.app" (depending on your OS), choose project in Projects list (it will have the same name as the folder from step 3), and click on the Start Project
 6. ???
 7. PROFIT!!!
