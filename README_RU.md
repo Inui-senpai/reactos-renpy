@@ -1,3 +1,5 @@
+[English](README.md) | **Русский**
+
 # reactos-renpy
 Порт операционной системы ReactOS на Ren'Py. Зачем? Потому что я могу, конечно.
 
