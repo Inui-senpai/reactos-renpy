@@ -149,11 +149,17 @@ screen ros_notepad(file=None):
                 text "[file] - Блокнот" style "ros_notepad_window_title"
             else:
                 text "Безымянный - Блокнот" style "ros_notepad_window_title"
-            imagebutton auto "gui/window/common/close_%s.png" action Hide("ros_notepad"):
+            imagebutton idle "gui/window/common/close_idle.png" action [
+                SetVariable("ros_notepad_menu_file_opened", False),
+                SetVariable("ros_notepad_menu_edit_opened", False),
+                SetVariable("ros_notepad_menu_format_opened", False),
+                SetVariable("ros_notepad_menu_view_opened", False),
+                SetVariable("ros_notepad_menu_help_opened", False),
+                Hide("ros_notepad")]:
                 xanchor -544 yanchor -2
-            imagebutton auto "gui/window/common/expand_%s.png" action NullAction():
+            imagebutton idle "gui/window/common/expand_idle.png" action NullAction():
                 xanchor -526 yanchor -2
-            imagebutton auto "gui/window/common/minimize_%s.png" action NullAction():
+            imagebutton idle "gui/window/common/minimize_idle.png" action NullAction():
                 xanchor -510 yanchor -2
             hbox:
                 xpos 10 ypos 22

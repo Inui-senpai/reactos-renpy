@@ -2,8 +2,9 @@
 screen ros_taskbar():
     add "gui/desktop/taskbar.png":
         yalign 1.0
-    use ros_desktop_context_menu_trigger
-    use ros_desktop_taskbar_context_menu_trigger
+    if not start_menu_opened:
+        use ros_desktop_context_menu_trigger
+        use ros_desktop_taskbar_context_menu_trigger
     textbutton "Пуск" style "ros_start_button" text_style "ros_start_button_text" focus_mask "gui/desktop/start_button.png" action [
         Hide(screen="ros_start_menu_entertainment_frame"),
         Hide(screen="ros_start_menu_communications_frame"),
@@ -1148,23 +1149,25 @@ screen ros_desktop_icons():
 
 # Область для триггера контекстного меню Рабочего стола
 screen ros_desktop_context_menu_trigger():
-    imagebutton idle "gui/desktop/desktop_trigger_frame.png" focus_mask "gui/desktop/desktop_trigger_frame_focus_mask.png" action NullAction() alternate [
-        SetVariable("sort_entry", False),
-        SetVariable("create_entry", False),
-        SetVariable("toolbars_entry", False),
-        Hide(screen="ros_taskbar_context_menu"),
-        Hide(screen="ros_desktop_context_menu_this_pc"),
-        Show(screen="ros_desktop_context_menu")]
+    if not renpy.get_screen(["ros_properties_screen", "ros_explorer", "ros_properties_system", "ros_properties_taskbar", "ros_command_prompt", "ros_app_manager", "ros_notepad"]):
+        imagebutton idle "gui/desktop/desktop_trigger_frame.png" focus_mask "gui/desktop/desktop_trigger_frame_focus_mask.png" action NullAction() alternate [
+            SetVariable("sort_entry", False),
+            SetVariable("create_entry", False),
+            SetVariable("toolbars_entry", False),
+            Hide(screen="ros_taskbar_context_menu"),
+            Hide(screen="ros_desktop_context_menu_this_pc"),
+            Show(screen="ros_desktop_context_menu")]
 
 # Область для триггера контекстного меню Панели задач
 screen ros_desktop_taskbar_context_menu_trigger():
-    imagebutton idle "gui/desktop/desktop_trigger_frame.png" focus_mask "gui/desktop/taskbar_trigger_frame_focus_mask.png" action NullAction() alternate [
-        SetVariable("sort_entry", False),
-        SetVariable("create_entry", False),
-        SetVariable("toolbars_entry", False),
-        Hide(screen="ros_desktop_context_menu"),
-        Hide(screen="ros_desktop_context_menu_this_pc"),
-        Show(screen="ros_taskbar_context_menu")]
+    if not renpy.get_screen(["ros_properties_screen", "ros_explorer", "ros_properties_system", "ros_properties_taskbar", "ros_command_prompt", "ros_app_manager", "ros_notepad"]):
+        imagebutton idle "gui/desktop/desktop_trigger_frame.png" focus_mask "gui/desktop/taskbar_trigger_frame_focus_mask.png" action NullAction() alternate [
+            SetVariable("sort_entry", False),
+            SetVariable("create_entry", False),
+            SetVariable("toolbars_entry", False),
+            Hide(screen="ros_desktop_context_menu"),
+            Hide(screen="ros_desktop_context_menu_this_pc"),
+            Show(screen="ros_taskbar_context_menu")]
 
 # Контекстное меню: Рабочий стол
 screen ros_desktop_context_menu():
@@ -1357,11 +1360,13 @@ screen ros_taskbar_context_menu_toolbars():
             textbutton "Создать панель инструментов..." style "ros_context_menu_toolbars" text_style "ros_context_menu_text" focus_mask "ros_context_menu_toolbars_idle" action NullAction()
 
 # Выход из системы / Завершение работы
+transform ros_shutdown_background:
+    matrixcolor SaturationMatrix(1.0)
+    linear 1.5 matrixcolor SaturationMatrix(0.0)
 screen ros_logoff_frame():
     modal True
     on "show" action [Function(SetThumbnailFull), FileTakeScreenshot(), Function(SetThumbnailOriginal)]
-    add FileCurrentScreenshot():
-        matrixcolor SaturationMatrix(0)
+    add FileCurrentScreenshot() at ros_shutdown_background
     frame:
         style "ros_shutdown"
         xsize 312 ysize 198
@@ -1385,8 +1390,7 @@ screen ros_logoff_frame():
 screen ros_shutdown_frame():
     modal True
     on "show" action [Function(SetThumbnailFull), FileTakeScreenshot(), Function(SetThumbnailOriginal)]
-    add FileCurrentScreenshot():
-        matrixcolor SaturationMatrix(0)
+    add FileCurrentScreenshot() at ros_shutdown_background
     frame:
         style "ros_shutdown"
         xsize 312 ysize 198

@@ -32,6 +32,7 @@ screen ros_about(name=None):
     python:
         friendly_name = name.replace("notepad", "Блокнот").replace("reactos", "ReactOS")
         authors_button_text = "Авторы" if not ros_authors_opened else "< Назад"
+    modal True
     drag:
         drag_name "ros_about"
         drag_handle (0, 0, 419, 21)
@@ -64,7 +65,7 @@ screen ros_about(name=None):
                     use ros_about_general
                 else:
                     use ros_about_general_authors
-            textbutton "[authors_button_text]" style "ros_authors_button" text_style "ros_authors_button_text" focus_mask "gui/system_info/authors_button_idle.png" xpos 8 ypos 307 action ToggleVariable("ros_authors_opened", True, False)
+            textbutton authors_button_text style "ros_authors_button" text_style "ros_authors_button_text" focus_mask "gui/system_info/authors_button_idle.png" xpos 8 ypos 307 action ToggleVariable("ros_authors_opened", True, False)
             textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" xpos 321 ypos 307 action [
                 SetVariable("ros_authors_opened", False),
                 Hide(screen="ros_about")]

@@ -29,6 +29,8 @@ default dropdown1 = False
 default dropdown2 = False
 default dropdown3 = False
 default ros_properties_show_bottom_buttons = True
+default persistent.user_theme = "reactos_classic"
+default persistent.user_theme_color_scheme = "reactos_standard"
 default selected_theme = "Классическая тема"
 default default_color_scheme = "ReactOS стандартная"
 default persistent.start_menu_layout = "legacy"
@@ -46,22 +48,31 @@ default this_pc_up_arrow_action = NullAction()
 
 # Узнаём техническую информацию реального ПК для пост-установки
 init python:
-    import subprocess
-    username = os.environ["USERNAME" if renpy.windows else "USER"]
-    organization, computer_name, workgroup_name = [
-        line.strip()
-        for line in subprocess.check_output(
-            " && ".join((
-                "wmic os get organization",
-                "wmic computersystem get name",
-                "wmic computersystem get workgroup"
-            )),
-            universal_newlines=True,
-            shell=True
-        ).split("\n")
-        if line
-    ][1::2]
-    if computer_name.startswith("DESKTOP") or computer_name.startswith("LAPTOP"): computer_name = computer_name.replace("DESKTOP","REACTOS").replace("LAPTOP","REACTOS")
+    if renpy.windows:
+        import subprocess
+        username = os.environ["USERNAME"]
+        organization, computer_name, workgroup_name = [
+            line.strip()
+            for line in subprocess.check_output(
+                " && ".join((
+                    "wmic os get organization",
+                    "wmic computersystem get name",
+                    "wmic computersystem get workgroup"
+                )),
+                universal_newlines=True,
+                shell=True
+            ).split("\n")
+            if line
+        ][1::2]
+        if computer_name.startswith("DESKTOP") or computer_name.startswith("LAPTOP"): computer_name = computer_name.replace("DESKTOP","REACTOS").replace("LAPTOP","REACTOS")
+    elif renpy.linux or renpy.macintosh:
+        import pwd
+        username = pwd.getpwuid(os.getuid()).pw_gecos.replace(",","")
+        # местозаполнители
+        organization, workgroup_name = ["", "WORKGROUP"]
+        for i in range(7):
+            computer_id = str(computer_id) + renpy.random.choice(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"])
+        computer_name = "REACTOS-" + computer_id
 
 # Закручивание гаек
 define config.developer = False
@@ -318,6 +329,10 @@ style ros_wait_frame is confirm_frame:
     background Frame("gui/window/pleasewait/window.png", gui.confirm_frame_borders, tile=gui.frame_tile)
     xalign 0
     yalign 0
+
+# Стиль для надписи в "распространённом" окне
+style ros_common_window_text is ros_wait_header_text:
+    xpos -39 ypos -39
 
 # Стили для окна установщика
 style ros_setup1_frame is ros_wait_frame:
@@ -986,15 +1001,6 @@ init python:
     cur_time = now.strftime("%H:%M:%S")
     cur_tz = time.tzname[0][:6]
 
-    def current_date():
-        return now.strftime("%d {0} %Y").format(months[month])
-    def current_time():
-        return now.strftime("%H:%M")
-    def current_time_with_seconds():
-        return now.strftime("%H:%M:%S")
-    def current_timezone():
-        return time.tzname[0][:6]
-
 # Расчёт времени работы системы
 init python:
     def ros_uptime_counter(seconds):
@@ -1020,23 +1026,29 @@ init python:
 
 # Узнаём техническую информацию реального ПК для окна Свойств системы
 init python:
-    import subprocess
-    ros_pc_model, ros_processor_manufacturer, ros_processor_name, ros_processor_frequency, ros_ram_capacity = [
-        line.strip()
-        for line in subprocess.check_output(
-            " && ".join((
-                "wmic computersystem get model",
-                "wmic cpu get manufacturer",
-                "wmic cpu get name",
-                "wmic cpu get currentclockspeed",
-                "wmic memorychip get capacity"
-            )),
-            universal_newlines=True,
-            shell=True
-        ).split("\n")
-        if line
-    ][1::2]
-    ros_ram_capacity = get_size(int(ros_ram_capacity))
+    if renpy.windows:
+        import subprocess
+        ros_pc_model, ros_processor_manufacturer, ros_processor_name, ros_processor_frequency, ros_ram_capacity = [
+            line.strip()
+            for line in subprocess.check_output(
+                " && ".join((
+                    "wmic computersystem get model",
+                    "wmic cpu get manufacturer",
+                    "wmic cpu get name",
+                    "wmic cpu get currentclockspeed",
+                    "wmic memorychip get capacity"
+                )),
+                universal_newlines=True,
+                shell=True
+            ).split("\n")
+            if line
+        ][1::2]
+        ros_ram_capacity = get_size(int(ros_ram_capacity))
+    elif renpy.linux or renpy.macintosh:
+        # местозаполнители
+        ros_pc_model, ros_processor_manufacturer, ros_processor_name, ros_processor_frequency, ros_ram_capacity = [
+            "", "", "", "", ""
+        ]
 
 # Полоса загрузки в окне "Пожалуйста, подождите"
 image ros_wait_loading_bar:

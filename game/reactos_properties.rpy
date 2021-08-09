@@ -343,6 +343,7 @@ screen ros_properties_system_general():
             textbutton "Лицензия..." style "ros_properties_license_button" text_style "ros_properties_license_button_text" focus_mask "gui/window/properties/license_button_idle.png" xpos 30 ypos -4 action Show(screen="ros_properties_system_general_license")
 # Лицензия
 screen ros_properties_system_general_license():
+    modal True
     drag:
         drag_name "ros_properties_license"
         drag_handle (0, 0, 407, 21)
@@ -453,6 +454,7 @@ screen ros_properties_system_advanced():
             textbutton "Отчёт об ошибках" style "ros_properties_page2_buttons" text_style "ros_properties_page4_buttons_text" focus_mask "gui/window/properties/button_page2_idle.png" action NullAction()
 # Настройки системы
 screen ros_properties_system_advanced_system_config():
+    modal True
     drag:
         drag_name "ros_properties_system_config"
         drag_handle (0, 0, 338, 21)
@@ -651,7 +653,7 @@ screen ros_properties_screen_appearance():
 screen ros_properties_screen_appearance_theme_choice_menu():
     frame:
         style "ros_properties_screen_appearance_choice_menu_frame"
-        xsize 201 ysize 85
+        xsize 201 ysize 99
         xpos 16 ypos 254
         vbox:
             xpos -3 ypos -3
@@ -661,6 +663,7 @@ screen ros_properties_screen_appearance_theme_choice_menu():
                 SetVariable("ros_properties_show_bottom_buttons", True)]
             textbutton "Lautus" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
             textbutton "Lunar" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "MetaVerse" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
             textbutton "Mizu" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
             textbutton "Modern" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
             textbutton "Классическая тема" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action [
@@ -744,9 +747,10 @@ screen ros_properties_screen_appearance_active_window():
             textbutton "Выбранная" style "ros_classic_active_window_menu_selected" text_style "ros_classic_active_window_menu_selected_text" action NullAction()
         frame:
             style "ros_classic_active_window_viewport" xpos 4 ypos 41
+            add "gui/window/properties/active_window_scrollbars.png" xpos 296 ypos 2
             viewport:
                 yinitial 0.0
-                scrollbars "vertical"
+                scrollbars None
                 mousewheel True
                 draggable True
                 side_yfill True
@@ -783,7 +787,7 @@ screen ros_properties_screen_settings():
             add "ros_properties_slider" xpos 49 ypos 21
             add "ros_properties_slider_thumb" xpos 109 ypos 14
             add "ros_properties_slider_marks" xpos 54 ypos 37
-            text "1280x720 пикселей" style "ros_properties_text" xpos 38 ypos 45
+            text "[config.screen_width]x[config.screen_height] пикселей" style "ros_properties_text" xpos 38 ypos 45
         frame:
             style "ros_properties_submenu_frame_mini"
             xpos 193 ypos 225

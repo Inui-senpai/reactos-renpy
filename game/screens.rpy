@@ -1175,7 +1175,7 @@ screen confirm(message, yes_action, no_action, level=None):
 
     zorder 200
 
-    if "ros_install" in store.current_label:
+    if not persistent.installed:
 
         style_prefix "confirm"
 
@@ -1216,34 +1216,54 @@ screen confirm(message, yes_action, no_action, level=None):
                     # yalign .5
                     # spacing 10
 
+                    python:
+                        if message == layout.QUIT:
+                            level = "question"
+
                     if level == "info":
-                        text "Информация" style "ros_header_text_installed"
-                        add "gui/window/common/info.png"
+                        text "Информация" style "ros_common_window_text"
+                        add "gui/window/common/info.png" xpos -35 ypos -12
                     elif level == "warning":
-                        text "Внимание" style "ros_header_text_installed"
-                        add "gui/window/common/warning.png"
+                        text "Внимание" style "ros_common_window_text"
+                        add "gui/window/common/warning.png" xpos -35 ypos -12
                     elif level == "question":
-                        text "Вопрос" style "ros_header_text_installed"
-                        add "gui/window/common/question.png"
+                        text "Вопрос" style "ros_common_window_text"
+                        add "gui/window/common/question.png" xpos -35 ypos -12
                     elif level == "error":
-                        text "Ошибка" style "ros_header_text_installed"
-                        add "gui/window/common/error.png"
+                        text "Ошибка" style "ros_common_window_text"
+                        add "gui/window/common/error.png" xpos -35 ypos -12
 
-                    imagebutton auto "gui/window/common/close_%s.png" action no_action:
-                        xanchor -189 yanchor 35
+                    if level in ["info", "warning", "question", "error"]:
+                        imagebutton auto "gui/window/common/close_%s.png" action no_action:
+                            xanchor -189 yanchor 79
 
-                    label _(message):
-                        style "ros_confirm_prompt_installed"
-                        xalign 0.5
+                        label _(message):
+                            style "ros_confirm_prompt_installed"
+                            xpos 10 ypos -50
+                    else:
+                        imagebutton auto "gui/window/common/close_%s.png" action no_action:
+                            xanchor -189 yanchor 35
+
+                        label _(message):
+                            style "ros_confirm_prompt_installed"
+                            xalign 0.5
 
                     null height 10
 
-                    hbox:
-                        xalign -0.2
-                        spacing 80
+                    if level in ["info", "warning", "question", "error"]:
+                        hbox:
+                            xalign -0.2 ypos -42
+                            spacing 80
 
-                        textbutton _("Да") style "ros_confirm_button_installed" text_style "ros_confirm_button_installed_text" focus_mask "gui/window/postinstall/button_idle.png" action yes_action
-                        textbutton _("Нет") style "ros_confirm_button_installed" text_style "ros_confirm_button_installed_no" focus_mask "gui/window/postinstall/button_idle.png" action no_action
+                            textbutton _("Да") style "ros_confirm_button_installed" text_style "ros_confirm_button_installed_text" focus_mask "gui/window/postinstall/button_idle.png" action yes_action
+                            textbutton _("Нет") style "ros_confirm_button_installed" text_style "ros_confirm_button_installed_no" focus_mask "gui/window/postinstall/button_idle.png" action no_action
+                    else:
+                        hbox:
+                            xalign -0.2
+                            spacing 80
+
+                            textbutton _("Да") style "ros_confirm_button_installed" text_style "ros_confirm_button_installed_text" focus_mask "gui/window/postinstall/button_idle.png" action yes_action
+                            textbutton _("Нет") style "ros_confirm_button_installed" text_style "ros_confirm_button_installed_no" focus_mask "gui/window/postinstall/button_idle.png" action no_action
 
     ## Правый клик и esc, как ответ "Нет".
     key "game_menu" action no_action
@@ -1255,7 +1275,7 @@ screen dialog(message, ok_action, level=None):
 
     zorder 200
 
-    if "ros_install" in store.current_label:
+    if not persistent.installed:
 
         style_prefix "confirm"
 
@@ -1296,16 +1316,16 @@ screen dialog(message, ok_action, level=None):
                     # spacing 10
 
                     if level == "info":
-                        text "Информация" style "ros_header_text_installed"
+                        text "Информация" style "ros_common_window_text"
                         add "gui/window/common/info.png"
                     elif level == "warning":
-                        text "Внимание" style "ros_header_text_installed"
+                        text "Внимание" style "ros_common_window_text"
                         add "gui/window/common/warning.png"
                     elif level == "question":
-                        text "Вопрос" style "ros_header_text_installed"
+                        text "Вопрос" style "ros_common_window_text"
                         add "gui/window/common/question.png"
                     elif level == "error":
-                        text "Ошибка" style "ros_header_text_installed"
+                        text "Ошибка" style "ros_common_window_text"
                         add "gui/window/common/error.png"
 
                     imagebutton auto "gui/window/common/close_%s.png" action ok_action:

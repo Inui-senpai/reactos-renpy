@@ -69,10 +69,14 @@ screen ros_properties_screen_appearance_active_window_blackshade():
         imagebutton idle "ros_blackshade_minimize_button_idle" xpos 223 ypos 5
         frame:
             style "ros_blackshade_active_window_viewport"
+            add "gui/window/themed/blackshade/viewport_background.png" ysize 107 xpos 294 ypos 1
+            add "gui/window/themed/blackshade/viewport_up_idle.png" xpos 295
+            add "gui/window/themed/blackshade/viewport_thumb.png" ysize 50 xpos 295 ypos 17
+            add "gui/window/themed/blackshade/viewport_down_idle.png" xpos 295 ypos 90
             xpos 4 ypos 22
             viewport:
                 yinitial 0.0
-                scrollbars "vertical"
+                scrollbars None
                 mousewheel True
                 draggable True
                 side_yfill True
