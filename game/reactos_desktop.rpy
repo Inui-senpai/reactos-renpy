@@ -40,7 +40,7 @@ screen ros_taskbar():
     imagebutton idle "gui/desktop/systray_icons/network.png" action NullAction():
         xpos 1222 ypos 700
     imagebutton idle "gui/desktop/systray_icons/ac_powerline.png" action NullAction():
-        xpos 1208 ypos 700
+        xpos 1205 ypos 700
     imagebutton idle "gui/desktop/systray_icons/safe_remove.png" action NullAction():
         xpos 1189 ypos 700
     imagebutton idle "gui/desktop/systray_icons/volume.png" action NullAction():

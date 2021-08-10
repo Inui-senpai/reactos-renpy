@@ -342,9 +342,7 @@ screen ros_explorer(folder=None):
                     yinitial 0.0
                     scrollbars "vertical"
                     mousewheel True
-                    # draggable True
-                    # TODO: возможно, нужно использовать hbox'ы с vbox'ами в vbox'ах для панели управления, дабы иконки можно было разложить по видимой области без костылей
-                    draggable False
+                    draggable True
                     side_yfill True
                     vbox:
                         hbox:
@@ -364,97 +362,101 @@ screen ros_explorer(folder=None):
                                     imagebutton auto "this_pc_music_%s" xalign 0.5 mouse "link" action NullAction()
                                     text "Моя музыка" style "ros_this_pc_viewport_text"
                             elif folder == "control_panel":
-                                hbox:
+                                vbox:
                                     spacing 10
-                                    vbox:
-                                        imagebutton auto "cp_administrative_tools_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Администрир..." style "ros_this_pc_viewport_text"
-                                    vbox:                                    
-                                        imagebutton auto "cp_timedate_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Дата и\nвремя" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        imagebutton auto "cp_sounds_and_audio_devices_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Звуки и\nаудиоустрой..." style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        imagebutton auto "cp_game_controllers_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Игровые\nустройства" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        imagebutton auto "cp_iexplore_settings_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Свойства\nобозревателя" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        imagebutton auto "cp_keyboard_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Клавиатура" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        imagebutton auto "cp_command_prompt_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Командная\nстрока" style "ros_this_pc_viewport_text"
-                                hbox:
-                                    xpos -476 ypos 64
-                                    spacing 24
-                                    vbox:
-                                        imagebutton auto "cp_mouse_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Мышь" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        imagebutton auto "cp_opengl_settings_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Настройки\nOpenGL" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -14
-                                        imagebutton auto "cp_wined3dcfg_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Параметры\nWineD3D" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -18
-                                        imagebutton auto "cp_printers_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Принтеры" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -18
-                                        imagebutton auto "cp_folder_options_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Свойства\nпапки" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -24
-                                        imagebutton auto "cp_netshell_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Сетевые\nподключения" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -36
-                                        imagebutton auto "cp_system_%s" xalign 0.5 mouse "link" action Show(screen="ros_properties_system")
-                                        text "Система" style "ros_this_pc_viewport_text"
-                                hbox:
-                                    xpos -999 ypos 128
-                                    spacing 24
-                                    vbox:
-                                        imagebutton auto "cp_ease_of_access_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Специальные\nвозможности" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -18
-                                        imagebutton auto "cp_phone_and_modem_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Телефон и\nмодем" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -36
-                                        imagebutton auto "cp_setup_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Установка и\nудаление..." style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -54
-                                        imagebutton auto "cp_hardware_setup_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Установка\nоборудования" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -64
-                                        imagebutton auto "cp_users_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Учётные\nзаписи..." style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -56
-                                        imagebutton auto "cp_fonts_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Шрифты" style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        xpos -52
-                                        imagebutton auto "cp_screen_settings_%s" xalign 0.5 mouse "link" action Show(screen="ros_properties_screen")
-                                        text "Экран" style "ros_this_pc_viewport_text"
-                                hbox:
-                                    xpos -1532 ypos 194
-                                    spacing 2
-                                    vbox:
-                                        imagebutton auto "cp_power_options_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Электропита..." style "ros_this_pc_viewport_text"
-                                    vbox:
-                                        imagebutton auto "cp_language_and_regional_standards_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Язык и\nрегиональн..." style "ros_this_pc_viewport_text"
+                                    hbox:
+                                        spacing 13
+                                        vbox:
+                                            imagebutton auto "cp_administrative_tools_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Администрир..." style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos 2
+                                            imagebutton auto "cp_timedate_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Дата и\nвремя" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos 5
+                                            imagebutton auto "cp_sounds_and_audio_devices_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Звуки и\nаудиоустрой..." style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            imagebutton auto "cp_game_controllers_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Игровые\nустройства" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            imagebutton auto "cp_keyboard_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Клавиатура" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            imagebutton auto "cp_command_prompt_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Командная\nстрока" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos 10
+                                            imagebutton auto "cp_mouse_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Мышь" style "ros_this_pc_viewport_text"
+                                    hbox:
+                                        spacing 13
+                                        xpos 10
+                                        vbox:
+                                            imagebutton auto "cp_opengl_settings_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Настройки\nOpenGL" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos 1
+                                            imagebutton auto "cp_wined3dcfg_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Параметры\nWineD3D" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos 2
+                                            imagebutton auto "cp_printers_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Принтеры" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos 2
+                                            imagebutton auto "cp_iexplore_settings_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Свойства\nобозревателя" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos 2
+                                            imagebutton auto "cp_folder_options_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Свойства\nпапки" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            imagebutton auto "cp_netshell_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Сетевые\nподключения" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            imagebutton auto "cp_system_%s" xalign 0.5 mouse "link" action Show(screen="ros_properties_system")
+                                            text "Система" style "ros_this_pc_viewport_text"
+                                    hbox:
+                                        spacing 13
+                                        xpos 2
+                                        vbox:
+                                            imagebutton auto "cp_ease_of_access_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Специальные\nвозможности" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos -4
+                                            imagebutton auto "cp_phone_and_modem_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Телефон и\nмодем" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos -8
+                                            imagebutton auto "cp_setup_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Установка и\nудаление..." style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos -14
+                                            imagebutton auto "cp_hardware_setup_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Установка\nоборудования" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos -14
+                                            imagebutton auto "cp_users_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Учётные\nзаписи..." style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos -2
+                                            imagebutton auto "cp_fonts_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Шрифты" style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            xpos 13
+                                            imagebutton auto "cp_screen_settings_%s" xalign 0.5 mouse "link" action Show(screen="ros_properties_screen")
+                                            text "Экран" style "ros_this_pc_viewport_text"
+                                    hbox:
+                                        spacing 2
+                                        xpos 1
+                                        vbox:
+                                            imagebutton auto "cp_power_options_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Электропита..." style "ros_this_pc_viewport_text"
+                                        vbox:
+                                            imagebutton auto "cp_language_and_regional_standards_%s" xalign 0.5 mouse "link" action NullAction()
+                                            text "Язык и\nрегиональн..." style "ros_this_pc_viewport_text"
                             else:
                                 vbox:
                                     imagebutton auto "this_pc_disk_drive_%s" xalign 0.5 mouse "link" action NullAction()
