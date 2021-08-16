@@ -24,3 +24,11 @@ I scroll through the ReactOS page on Twitter in my spare time, and one day I was
 5. Launch "renpy.exe"/"renpy-32.exe", "renpy.sh", "renpy.app" (depending on your OS), choose project in Projects list (it will have the same name as the folder from step 3), and click on the Start Project
 6. ???
 7. PROFIT!!!
+
+# Special thanks
+* **ReactOS Team and its contributors** for creating an amazing operating system
+* **Tom "PyTom" Rothamel and many other Ren'Py contributors** for creating such a flexible and challenging (in every way) visual novel engine
+* **Python Software Foundation** for creating a Python programming language
+* **Max Krylov** for helping me in some complex situations
+* **Egor Pravdikov** and **Artyom "FUFSoB" Vinogradov** for shed a light on some Linux "features"
+* And **you** for downloading and testing my own project :3 
