@@ -31,4 +31,5 @@ I scroll through the ReactOS page on Twitter in my spare time, and one day I was
 * **Python Software Foundation** for creating a Python programming language
 * **Max Krylov** for helping me in some complex situations
 * **Egor Pravdikov** and **Artyom "FUFSoB" Vinogradov** for shed a light on some Linux "features"
+* **Marquis Kurt** for creating an amazing AliceOS and Candella operating systems (which inspired me to create this project in the last but not least turn)
 * And **you** for downloading and testing my own project :3 
