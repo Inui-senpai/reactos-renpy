@@ -530,8 +530,8 @@ screen ros_properties_screen_desktop():
         style "ros_properties_viewport"
         xsize 377 ysize 351
         add "gui/window/properties/screen.png" xpos 110 ypos 19
-        if wallpaper:
-            add wallpaper xsize 120 ysize 84 xalign 0.509 yalign 0.102
+        if persistent.wallpaper:
+            add persistent.wallpaper xsize 120 ysize 84 xalign 0.509 yalign 0.102
         else:
             add "postinstall" xsize 120 ysize 84 xalign 0.509 yalign 0.102
         text "Выберите изображение для рабочего стола:" style "ros_properties_text" xpos 16 ypos 157
@@ -548,13 +548,13 @@ screen ros_properties_screen_desktop():
                 hbox:
                     spacing 2
                     add "gui/desktop/menu_icons/submenu/forbidden.png"
-                    textbutton "(нет)" style "ros_properties_screen_choice" text_style "ros_properties_screen_choice" action SetVariable("wallpaper", None)
+                    textbutton "(нет)" style "ros_properties_screen_choice" text_style "ros_properties_screen_choice" action SetVariable("persistent.wallpaper", None)
                 for i in my_wallpapers:
                     python:
                         i2 = i.replace("Silhouette/","").replace("Angelus/Bliss/","").replace("Angelus/BlueHorizon/","").replace("Angelus/DeepSea/","").replace("Angelus/Fisherman/","").replace("Angelus/Flower/","").replace("Angelus/Rain/","").replace("Angelus/ReactOS/","").replace("Angelus/ReactOSNewHope/","").replace("Angelus/ReactOSSea/","").replace("Angelus/ReactOSSunset/","").replace("Angelus/Sea/","").replace("Angelus/Sky/","").replace("Angelus/VistaReactOS/","")
                     hbox:
                         add "gui/desktop/menu_icons/submenu/image.png"
-                        textbutton i2 style "ros_properties_screen_choice" text_style "ros_properties_screen_choice" xpos 2 action SetVariable("wallpaper", "wallpapers/"+i+".png")
+                        textbutton i2 style "ros_properties_screen_choice" text_style "ros_properties_screen_choice" xpos 2 action SetVariable("persistent.wallpaper", "wallpapers/"+i+".png")
     vbox:
         xpos 285 ypos 219
         textbutton "Обзор..." style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action NullAction()

@@ -1,3 +1,57 @@
+# Подсказки иконок в системном лотке
+style ros_taskbar_system_tray_tooltip:
+    background Frame("gui/desktop/tooltip.png")
+    # background Composite((58,19), (0,0), Solid("#000"), (1,1), Solid("#ffffe1"))
+style ros_taskbar_system_tray_tooltip_2:
+    background Frame("gui/desktop/tooltip_2.png")
+style ros_taskbar_system_tray_tooltip_3:
+    background Frame("gui/desktop/tooltip_3.png")
+style ros_taskbar_system_tray_tooltip_4:
+    background Frame("gui/desktop/tooltip_4.png")
+style ros_taskbar_system_tray_tooltip_5:
+    background Frame("gui/desktop/tooltip_5.png")
+style ros_taskbar_system_tray_tooltip_text:
+    font "gui/font/tahoma.ttf"
+    size 11
+    color "#000"
+    xpos 3 ypos 2
+
+screen ros_taskbar_system_tray_tooltip_volume():
+    frame:
+        style "ros_taskbar_system_tray_tooltip"
+        xsize 58 ysize 19
+        xpos 1180 ypos 684
+        vbox:
+            text "Громкость" style "ros_taskbar_system_tray_tooltip_text"
+screen ros_taskbar_system_tray_tooltip_safe_remove():
+    frame:
+        style "ros_taskbar_system_tray_tooltip_2"
+        xsize 187 ysize 19
+        xpos 1094 ypos 684
+        vbox:
+            text "Безопасное извлечение устройства" style "ros_taskbar_system_tray_tooltip_text"
+screen ros_taskbar_system_tray_tooltip_power():
+    frame:
+        style "ros_taskbar_system_tray_tooltip_3"
+        xsize 140 ysize 19
+        xpos 1141 ypos 684
+        vbox:
+            text "От сети переменного тока" style "ros_taskbar_system_tray_tooltip_text"
+screen ros_taskbar_system_tray_tooltip_network():
+    frame:
+        style "ros_taskbar_system_tray_tooltip_4"
+        xsize 120 ysize 19
+        xpos 1161 ypos 684
+        vbox:
+            text "Сетевое подключение" style "ros_taskbar_system_tray_tooltip_text"
+screen ros_taskbar_system_tray_tooltip_date_and_time():
+    frame:
+        style "ros_taskbar_system_tray_tooltip_5"
+        xsize 98 ysize 19
+        xpos 1182 ypos 684
+        vbox:
+            text "[cur_date] г." style "ros_taskbar_system_tray_tooltip_text"
+
 # Панель задач
 screen ros_taskbar():
     add "gui/desktop/taskbar.png":
@@ -5,6 +59,7 @@ screen ros_taskbar():
     if not start_menu_opened:
         use ros_desktop_context_menu_trigger
         use ros_desktop_taskbar_context_menu_trigger
+    use ros_desktop_taskbar_clock_trigger
     textbutton "Пуск" style "ros_start_button" text_style "ros_start_button_text" focus_mask "gui/desktop/start_button.png" action [
         Hide(screen="ros_start_menu_entertainment_frame"),
         Hide(screen="ros_start_menu_communications_frame"),
@@ -34,16 +89,21 @@ screen ros_taskbar():
             use ros_start_menu
         else:
             use ros_start_menu_new
+    hbox:
+        xpos 65 ypos 696
+        if renpy.get_screen("ros_explorer"):
+            textbutton "{image=gui/desktop/menu_icons/submenu/device_manager.png} Мой компьютер" style "ros_taskbar_window_buttons" text_style "ros_taskbar_window_buttons_text":
+                focus_mask "gui/desktop/taskbar_window_idle.png" action ToggleVariable("is_explorer_window_opened", True, False)
     add "gui/desktop/system_tray.png":
         xalign 0.998 yalign 0.998
     add myClock xpos 1234 ypos 700
-    imagebutton idle "gui/desktop/systray_icons/network.png" action NullAction():
+    imagebutton idle "gui/desktop/systray_icons/network.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_network") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_network") action NullAction():
         xpos 1222 ypos 700
-    imagebutton idle "gui/desktop/systray_icons/ac_powerline.png" action NullAction():
+    imagebutton idle "gui/desktop/systray_icons/ac_powerline.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_power") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_power") action NullAction():
         xpos 1205 ypos 700
-    imagebutton idle "gui/desktop/systray_icons/safe_remove.png" action NullAction():
+    imagebutton idle "gui/desktop/systray_icons/safe_remove.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_safe_remove") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_safe_remove") action NullAction():
         xpos 1189 ypos 700
-    imagebutton idle "gui/desktop/systray_icons/volume.png" action NullAction():
+    imagebutton idle "gui/desktop/systray_icons/volume.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_volume") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_volume") action NullAction():
         xpos 1171 ypos 700
     key "K_ESCAPE" action [
         Hide(screen="ros_start_menu_entertainment_frame"),
@@ -1106,6 +1166,17 @@ screen ros_start_menu_new_recent_docs():
 
 # Иконки
 screen ros_desktop_icons():
+    if persistent.wallpaper:
+        add persistent.wallpaper at truecenter:
+            size(1280,720)
+            fit "fill"
+    else:
+        add "postinstall" at truecenter:
+            size(1280,720)
+            fit "fill"
+    vbox:
+        xalign 1.0 yalign 0.95
+        text "{font=gui/font/tahomabd.ttf}ReactOS Version [config.version]{/font}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]" style "corner_text"
     vbox:
         xpos 20 ypos 12
         spacing 20
@@ -1168,6 +1239,14 @@ screen ros_desktop_taskbar_context_menu_trigger():
             Hide(screen="ros_desktop_context_menu"),
             Hide(screen="ros_desktop_context_menu_this_pc"),
             Show(screen="ros_taskbar_context_menu")]
+
+# Область для триггера часов на Панели задач
+screen ros_desktop_taskbar_clock_trigger():
+    imagebutton idle "gui/desktop/desktop_trigger_frame.png":
+        focus_mask "gui/desktop/taskbar_trigger_clock_focus_mask.png"
+        hovered Show(screen="ros_taskbar_system_tray_tooltip_date_and_time")
+        unhovered Hide(screen="ros_taskbar_system_tray_tooltip_date_and_time")
+        action NullAction()
 
 # Контекстное меню: Рабочий стол
 screen ros_desktop_context_menu():
@@ -1359,100 +1438,9 @@ screen ros_taskbar_context_menu_toolbars():
             null height 2
             textbutton "Создать панель инструментов..." style "ros_context_menu_toolbars" text_style "ros_context_menu_text" focus_mask "ros_context_menu_toolbars_idle" action NullAction()
 
-# Выход из системы / Завершение работы
-transform ros_shutdown_background:
-    matrixcolor SaturationMatrix(1.0)
-    linear 1.5 matrixcolor SaturationMatrix(0.0)
-screen ros_logoff_frame():
-    modal True
-    on "show" action [Function(SetThumbnailFull), FileTakeScreenshot(), Function(SetThumbnailOriginal)]
-    add FileCurrentScreenshot() at ros_shutdown_background
-    frame:
-        style "ros_shutdown"
-        xsize 312 ysize 198
-        xalign 0.5 yalign 0.5
-        text "Выход из ReactOS" style "ros_shutdown_title"
-        add "gui/shutdown/reactos_flag.png":
-            xalign 1.0 yalign 0.01
-        vbox:
-            xpos 84 ypos 76
-            imagebutton auto "gui/shutdown/switch_user_%s.png"
-            text "Смена пользователя" style "ros_shutdown_buttons_text":
-                xpos -34 ypos 5
-        vbox:
-            xpos 199 ypos 76
-            imagebutton auto "gui/shutdown/log_off_%s.png" hovered Show(screen="ros_shutdown_tooltip_logoff") unhovered Hide(screen="ros_shutdown_tooltip_logoff") mouse "link" action Jump("ros_shutdown")
-            text "Выход" style "ros_shutdown_buttons_text":
-                ypos 5
-        hbox:
-            xpos 244 ypos 168
-            textbutton "Отмена" style "ros_shutdown_cancel_button" text_style "ros_shutdown_cancel_text" focus_mask "gui/shutdown/cancel_idle.png" action Hide("ros_logoff_frame")
-screen ros_shutdown_frame():
-    modal True
-    on "show" action [Function(SetThumbnailFull), FileTakeScreenshot(), Function(SetThumbnailOriginal)]
-    add FileCurrentScreenshot() at ros_shutdown_background
-    frame:
-        style "ros_shutdown"
-        xsize 312 ysize 198
-        xalign 0.5 yalign 0.5
-        text "Завершение работы ReactOS" style "ros_shutdown_title":
-            xalign 0.1
-        add "gui/shutdown/reactos_flag.png":
-            xalign 1.0 yalign 0.01
-        vbox:
-            xpos 55 ypos 76
-            imagebutton auto "gui/shutdown/sleep_%s.png"
-            text "Спящий режим" style "ros_shutdown_buttons_text":
-                xpos -20 ypos 5
-        vbox:
-            xpos 141 ypos 76
-            imagebutton auto "gui/shutdown/shutdown_%s.png" hovered Show(screen="ros_shutdown_tooltip_shutdown") unhovered Hide(screen="ros_shutdown_tooltip_shutdown") mouse "link" action Jump("ros_shutdown")
-            text "Выключить" style "ros_shutdown_buttons_text":
-                xpos -10 ypos 5
-        vbox:
-            xpos 226 ypos 76
-            imagebutton auto "gui/shutdown/restart_%s.png" hovered Show(screen="ros_shutdown_tooltip_restart") unhovered Hide(screen="ros_shutdown_tooltip_restart") mouse "link" action Jump("ros_restart")
-            text "Перезапустить" style "ros_shutdown_buttons_text":
-                xpos -21 ypos 5
-        hbox:
-            xpos 244 ypos 168
-            textbutton "Отмена" style "ros_shutdown_cancel_button" text_style "ros_shutdown_cancel_text" focus_mask "gui/shutdown/cancel_idle.png" action Hide("ros_shutdown_frame")
-
-# Подсказки в Выходе из системы / Завершении работы
-screen ros_shutdown_tooltip_logoff():
-    frame:
-        style "ros_shutdown_tooltip"
-        xsize 246 ysize 80
-        xpos 679 ypos 273
-        vbox:
-            xpos 10 ypos 16
-            text "Выход" style "ros_shutdown_tooltip_title"
-            text "Закрывает все программы и завершает сеанс ReactOS." style "ros_shutdown_tooltip_text":
-                ypos 6
-screen ros_shutdown_tooltip_shutdown():
-    frame:
-        style "ros_shutdown_tooltip"
-        xsize 246 ysize 80
-        xpos 621 ypos 273
-        vbox:
-            xpos 10 ypos 16
-            text "Завершение работы" style "ros_shutdown_tooltip_title"
-            text "Закрывает все программы, завершает работу ReactOS и выключает компьютер." style "ros_shutdown_tooltip_text":
-                ypos 6
-screen ros_shutdown_tooltip_restart():
-    frame:
-        style "ros_shutdown_tooltip"
-        xsize 246 ysize 80
-        xpos 706 ypos 273
-        vbox:
-            xpos 10 ypos 16
-            text "Перезагрузка" style "ros_shutdown_tooltip_title"
-            text "Завершает текущий сеанс и перезагружает систему." style "ros_shutdown_tooltip_text":
-                ypos 6
-
+# Вывод рабочего стола
 label ros_desktop:
     $ mouse_visible = True
-    # TODO: Сделать смену обоев
     scene postinstall
     show corner_text "{font=gui/font/tahomabd.ttf}ReactOS Version [config.version]{/font}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]"
     show screen please_wait("Загружаются персональные настройки...")
@@ -1464,31 +1452,3 @@ label ros_desktop:
     show corner_text "{font=gui/font/tahomabd.ttf}ReactOS Version [config.version]{/font}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]":
         yalign 0.95
     $ renpy.pause(hard=True)
-
-label ros_shutdown:
-    $ mouse_visible = False
-    hide screen ros_desktop_icons
-    hide screen ros_taskbar
-    hide screen ros_shutdown_frame
-    hide screen ros_logoff_frame
-    hide screen ros_shutdown_tooltip_logoff
-    hide screen ros_shutdown_tooltip_shutdown
-    show screen please_wait("Завершение работы...")
-    $ renpy.pause(1.0, hard=True)
-    hide screen please_wait
-    scene black
-    $ renpy.quit()
-
-label ros_restart:
-    $ mouse_visible = False
-    hide screen ros_desktop_icons
-    hide screen ros_taskbar
-    hide screen ros_shutdown_frame
-    hide screen ros_shutdown_tooltip_restart
-    show screen please_wait("Перезагрузка...")
-    $ renpy.pause(1.0, hard=True)
-    hide screen please_wait
-    scene black
-    $ renpy.pause(0.5, hard=True)
-    jump ros_boot
-# ...

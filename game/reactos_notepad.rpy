@@ -111,7 +111,7 @@ style ros_notepad_viewport:
     xsize 562 ysize 361
     xpos 1 ypos 39
 style ros_notepad_viewport_text:
-    font "gui/font/DejaVuSansMono.ttf"
+    font "gui/font/lucon.ttf"
     size 14
     color "#000"
     xpos 8 ypos 7

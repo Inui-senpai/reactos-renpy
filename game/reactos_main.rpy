@@ -22,7 +22,7 @@ default sort_entry = False
 default create_entry = False
 default toolbars_entry = False
 default properties_current_tab = "general"
-default wallpaper = None
+default persistent.wallpaper = None
 default screensaver = None
 default ros_theme = "classic"
 default dropdown1 = False
@@ -483,6 +483,18 @@ image ros_setup_final_countdown_progress:
     linear 16.0 xsize 278
 
 # Рабочий стол
+# Панель задач - Активное окно
+style ros_taskbar_window_buttons:
+    idle_background "gui/desktop/taskbar_window_idle.png"
+    hover_background "gui/desktop/taskbar_window_idle.png"
+    selected_background "gui/desktop/taskbar_window_selected.png"
+style ros_taskbar_window_buttons_text:
+    font "gui/font/tahoma.ttf"
+    size 11
+    color "#000"
+    hover_color "#000"
+    selected_color "#000"
+    xpos 8 ypos 4
 # Кнопка "Пуск"
 style ros_start_button:
     idle_background "gui/desktop/start_button.png"
@@ -586,35 +598,6 @@ style ros_start_menu_new_shutdown_text:
     hover_color "#fff"
     size 11
     xpos 35 ypos 8
-
-# Выход из системы / Завершение работы
-style ros_shutdown:
-    background Frame("gui/shutdown/dlg_bg.png")
-style ros_shutdown_title:
-    font "gui/font/tahoma.ttf"
-    size 17
-    color "#f4f4f4"
-    xalign 0.04 yalign 0.06
-style ros_shutdown_buttons_text:
-    font "gui/font/tahoma.ttf"
-    size 11
-    color "#000"
-    text_align 0.5
-style ros_shutdown_cancel_button:
-    idle_background "gui/shutdown/cancel_idle.png"
-    hover_background "gui/shutdown/cancel_hover.png"
-style ros_shutdown_cancel_text is ros_shutdown_buttons_text:
-    xpos 7
-style ros_shutdown_tooltip:
-    background Frame("gui/shutdown/tooltip.png")
-style ros_shutdown_tooltip_title:
-    font "gui/font/tahomabd.ttf"
-    size 11
-    color "#000"
-style ros_shutdown_tooltip_text:
-    font "gui/font/tahoma.ttf"
-    size 11
-    color "#000"
 
 # Захват экрана для дальнейшей работы с ним
 init python:
