@@ -142,9 +142,9 @@ screen ros_notepad(file=None):
             style "ros_notepad_frame"
             add "gui/desktop/menu_icons/submenu/notepad.png":
                 xpos 3 ypos 1
-            if file:
+            if file is not None:
                 python:
-                    try: file_text = renpy.file(file).read()
+                    try: file_text = open(file, "rb").read()
                     except: file = None
                 text "[file] - Блокнот" style "ros_notepad_window_title"
             else:
