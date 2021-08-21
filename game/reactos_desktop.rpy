@@ -94,6 +94,9 @@ screen ros_taskbar():
         if renpy.get_screen("ros_explorer"):
             textbutton "{image=gui/desktop/menu_icons/submenu/device_manager.png} Мой компьютер" style "ros_taskbar_window_buttons" text_style "ros_taskbar_window_buttons_text":
                 focus_mask "gui/desktop/taskbar_window_idle.png" action ToggleVariable("is_explorer_window_opened", True, False)
+        elif renpy.get_screen("ros_calc"):
+            textbutton "{image=gui/desktop/menu_icons/submenu/calc.png} Калькулятор ReactOS" style "ros_taskbar_window_buttons" text_style "ros_taskbar_window_buttons_text":
+                focus_mask "gui/desktop/taskbar_window_idle.png" action ToggleVariable("is_calc_window_opened", True, False)
     add "gui/desktop/system_tray.png":
         xalign 0.998 yalign 0.998
     add myClock xpos 1234 ypos 700
@@ -482,7 +485,11 @@ screen ros_start_menu_system_tools_frame():
                 Hide(screen="ros_start_menu_entertainment_frame"),
                 Hide(screen="ros_start_menu_communications_frame"),
                 Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame")] action NullAction():
+                Hide(screen="ros_start_menu_accessibility_frame")] action [
+                    SetVariable("start_menu_opened", False),
+                    Hide(screen="ros_start_menu_system_tools_frame"),
+                    Hide(screen="ros_start_menu_programs_frame"),
+                    Show(screen="ros_calc")]:
                 ypos -84
             add "calc_shortcut":
                 xpos 6 ypos -96
@@ -1062,7 +1069,11 @@ screen ros_start_menu_new_system_tools_frame():
                 Hide(screen="ros_start_menu_new_entertainment_frame"),
                 Hide(screen="ros_start_menu_new_communications_frame"),
                 Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame")] action NullAction():
+                Hide(screen="ros_start_menu_new_accessibility_frame")] action [
+                    SetVariable("start_menu_opened", False),
+                    Hide(screen="ros_start_menu_new_all_programs"),
+                    Hide(screen="ros_start_menu_new_system_tools_frame"),
+                    Show(screen="ros_calc")]:
                 ypos -84
             add "calc_shortcut":
                 xpos 6 ypos -96
@@ -1220,7 +1231,7 @@ screen ros_desktop_icons():
 
 # Область для триггера контекстного меню Рабочего стола
 screen ros_desktop_context_menu_trigger():
-    if not renpy.get_screen(["ros_properties_screen", "ros_explorer", "ros_properties_system", "ros_properties_taskbar", "ros_command_prompt", "ros_app_manager", "ros_notepad"]):
+    if not renpy.get_screen(["ros_properties_screen", "ros_explorer", "ros_properties_system", "ros_properties_taskbar", "ros_command_prompt", "ros_app_manager", "ros_notepad", "ros_calc"]):
         imagebutton idle "gui/desktop/desktop_trigger_frame.png" focus_mask "gui/desktop/desktop_trigger_frame_focus_mask.png" action NullAction() alternate [
             SetVariable("sort_entry", False),
             SetVariable("create_entry", False),
@@ -1231,7 +1242,7 @@ screen ros_desktop_context_menu_trigger():
 
 # Область для триггера контекстного меню Панели задач
 screen ros_desktop_taskbar_context_menu_trigger():
-    if not renpy.get_screen(["ros_properties_screen", "ros_explorer", "ros_properties_system", "ros_properties_taskbar", "ros_command_prompt", "ros_app_manager", "ros_notepad"]):
+    if not renpy.get_screen(["ros_properties_screen", "ros_explorer", "ros_properties_system", "ros_properties_taskbar", "ros_command_prompt", "ros_app_manager", "ros_notepad", "ros_calc"]):
         imagebutton idle "gui/desktop/desktop_trigger_frame.png" focus_mask "gui/desktop/taskbar_trigger_frame_focus_mask.png" action NullAction() alternate [
             SetVariable("sort_entry", False),
             SetVariable("create_entry", False),

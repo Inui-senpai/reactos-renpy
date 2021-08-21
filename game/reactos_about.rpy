@@ -30,7 +30,7 @@ default ros_authors_opened = False
 # Окно
 screen ros_about(name=None):
     python:
-        friendly_name = name.replace("notepad", "Блокнот").replace("reactos", "ReactOS")
+        friendly_name = name.replace("notepad", "Блокнот").replace("reactos", "ReactOS").replace("calc", "Калькулятор ReactOS")
         authors_button_text = "Авторы" if not ros_authors_opened else "< Назад"
     modal True
     drag:
@@ -60,6 +60,8 @@ screen ros_about(name=None):
                 if not ros_authors_opened:
                     if name == "notepad":
                         use ros_about_general_notepad
+                    elif name == "calc":
+                        use ros_about_general_calc
                     else:
                         use ros_about_general_placeholder
                     use ros_about_general
@@ -74,6 +76,10 @@ screen ros_about_general_notepad():
     hbox:
         xpos 53 ypos 163
         text "Copyright 1997,98 Marcel Baur, 2000 Mike McCormack,\n2002 Sylvain Petreolle, 2002 Andriy Palamarchuk" style "ros_about_description"
+screen ros_about_general_calc():
+    hbox:
+        xpos 53 ypos 163
+        text "Автор: Карло Брамини\n" style "ros_about_description"
 screen ros_about_general_placeholder():
     hbox:
         xpos 53 ypos 163
