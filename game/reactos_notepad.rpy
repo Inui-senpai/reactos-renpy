@@ -1,6 +1,6 @@
 # Оформление
 style ros_notepad_frame:
-    background Frame("gui/notepad/window.png")
+    background Frame("gui/window/notepad/window.png")
     xsize 570 ysize 427
 style ros_notepad_menu:
     idle_background "ros_notepad_menu_idle"
@@ -11,31 +11,31 @@ image ros_notepad_menu_idle:
     Solid("#d4d0c8")
     xsize 38 ysize 18
 image ros_notepad_menu_selected:
-    "gui/notepad/menu_button_selected.png"
+    "gui/window/notepad/menu_button_selected.png"
     xsize 38 ysize 18
     xpos -6
 style ros_notepad_menu_edit is ros_notepad_menu:
     selected_background "ros_notepad_menu_selected_edit"
 image ros_notepad_menu_selected_edit:
-    "gui/notepad/menu_button_selected.png"
+    "gui/window/notepad/menu_button_selected.png"
     xsize 45 ysize 18
     xpos -6
 style ros_notepad_menu_format is ros_notepad_menu:
     selected_background "ros_notepad_menu_selected_format"
 image ros_notepad_menu_selected_format:
-    "gui/notepad/menu_button_selected.png"
+    "gui/window/notepad/menu_button_selected.png"
     xsize 48 ysize 18
     xpos -6
 style ros_notepad_menu_view is ros_notepad_menu:
     selected_background "ros_notepad_menu_selected_view"
 image ros_notepad_menu_selected_view:
-    "gui/notepad/menu_button_selected.png"
+    "gui/window/notepad/menu_button_selected.png"
     xsize 30 ysize 18
     xpos -6
 style ros_notepad_menu_help is ros_notepad_menu:
     selected_background "ros_notepad_menu_selected_help"
 image ros_notepad_menu_selected_help:
-    "gui/notepad/menu_button_selected.png"
+    "gui/window/notepad/menu_button_selected.png"
     xsize 52 ysize 18
     xpos -6
 style ros_notepad_menu_text:
@@ -107,7 +107,7 @@ style ros_notepad_window_title:
     color "#fff"
     xpos 22 ypos 5
 style ros_notepad_viewport:
-    background Frame("gui/notepad/viewport.png")
+    background Frame("gui/window/notepad/viewport.png")
     xsize 562 ysize 361
     xpos 1 ypos 39
 style ros_notepad_viewport_text:
@@ -116,7 +116,7 @@ style ros_notepad_viewport_text:
     color "#000"
     xpos 8 ypos 7
 style ros_notepad_counter_bar:
-    background Frame("gui/notepad/counter_bar.png")
+    background Frame("gui/window/notepad/counter_bar.png")
     xsize 562 ysize 18
     xpos 1 ypos 402
 style ros_notepad_counter_bar_text:
@@ -142,13 +142,14 @@ screen ros_notepad(file=None):
             style "ros_notepad_frame"
             add "gui/desktop/menu_icons/submenu/notepad.png":
                 xpos 3 ypos 1
-            if file is not None:
+            if file:
                 python:
-                    try: file_text = open(file, "rb").read()
+                    try: file_text = renpy.file(file).read()
                     except: file = None
-                text "[file] - Блокнот" style "ros_notepad_window_title"
-            else:
+            if not file:
                 text "Безымянный - Блокнот" style "ros_notepad_window_title"
+            else:
+                text "[file] - Блокнот" style "ros_notepad_window_title"
             imagebutton idle "gui/window/common/close_idle.png" action [
                 SetVariable("ros_notepad_menu_file_opened", False),
                 SetVariable("ros_notepad_menu_edit_opened", False),

@@ -471,7 +471,7 @@ screen ros_properties_system_advanced_system_config():
                 hbox:
                     xpos 12 ypos 80
                     style_prefix "ros_check"
-                    textbutton "Представляться как рабочая станция" action ToggleVariable("selected_edition", "workstation", "server")
+                    textbutton "Представляться как рабочая станция" action ToggleVariable("persistent.selected_edition", "workstation", "server")
             textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" xpos 244 ypos 157 action Hide("ros_properties_system_advanced_system_config")
 
 # Окно - Свойства: Экран

@@ -1,6 +1,6 @@
 # Оформление
 style ros_about_frame:
-    background Frame("gui/system_info/about_window.png")
+    background Frame("gui/window/system_info/about_window.png")
     xsize 419 ysize 347
 style ros_about_title:
     font "gui/font/tahomabd.ttf"
@@ -12,8 +12,8 @@ style ros_about_description:
     size 11
     color "#000"
 style ros_authors_button:
-    idle_background "gui/system_info/authors_button_idle.png"
-    hover_background "gui/system_info/authors_button_hover.png"
+    idle_background "gui/window/system_info/authors_button_idle.png"
+    hover_background "gui/window/system_info/authors_button_hover.png"
 style ros_authors_button_text:
     font "gui/font/tahoma.ttf"
     size 11
@@ -21,7 +21,7 @@ style ros_authors_button_text:
     hover_color "#000"
     xpos 29
 style ros_authors_viewport:
-    background Frame("gui/system_info/authors_viewport.png")
+    background Frame("gui/window/system_info/authors_viewport.png")
     xsize 248 ysize 116
 
 # Основные переменные
@@ -44,11 +44,11 @@ screen ros_about(name=None):
                 SetVariable("ros_authors_opened", False),
                 Hide("ros_about")]:
                 xanchor -394 yanchor -1
-            if selected_edition == "workstation":
-                add "gui/system_info/reactosworkstation.png" xpos -1 ypos 19
+            if persistent.selected_edition == "workstation":
+                add "gui/window/system_info/reactosworkstation.png" xpos -1 ypos 19
             else:
-                add "gui/system_info/reactosserver.png" xpos -1 ypos 19
-            add "gui/system_info/line.png" xpos -1 ypos 90
+                add "gui/window/system_info/reactosserver.png" xpos -1 ypos 19
+            add "gui/window/system_info/line.png" xpos -1 ypos 90
             add "gui/desktop/desktop_icons/[name].png" xpos 10 ypos 107
             vbox:
                 xpos 53 ypos 107
@@ -65,7 +65,7 @@ screen ros_about(name=None):
                     use ros_about_general
                 else:
                     use ros_about_general_authors
-            textbutton authors_button_text style "ros_authors_button" text_style "ros_authors_button_text" focus_mask "gui/system_info/authors_button_idle.png" xpos 8 ypos 307 action ToggleVariable("ros_authors_opened", True, False)
+            textbutton authors_button_text style "ros_authors_button" text_style "ros_authors_button_text" focus_mask "gui/window/system_info/authors_button_idle.png" xpos 8 ypos 307 action ToggleVariable("ros_authors_opened", True, False)
             textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" xpos 321 ypos 307 action [
                 SetVariable("ros_authors_opened", False),
                 Hide(screen="ros_about")]
@@ -85,7 +85,7 @@ screen ros_about_general():
         text "Данная версия ReactOS зарегистрирована на:" style "ros_about_description"
         text "[username]" style "ros_about_description" xpos 16
         text "[organization]" style "ros_about_description" xpos 16
-        add "gui/system_info/about_window_separator.png"
+        add "gui/window/system_info/about_window_separator.png"
     hbox:
         xpos 53 ypos 187
         spacing 50

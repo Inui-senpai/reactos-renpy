@@ -2,7 +2,7 @@
 default persistent.provisioned = False
 default persistent.installed = False
 default install_lang = "english"
-define ros_build = "20210603-0.4.15-dev-2634-gf37b94b.GNU_8.4.0"
+define ros_build = "20210819-0.4.15-dev-3072-gc59c185.GNU_8.4.0"
 define ros_build_short = ros_build[9:33]
 define ros_build_wo_compiler = ros_build[:33]
 default ros_install_directory = "ReactOS"
@@ -11,7 +11,7 @@ default partition_hovered = False
 default format_method = None
 default next_step = None
 default set_loader = None
-default selected_edition = "workstation"
+default persistent.selected_edition = "workstation"
 default admin_pass = ""
 default admin_pass2 = ""
 default daylight_saving_time = True

@@ -11,31 +11,31 @@ image ros_this_pc_menu_idle:
     Solid("#d4d0c8")
     xsize 38 ysize 18
 image ros_this_pc_menu_selected:
-    "gui/notepad/menu_button_selected.png"
+    "gui/window/notepad/menu_button_selected.png"
     xsize 38 ysize 18
     xpos -6
 style ros_this_pc_menu_edit is ros_this_pc_menu:
     selected_background "ros_this_pc_menu_edit_selected"
 image ros_this_pc_menu_edit_selected:
-    "gui/notepad/menu_button_selected.png"
+    "gui/window/notepad/menu_button_selected.png"
     xsize 42 ysize 18
     xpos -4
 style ros_this_pc_menu_view is ros_this_pc_menu:
     selected_background "ros_this_pc_menu_view_selected"
 image ros_this_pc_menu_view_selected:
-    "gui/notepad/menu_button_selected.png"
+    "gui/window/notepad/menu_button_selected.png"
     xsize 26 ysize 18
     xpos -4
 style ros_this_pc_menu_favorites is ros_this_pc_menu:
     selected_background "ros_this_pc_menu_favorites_selected"
 image ros_this_pc_menu_favorites_selected:
-    "gui/notepad/menu_button_selected.png"
+    "gui/window/notepad/menu_button_selected.png"
     xsize 60 ysize 18
     xpos -4
 style ros_this_pc_menu_help is ros_this_pc_menu:
     selected_background "ros_this_pc_menu_help_selected"
 image ros_this_pc_menu_help_selected:
-    "gui/notepad/menu_button_selected.png"
+    "gui/window/notepad/menu_button_selected.png"
     xsize 49 ysize 18
     xpos -4
 style ros_this_pc_menu_text:
