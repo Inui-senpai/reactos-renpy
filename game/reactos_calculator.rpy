@@ -166,15 +166,6 @@ init python:
 # Окно
 screen ros_calc():
     default calc_input = "0"
-    default hovered_button = False
-    if not hovered_button:
-        key "mouseup_1" action [
-            SetVariable("ros_calc_menu_edit_opened", False),
-            SetVariable("ros_calc_menu_view_opened", False),
-            SetVariable("ros_calc_menu_help_opened", False),
-            Hide("ros_calc_edit"),
-            Hide("ros_calc_view"),
-            Hide("ros_calc_help")]
     if not is_calc_window_opened:
         frame:
             style "ros_calc_frame_minimized"
@@ -317,7 +308,7 @@ screen ros_calc_edit():
         vbox:
             xpos 3 ypos 3
             spacing 2
-            textbutton "Копировать    CTRL-C" style "ros_calc_menu_entry" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_idle" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) action NullAction()
+            textbutton "Копировать    CTRL-C" style "ros_calc_menu_entry" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_idle" action NullAction()
             textbutton "Вставить        CTRL-V" style "ros_calc_menu_entry" text_style "ros_calc_menu_entry_text"
 # Вид
 screen ros_calc_view():
@@ -328,13 +319,13 @@ screen ros_calc_view():
         vbox:
             xpos 3 ypos 3
             spacing 2
-            textbutton "Обычный" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) action NullAction()
-            textbutton "Инженерный" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) action NullAction()
-            textbutton "Перевод величин" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) action NullAction()
+            textbutton "Обычный" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" action NullAction()
+            textbutton "Инженерный" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" action NullAction()
+            textbutton "Перевод величин" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" action NullAction()
             null height 1
             add "gui/desktop/context_menu_separator.png" xsize 139 ypos 1
             null height 1
-            textbutton "Группировать цифры" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) action NullAction()
+            textbutton "Группировать цифры" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" action NullAction()
 # Справка
 screen ros_calc_help():
     frame:
@@ -344,10 +335,10 @@ screen ros_calc_help():
         vbox:
             xpos 3 ypos 3
             spacing 2
-            textbutton "Вызов справки" style "ros_calc_menu_entry_help" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_help_idle" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) action NullAction()
+            textbutton "Вызов справки" style "ros_calc_menu_entry_help" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_help_idle" action NullAction()
             null height 1
             add "gui/desktop/context_menu_separator.png" xsize 103 ypos 1
             null height 1
-            textbutton "О программе" style "ros_calc_menu_entry_help" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_help_idle" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) action [
+            textbutton "О программе" style "ros_calc_menu_entry_help" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_help_idle" action [
                 SetVariable("ros_calc_menu_help_opened", False),
                 Show(screen="ros_about", name="calc")]
