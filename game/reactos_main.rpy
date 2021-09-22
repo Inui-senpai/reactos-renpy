@@ -518,6 +518,7 @@ style ros_desktop_icon_text:
     color "#fff"
     size 11
     text_align 0.5
+    outlines [(0, "#000", 1, 1)]
 # Меню "Пуск"
 # Унаследованное ("Классическое")
 style ros_start_menu:

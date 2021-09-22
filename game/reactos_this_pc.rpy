@@ -475,7 +475,7 @@ screen ros_explorer(folder=None):
                                         text "Панель\nуправления" style "ros_this_pc_viewport_text"
                                     vbox:
                                         imagebutton auto "this_pc_namespaces_%s" xalign 0.5 mouse "link" action NullAction()
-                                        text "Пространство\nимён объектов" style "ros_this_pc_viewport_text"
+                                        text "Пространство\nимён объекто..." style "ros_this_pc_viewport_text"
                                     vbox:
                                         imagebutton auto "this_pc_system_registry_%s" xalign 0.5 mouse "link" action NullAction()
                                         text "Системный\nреестр" style "ros_this_pc_viewport_text"
