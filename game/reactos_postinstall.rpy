@@ -334,8 +334,8 @@ screen setup_step9():
                 style_prefix "ros_radio"
                 xmaximum 1000
                 xpos 48 ypos 100
-                textbutton "{font=gui/font/tahomabd.ttf}Обычный режим настройки{/font}\nСоздаёт сетевые соединения, используя клиент для сетей ReactOS,\nобщие файлы и принтеры для сетей ReactOS и транспортный\nпротокол TCP/IP с автоматической адресацией." action SetVariable("network_setup_mode", "regular")
-                textbutton "{font=gui/font/tahomabd.ttf}Расширенный режим настройки{/font}\nПозволяет вам настроить сетевые компоненты вручную."
+                textbutton "{b}Обычный режим настройки{/b}\nСоздаёт сетевые соединения, используя клиент для сетей ReactOS,\nобщие файлы и принтеры для сетей ReactOS и транспортный\nпротокол TCP/IP с автоматической адресацией." action SetVariable("network_setup_mode", "regular")
+                textbutton "{b}Расширенный режим настройки{/b}\nПозволяет вам настроить сетевые компоненты вручную."
             hbox:
                 pos(195,310)
                 textbutton "< Назад" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_8")
@@ -493,7 +493,7 @@ screen setup_step12():
 label ros_postinstall:
     $ mouse_visible = True
     scene postinstall
-    show corner_text "{font=gui/font/tahomabd.ttf}ReactOS Version [config.version]{/font}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]"
+    show corner_text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]"
     $ renpy.pause(0.2, hard=True)
     show screen please_wait("Установка оборудования...")
     $ renpy.pause(1.5, hard=True)

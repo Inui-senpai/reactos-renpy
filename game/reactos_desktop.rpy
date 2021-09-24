@@ -1187,7 +1187,7 @@ screen ros_desktop_icons():
             fit "fill"
     vbox:
         xalign 1.0 yalign 0.95
-        text "{font=gui/font/tahomabd.ttf}ReactOS Version [config.version]{/font}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]" style "corner_text"
+        text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]" style "corner_text"
     vbox:
         xpos 20 ypos 12
         spacing 20
@@ -1453,13 +1453,13 @@ screen ros_taskbar_context_menu_toolbars():
 label ros_desktop:
     $ mouse_visible = True
     scene postinstall
-    show corner_text "{font=gui/font/tahomabd.ttf}ReactOS Version [config.version]{/font}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]"
+    show corner_text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]"
     show screen please_wait("Загружаются персональные настройки...")
     $ renpy.pause(0.5, hard=True)
     hide screen please_wait
     play sound "audio/ReactOS_LogOn.wav"
     show screen ros_desktop_icons
     show screen ros_taskbar
-    show corner_text "{font=gui/font/tahomabd.ttf}ReactOS Version [config.version]{/font}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]":
+    show corner_text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]":
         yalign 0.95
     $ renpy.pause(hard=True)

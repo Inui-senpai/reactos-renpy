@@ -46,6 +46,10 @@ default persistent.taskbar_settings_hide_inactive_icons = False
 # Запись действия для кнопки "Вверх" в Проводнике
 default this_pc_up_arrow_action = NullAction()
 
+# Использование имеющихся шрифтов вместо псевдорежимов
+init python:
+    config.font_replacement_map["gui/font/tahoma.ttf", True, False] = ("gui/font/tahomabd.ttf", False, False)
+
 # Узнаём техническую информацию реального ПК для пост-установки
 init python:
     if renpy.windows:
