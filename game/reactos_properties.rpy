@@ -30,6 +30,16 @@ image ros_properties_tab_medium_idle:
 image ros_properties_tab_medium_selected:
     "gui/window/properties/tab_selected.png"
     xsize 79 subpixel True
+style ros_properties_tabs_extra_large:
+    idle_background "ros_properties_tab_extra_large_idle"
+    hover_background "ros_properties_tab_extra_large_idle"
+    selected_background "ros_properties_tab_extra_large_selected"
+image ros_properties_tab_extra_large_idle:
+    "gui/window/properties/tab_idle.png"
+    xsize 130 subpixel True
+image ros_properties_tab_extra_large_selected:
+    "gui/window/properties/tab_selected.png"
+    xsize 130 subpixel True
 style ros_properties_tabs_text:
     font "gui/font/tahoma.ttf"
     size 11
@@ -47,6 +57,7 @@ style ros_properties_buttons_text:
     color "#000"
     hover_color "#000"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     xpos 14 ypos 4
 style ros_properties_buttons_text_ok is ros_properties_buttons_text:
     xpos 34
@@ -97,6 +108,8 @@ style ros_properties_tabs_text_5 is ros_properties_tabs_text:
     xpos 5
 style ros_properties_tabs_text_6 is ros_properties_tabs_text:
     xpos 9
+style ros_properties_tabs_text_7 is ros_properties_tabs_text:
+    xpos 13
 style ros_properties_submenu_frame_title:
     insensitive_background Solid("#d4d0c8")
     font "gui/font/tahoma.ttf"
@@ -140,6 +153,7 @@ style ros_properties_screen_choice_fit_mode_text:
     hover_color "#000"
     selected_color "#fff"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     xpos 4 ypos 4
 style ros_properties_screen_screensaver_frame:
     background Frame("gui/window/properties/screensaver_frame.png")
@@ -164,6 +178,7 @@ style ros_properties_screen_screensaver_adjust_box_text:
     hover_color "#000"
     selected_color "#fff"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     text_align 1.0
     xpos 14 ypos 4
 style ros_classic_inactive_window:
@@ -193,6 +208,7 @@ style ros_classic_active_window_menu_text:
     color "#000"
     hover_color "#000"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
 style ros_classic_active_window_menu_selected_text is ros_classic_active_window_menu_text:
     xpos 6
 style ros_classic_active_window_viewport:
@@ -250,9 +266,46 @@ style ros_properties_submenu_frame_mini:
 image ros_properties_slider = "gui/window/properties/horizontal_idle_bar.png"
 image ros_properties_slider_thumb = "gui/window/properties/horizontal_idle_thumb.png"
 image ros_properties_slider_marks = "gui/window/properties/horizontal_idle_bar_marks.png"
+image ros_properties_slider_marks_2 = "gui/window/properties/horizontal_idle_bar_marks_2.png"
 style ros_properties_color_quality_frame:
     background Frame("gui/window/properties/color_quality_frame.png")
     xsize 155 ysize 15
+style ros_properties_mouse_mouse_scheme_frame:
+    background Frame("gui/window/properties/dropdown_menu_mouse_scheme_idle.png")
+    xsize 258 ysize 21
+style ros_properties_mouse_mouse_scheme_remove_buttons:
+    idle_background "gui/window/properties/mouse_scheme_delete_button_idle.png"
+    hover_background "gui/window/properties/mouse_scheme_delete_button_hover.png"
+    insensitive_background "gui/window/properties/mouse_scheme_delete_button_idle.png"
+style ros_properties_mouse_mouse_scheme_save_as_buttons:
+    idle_background "gui/window/properties/mouse_scheme_save_as_button_idle.png"
+    hover_background "gui/window/properties/mouse_scheme_save_as_button_hover.png"
+    insensitive_background "gui/window/properties/mouse_scheme_save_as_button_idle.png"
+style ros_properties_mouse_mouse_scheme_save_as_buttons_text is ros_properties_screen_appearance_buttons_text:
+    xpos 12
+style ros_properties_mouse_mouse_scheme_remove_buttons_text is ros_properties_buttons_text:
+    xpos 16
+style ros_properties_mouse_mouse_scheme_content_viewport:
+    background Frame("gui/window/properties/mouse_scheme_content_viewport.png")
+    xsize 353 ysize 184
+style ros_properties_mouse_mouse_scheme_content_viewport_item:
+    idle_background "mouse_scheme_content_viewport_item_idle"
+    hover_background "mouse_scheme_content_viewport_item_idle"
+    selected_background "mouse_scheme_content_viewport_item_selected"
+    xpos 2 ypos 2
+image mouse_scheme_content_viewport_item_idle:
+    Solid("#fff")
+    xsize 333 ysize 36
+image mouse_scheme_content_viewport_item_selected:
+    Solid("#0a246a")
+    xsize 333 ysize 36
+style ros_properties_mouse_mouse_scheme_content_viewport_item_text:
+    font "gui/font/tahoma.ttf"
+    size 11
+    idle_color "#000"
+    hover_color "#000"
+    selected_color "#fff"
+    xpos 6 ypos 11
 
 # Окно - Свойства: Система
 screen ros_properties_system():
@@ -954,3 +1007,219 @@ screen ros_properties_taskbar_start_menu_settings():
                 else:
                     textbutton "Настроить..." style "ros_properties_buttons" text_style "ros_properties_buttons_text" xpos 121 ypos 1
             text "Классический стиль отображения меню \"Пуск\"." style "ros_properties_text"
+
+# Окно - Свойства: Мышь
+screen ros_properties_mouse():
+    drag:
+        drag_name "ros_properties"
+        drag_handle (0, 0, 395, 21)
+        xalign 0.1 yalign 0.1
+        frame:
+            style "ros_properties_frame"
+            xsize 395 ysize 440
+            add "gui/desktop/menu_icons/submenu/mouse_properties.png" xpos 3
+            text "Свойства: Мышь" style "ros_properties_window_title"
+            imagebutton idle "gui/window/common/close_idle.png" action [
+                SetVariable("properties_current_tab", "general"),
+                Hide("ros_properties_mouse")]:
+                xanchor -370 yanchor 0
+            if properties_current_tab == "general":
+                use ros_properties_mouse_mouse_buttons
+            elif properties_current_tab == "pointers":
+                use ros_properties_mouse_pointers
+            elif properties_current_tab == "pointer_options":
+                use ros_properties_mouse_pointer_options
+            # elif properties_current_tab == "settings":
+            #     use ros_properties_screen_settings
+            hbox:
+                xpos 3 ypos 26
+                textbutton "Кнопки мыши" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_4" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "general")
+                null width 10
+                textbutton "Указатели" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_7" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "pointers")
+                null width 20
+                textbutton "Параметры указателя" style "ros_properties_tabs_extra_large" text_style "ros_properties_tabs_text_6" focus_mask "ros_properties_tab_extra_large_idle" action SetVariable("properties_current_tab", "pointer_options")
+            if ros_properties_show_bottom_buttons:
+                hbox:
+                    xpos 125 ypos 403
+                    textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" action [
+                    SetVariable("properties_current_tab", "general"),
+                    Hide("ros_properties_mouse")]
+                    null width 72
+                    textbutton "Отмена" style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action [
+                    SetVariable("properties_current_tab", "general"),
+                    Hide("ros_properties_mouse")]
+                    null width 48
+                    textbutton "Применить" style "ros_properties_buttons" text_style "ros_properties_buttons_text"
+# Кнопки мыши
+screen ros_properties_mouse_mouse_buttons():
+    frame:
+        style "ros_properties_viewport"
+        xsize 377 ysize 351
+        frame:
+            style "ros_properties_submenu_frame"
+            xsize 354 ysize 109
+            xpos 12 ypos 15
+            textbutton "Конфигурация кнопок" style "ros_properties_submenu_frame_title" text_style "ros_properties_submenu_frame_title" xpos 4 ypos -10
+            hbox:
+                xpos 8 ypos 12
+                style_prefix "ros_check"
+                textbutton "Обменять назначение кнопок" action NullAction()
+            text "Назначает правую кнопку для выполнения\nтаких основных функций, как выбор и\nперетаскивание. Часто используется теми,\nкто работает мышью левой рукой." style "ros_properties_text" xpos 6 ypos 32
+            add "gui/window/properties/screensaver_frame.png" xsize 87 ysize 83 xpos 252 ypos 9
+            add "gui/window/properties/mouse_lmb_primary.png" xpos 270 ypos 26
+        frame:
+            style "ros_properties_submenu_frame"
+            xsize 354 ysize 109
+            xpos 12 ypos 135
+            textbutton "Скорость выполнения двойного щелчка" style "ros_properties_submenu_frame_title" text_style "ros_properties_submenu_frame_title" xpos 4 ypos -10
+            text "Сделайте двойной щелчок по этому значку.\nЕсли папка не открывается или не\nзакрывается, выберите более низкую\nскорость." style "ros_properties_text" xpos 6 ypos 7
+            text "Скорость:" style "ros_properties_text" xpos 6 ypos 67
+            text "Ниже" style "ros_properties_text" xpos 66 ypos 67
+            text "Выше" style "ros_properties_text" xpos 212 ypos 67
+            add "ros_properties_slider" xpos 108 ypos 74 xsize 89 ysize 4
+            add "ros_properties_slider_thumb" xpos 152 ypos 67
+            add "ros_properties_slider_marks_2" xpos 113 ypos 90
+            add "gui/window/properties/screensaver_frame.png" xsize 87 ysize 83 xpos 252 ypos 9
+            add "gui/window/properties/mouse_folder_closed.png" xpos 270 ypos 26
+        frame:
+            style "ros_properties_submenu_frame"
+            xsize 354 ysize 92
+            xpos 12 ypos 255
+            textbutton "Залипание кнопки мыши" style "ros_properties_submenu_frame_title" text_style "ros_properties_submenu_frame_title" xpos 4 ypos -10
+            hbox:
+                xpos 8 ypos 10
+                style_prefix "ros_check"
+                textbutton "Включить залипание" action NullAction()
+            text "Позволяет выполнять выделение и перетаскивание без\nудерживания кнопки нажатой. Для включения ненадолго\nзадержите кнопку мыши в нажатом положении. Для\nосвобождения снова сделайте щелчок." style "ros_properties_text" xpos 6 ypos 28
+            textbutton "Параметры..." style "ros_properties_buttons" text_style "ros_properties_page4_buttons_text" xpos 255 ypos 4
+# Указатели
+screen ros_properties_mouse_pointers():
+    frame:
+        style "ros_properties_viewport"
+        xsize 377 ysize 351
+        frame:
+            style "ros_properties_submenu_frame"
+            xsize 275 ysize 68
+            xpos 13 ypos 16
+            textbutton "Схема" style "ros_properties_submenu_frame_title" text_style "ros_properties_submenu_frame_title" xpos 4 ypos -10
+            textbutton "ReactOS Default (системная схема)" style "ros_properties_mouse_mouse_scheme_frame" text_style "ros_properties_text" xpos 3 ypos 7 action NullAction()
+            textbutton "Сохранить как..." style "ros_properties_mouse_mouse_scheme_save_as_buttons" text_style "ros_properties_mouse_mouse_scheme_save_as_buttons_text" focus_mask "gui/window/properties/mouse_scheme_save_as_button_idle.png" xpos 75 ypos 32 action NullAction()
+            textbutton "Удалить" style "ros_properties_mouse_mouse_scheme_remove_buttons" text_style "ros_properties_mouse_mouse_scheme_remove_buttons_text" xpos 186 ypos 32
+        add "gui/window/properties/screensaver_frame.png" xsize 68 ysize 67 xpos 298 ypos 19
+        if current_content_viewport_item == "default":
+            add config.mouse["default"][0][0] xpos 318 ypos 38
+        elif current_content_viewport_item == "helpsel":
+            add config.mouse["helpsel"][0][0] xpos 318 ypos 38
+        elif current_content_viewport_item == "working":
+            add config.mouse["working"][0][0] xpos 318 ypos 38
+        elif current_content_viewport_item == "busy":
+            add config.mouse["busy"][0][0] xpos 316 ypos 36
+        elif current_content_viewport_item == "cross":
+            add config.mouse["cross"][0][0] xpos 316 ypos 36
+        elif current_content_viewport_item == "beam":
+            add config.mouse["beam"][0][0] xpos 316 ypos 36
+        elif current_content_viewport_item == "pen":
+            add config.mouse["pen"][0][0] xpos 318 ypos 38
+        elif current_content_viewport_item == "unavail":
+            add config.mouse["unavail"][0][0] xpos 316 ypos 36
+        elif current_content_viewport_item == "ns":
+            add config.mouse["ns"][0][0] xpos 316 ypos 36
+        elif current_content_viewport_item == "ew":
+            add config.mouse["ew"][0][0] xpos 316 ypos 36
+        elif current_content_viewport_item == "nwse":
+            add config.mouse["nwse"][0][0] xpos 316 ypos 36
+        elif current_content_viewport_item == "nesw":
+            add config.mouse["nesw"][0][0] xpos 316 ypos 36
+        elif current_content_viewport_item == "move":
+            add config.mouse["move"][0][0] xpos 316 ypos 36
+        elif current_content_viewport_item == "up":
+            add config.mouse["up"][0][0] xpos 316 ypos 36
+        elif current_content_viewport_item == "link":
+            add config.mouse["link"][0][0] xpos 316 ypos 36
+        text "Настройка:" style "ros_properties_text" xpos 13 ypos 101
+        frame:
+            style "ros_properties_mouse_mouse_scheme_content_viewport"
+            xpos 13 ypos 117
+            viewport:
+                yinitial 0.0
+                scrollbars "vertical"
+                mousewheel True
+                draggable True
+                side_yfill True
+                vbox:
+                    spacing 2
+                    hbox:
+                        textbutton "Основной режим" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "default")
+                        add config.mouse["default"][0][0] xpos 217 ypos 7
+                    hbox:
+                        textbutton "Выбор справки" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "helpsel")
+                        add config.mouse["helpsel"][0][0] xpos 226 ypos 7
+                    hbox:
+                        textbutton "Фоновый режим" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "working")
+                        add config.mouse["working"][0][0] xpos 220 ypos 7
+                    hbox:
+                        textbutton "Занят" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "busy")
+                        add config.mouse["busy"][0][0] xpos 267 ypos 7
+                    hbox:
+                        textbutton "Графическое выделение" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "cross")
+                        add config.mouse["cross"][0][0] xpos 171 ypos 7
+                    hbox:
+                        textbutton "Выделение текста" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "beam")
+                        add config.mouse["beam"][0][0] xpos 203 ypos 7
+                    hbox:
+                        textbutton "Рукописный ввод" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "pen")
+                        add config.mouse["pen"][0][0] xpos 213 ypos 7
+                    hbox:
+                        textbutton "Недоступно" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "unavail")
+                        add config.mouse["unavail"][0][0] xpos 236 ypos 7
+                    hbox:
+                        textbutton "Изменение вертикальных размеров" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "ns")
+                        add config.mouse["ns"][0][0] xpos 117 ypos 7
+                    hbox:
+                        textbutton "Изменение горизонтальных размеров" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "ew")
+                        add config.mouse["ew"][0][0] xpos 106 ypos 7
+                    hbox:
+                        textbutton "Изменение размеров по диагонали 1" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "nwse")
+                        add config.mouse["nwse"][0][0] xpos 112 ypos 7
+                    hbox:
+                        textbutton "Изменение размеров по диагонали 2" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "nesw")
+                        add config.mouse["nesw"][0][0] xpos 112 ypos 7
+                    hbox:
+                        textbutton "Переместить" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "move")
+                        add config.mouse["move"][0][0] xpos 231 ypos 7
+                    hbox:
+                        textbutton "Специальное выделение" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "up")
+                        add config.mouse["up"][0][0] xpos 169 ypos 7
+                    hbox:
+                        textbutton "Выбор ссылки" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "link")
+                        add config.mouse["link"][0][0] xpos 227 ypos 7
+        hbox:
+            xpos 13 ypos 313
+            style_prefix "ros_check"
+            textbutton "Включить тень указателя" action NullAction()
+        hbox:
+            xpos 170 ypos 310
+            spacing 40
+            textbutton "По умолчанию" style "ros_properties_mouse_mouse_scheme_save_as_buttons" text_style "ros_properties_mouse_mouse_scheme_remove_buttons_text"
+            textbutton "Обзор..." style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action NullAction()
+# Параметры указателя
+screen ros_properties_mouse_pointer_options():
+    frame:
+        style "ros_properties_viewport"
+        xsize 377 ysize 351
+        frame:
+            style "ros_properties_submenu_frame"
+            xsize 354 ysize 93
+            xpos 13 ypos 16
+            textbutton "Перемещение" style "ros_properties_submenu_frame_title" text_style "ros_properties_submenu_frame_title" xpos 4 ypos -10
+            add "gui/window/properties/mouse_opt_movement.png" xpos 11 ypos 12
+            text "Задайте скорость движения указателя:" style "ros_properties_text" xpos 48 ypos 6
+            text "Ниже" style "ros_properties_text" xpos 48 ypos 32
+            text "Выше" style "ros_properties_text" xpos 185 ypos 32
+            add "ros_properties_slider" xpos 85 ypos 35 xsize 89 ysize 4
+            add "ros_properties_slider_thumb" xpos 130 ypos 26
+            add "ros_properties_slider_marks_2" xpos 90 ypos 50
+            hbox:
+                xpos 48 ypos 65
+                style_prefix "ros_check"
+                textbutton "Включить повышенную точность установки указателя" action NullAction()

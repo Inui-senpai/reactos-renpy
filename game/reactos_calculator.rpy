@@ -52,6 +52,7 @@ style ros_calc_menu_text:
     color "#000"
     hover_color "#000"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     ypos 2
 style ros_calc_input:
     background Frame("gui/window/calculator/input.png")
@@ -125,7 +126,10 @@ style ros_calc_menu_entry_text:
     color "#000"
     hover_color "#fff"
     insensitive_color "#808080"
-    xpos 20
+    insensitive_outlines [(0, "#fff", 1, 1)]
+    xpos 15 ypos 1
+style ros_calc_menu_entry_text_selected is ros_calc_menu_entry_text:
+    xpos -1 ypos -1
 style ros_calc_menu_entry_view:
     idle_background "ros_calc_menu_entry_view_idle"
     hover_background "ros_calc_menu_entry_view_hover"
@@ -261,32 +265,53 @@ screen ros_calc():
                     hbox:
                         xpos 53 ypos 111
                         spacing 33
-                        textbutton "7" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"7")
-                        textbutton "8" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"8")
-                        textbutton "9" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"9")
+                        if len(calc_input) < 38:
+                            textbutton "7" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"7")
+                            textbutton "8" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"8")
+                            textbutton "9" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"9")
+                        else:
+                            textbutton "7" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
+                            textbutton "8" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
+                            textbutton "9" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
                         textbutton "/" style "ros_calc_memory_buttons" text_style "ros_calc_operations_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"/")
                         textbutton "Sqrt" style "ros_calc_memory_buttons" text_style "ros_calc_sqrt_text" focus_mask "ros_calc_memory_buttons_idle" xpos 2 action NullAction()
                     hbox:
                         xpos 53 ypos 144
                         spacing 33
-                        textbutton "4" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"4")
-                        textbutton "5" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"5")
-                        textbutton "6" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"6")
+                        if len(calc_input) < 38:
+                            textbutton "4" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"4")
+                            textbutton "5" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"5")
+                            textbutton "6" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"6")
+                        else:
+                            textbutton "4" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
+                            textbutton "5" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
+                            textbutton "6" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
                         textbutton "*" style "ros_calc_memory_buttons" text_style "ros_calc_operations_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"*")
                         textbutton "%" style "ros_calc_memory_buttons" text_style "ros_calc_percent_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
                     hbox:
                         xpos 53 ypos 177
                         spacing 33
-                        textbutton "1" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"1")
-                        textbutton "2" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"2")
-                        textbutton "3" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"3")
+                        if len(calc_input) < 38:
+                            textbutton "1" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"1")
+                            textbutton "2" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"2")
+                            textbutton "3" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"3")
+                        else:
+                            textbutton "1" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
+                            textbutton "2" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
+                            textbutton "3" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
                         textbutton "-" style "ros_calc_memory_buttons" text_style "ros_calc_operations_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"-")
                         textbutton "1/x" style "ros_calc_memory_buttons" text_style "ros_calc_1x_text" focus_mask "ros_calc_memory_buttons_idle" xpos 2 action NullAction()
                     hbox:
                         xpos 53 ypos 210
                         spacing 33
-                        textbutton "0" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"0")
-                        textbutton "+/-" style "ros_calc_memory_buttons" text_style "ros_calc_sqrt_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", "-"+calc_input)
+                        if len(calc_input) < 38:
+                            textbutton "0" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input+"0")
+                        else:
+                            textbutton "0" style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" action NullAction()
+                        if not calc_input.startswith("-"):
+                            textbutton "+/-" style "ros_calc_memory_buttons" text_style "ros_calc_sqrt_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", "-"+calc_input)
+                        else:
+                            textbutton "+/-" style "ros_calc_memory_buttons" text_style "ros_calc_sqrt_text" focus_mask "ros_calc_memory_buttons_idle" action SetScreenVariable("calc_input", calc_input[1:])
                         textbutton "," style "ros_calc_memory_buttons" text_style "ros_calc_integer_buttons_text" focus_mask "ros_calc_memory_buttons_idle" xpos -10 action NullAction()
                         textbutton "+" style "ros_calc_memory_buttons" text_style "ros_calc_operations_text" focus_mask "ros_calc_memory_buttons_idle" xpos -7 action SetScreenVariable("calc_input", calc_input+"+")
                         textbutton "=" style "ros_calc_memory_buttons" text_style "ros_calc_equal_text" focus_mask "ros_calc_memory_buttons_idle" xpos -9 action SetScreenVariable("calc_input", ros_calc_equal(calc_input))
@@ -319,13 +344,13 @@ screen ros_calc_view():
         vbox:
             xpos 3 ypos 3
             spacing 2
-            textbutton "Обычный" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" action NullAction()
+            textbutton "{font=gui/font/Marlett.ttf}{size=13}a{/font}{/size} Обычный" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text_selected" focus_mask "ros_calc_menu_entry_view_idle" action NullAction()
             textbutton "Инженерный" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" action NullAction()
             textbutton "Перевод величин" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" action NullAction()
             null height 1
             add "gui/desktop/context_menu_separator.png" xsize 139 ypos 1
             null height 1
-            textbutton "Группировать цифры" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_view_idle" action NullAction()
+            textbutton "{font=gui/font/Marlett.ttf}{size=13}a{/font}{/size} Группировать цифры" style "ros_calc_menu_entry_view" text_style "ros_calc_menu_entry_text_selected" focus_mask "ros_calc_menu_entry_view_idle" action NullAction()
 # Справка
 screen ros_calc_help():
     frame:

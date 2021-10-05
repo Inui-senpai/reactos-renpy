@@ -830,6 +830,7 @@ style ros_check_button_text is check_button_text:
     color "#000"
     hover_color "#000"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     ypos 2
 style ros_check_vbox is check_vbox
 

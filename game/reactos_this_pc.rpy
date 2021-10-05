@@ -44,6 +44,7 @@ style ros_this_pc_menu_text:
     color "#000"
     hover_color "#000"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     ypos 2
 style ros_this_pc_window_title:
     font "gui/font/tahomabd.ttf"
@@ -81,6 +82,7 @@ style ros_this_pc_back_button_text:
     color "#000"
     hover_color "#000"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     xpos 28 ypos 12
 style ros_this_pc_search_button:
     idle_background "gui/window/this_pc/buttons/search_idle.png"
@@ -234,6 +236,7 @@ style ros_this_pc_menu_entry_text:
     color "#000"
     hover_color "#fff"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     xpos 20
 style ros_this_pc_frame_minimized is empty
 
@@ -394,7 +397,7 @@ screen ros_explorer(folder=None):
                                                 text "Командная\nстрока" style "ros_this_pc_viewport_text"
                                             vbox:
                                                 xpos 10
-                                                imagebutton auto "cp_mouse_%s" xalign 0.5 mouse "link" action NullAction()
+                                                imagebutton auto "cp_mouse_%s" xalign 0.5 mouse "link" action Show(screen="ros_properties_mouse")
                                                 text "Мышь" style "ros_this_pc_viewport_text"
                                         hbox:
                                             spacing 13

@@ -1397,7 +1397,7 @@ screen ros_taskbar_context_menu():
         vbox:
             xpos 3 ypos 3
             spacing 2
-            textbutton "Панели инструментов                        {font=gui/font/arial.ttf}►{/font}" style "ros_context_menu_taskbar" text_style "ros_context_menu_text" hovered [
+            textbutton "Панели инструментов                       {font=gui/font/arial.ttf}►{/font}" style "ros_context_menu_taskbar" text_style "ros_context_menu_text" hovered [
                 SetVariable("toolbars_entry", True),
                 SetVariable("hovered_button", True)] unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_taskbar_idle" action NullAction()
             textbutton "Настройка даты и времени" style "ros_context_menu_taskbar" text_style "ros_context_menu_text" hovered [
@@ -1421,9 +1421,18 @@ screen ros_taskbar_context_menu():
                 SetVariable("toolbars_entry", False),
                 SetVariable("hovered_button", True)] unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_taskbar_idle" action NullAction()
             add "gui/desktop/context_menu_separator.png" xsize 204 ypos 2
-            textbutton "Закрепить панель задач" style "ros_context_menu_taskbar" text_style "ros_context_menu_text" hovered [
-                SetVariable("toolbars_entry", False),
-                SetVariable("hovered_button", True)] unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_taskbar_idle" action NullAction()
+            if persistent.taskbar_settings_lock_taskbar:
+                textbutton "{font=gui/font/Marlett.ttf}{size=13}a{/font}{/size} Закрепить панель задач" style "ros_context_menu_taskbar" text_style "ros_context_menu_text_selected" hovered [
+                    SetVariable("toolbars_entry", False),
+                    SetVariable("hovered_button", True)] unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_taskbar_idle" action [
+                        Hide(screen="ros_taskbar_context_menu"),
+                        SetVariable("persistent.taskbar_settings_lock_taskbar", False)]
+            else:
+                textbutton "Закрепить панель задач" style "ros_context_menu_taskbar" text_style "ros_context_menu_text" hovered [
+                    SetVariable("toolbars_entry", False),
+                    SetVariable("hovered_button", True)] unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_taskbar_idle" action [
+                        Hide(screen="ros_taskbar_context_menu"),
+                        SetVariable("persistent.taskbar_settings_lock_taskbar", True)]
             textbutton "Свойства" style "ros_context_menu_taskbar" text_style "ros_context_menu_text" hovered [
                 SetVariable("toolbars_entry", False),
                 SetVariable("hovered_button", True)] unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_taskbar_idle" action [

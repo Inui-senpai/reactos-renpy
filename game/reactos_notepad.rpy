@@ -44,6 +44,7 @@ style ros_notepad_menu_text:
     color "#000"
     hover_color "#000"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
 style ros_notepad_menu_entry:
     idle_background "ros_notepad_menu_entry_idle"
     hover_background "ros_notepad_menu_entry_hover"
@@ -100,6 +101,7 @@ style ros_notepad_menu_entry_text:
     color "#000"
     hover_color "#fff"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     xpos 20
 style ros_notepad_window_title:
     font "gui/font/tahomabd.ttf"

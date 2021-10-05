@@ -42,6 +42,7 @@ default persistent.taskbar_settings_show_quick_launch = False
 default persistent.taskbar_settings_show_clock = True
 default persistent.taskbar_settings_show_seconds = False
 default persistent.taskbar_settings_hide_inactive_icons = False
+default current_content_viewport_item = "default"
 
 # Запись действия для кнопки "Вверх" в Проводнике
 default this_pc_up_arrow_action = NullAction()
@@ -367,6 +368,7 @@ style ros_setup_button_text:
     color "#000"
     hover_color "#000"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     xpos 15
 style ros_setup_description_title:
     font "gui/font/tahomabd.ttf"
@@ -532,6 +534,7 @@ style ros_start_menu_entry_text:
     color "#000"
     hover_color "#fff"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     size 11
     xpos 40 ypos 10
 style ros_start_menu_entry:
@@ -567,6 +570,7 @@ style ros_start_menu_new_entry_text:
     color "#000"
     hover_color "#fff"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     size 11
     xpos 36 ypos 8
 style ros_start_menu_new_entry_title_text is ros_start_menu_new_entry_text:
@@ -626,7 +630,10 @@ style ros_context_menu_text:
     color "#000"
     hover_color "#fff"
     insensitive_color "#808080"
-    xpos 10 ypos 1
+    insensitive_outlines [(0, "#fff", 1, 1)]
+    xpos 15 ypos 1
+style ros_context_menu_text_selected is ros_context_menu_text:
+    xpos -1 ypos -1
 image ros_context_menu_idle:
     Solid("#d4d0c8")
     xsize 132 ysize 17
@@ -700,6 +707,7 @@ style ros_start_menu_submenu_text:
     color "#000"
     hover_color "#fff"
     insensitive_color "#808080"
+    insensitive_outlines [(0, "#fff", 1, 1)]
     size 11
     xpos 27 ypos 2
 image ros_start_menu_submenu_idle:
