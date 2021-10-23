@@ -290,7 +290,21 @@ screen ros_explorer(folder=None):
                         this_pc_up_arrow_action = Show(screen="ros_explorer")
                     else:
                         this_pc_up_arrow_action = NullAction()
-                imagebutton auto "gui/window/common/close_%s.png" action Hide("ros_explorer"):
+                imagebutton auto "gui/window/common/close_%s.png" action [
+                    Hide("ros_explorer"),
+                    SetVariable("ros_explorer_menu_file_opened", False),
+                    SetVariable("ros_explorer_menu_edit_opened", False),
+                    SetVariable("ros_explorer_menu_view_opened", False),
+                    SetVariable("ros_explorer_menu_favorites_opened", False),
+                    SetVariable("ros_explorer_menu_services_opened", False),
+                    SetVariable("ros_explorer_menu_help_opened", False),
+                    SetVariable("ros_explorer_menu_file_sort_opened", False),
+                    SetVariable("ros_explorer_menu_file_view_opened", False),
+                    SetVariable("ros_explorer_menu_view_browser_panels_opened", False),
+                    SetVariable("ros_explorer_menu_view_sort_opened", False),
+                    SetVariable("ros_explorer_menu_view_go_opened", False),
+                    SetVariable("ros_explorer_menu_view_toolbars_opened", False)
+                    ]:
                     xanchor -574 yanchor -2
                 imagebutton auto "gui/window/common/expand_%s.png" action NullAction():
                     xanchor -556 yanchor -2
@@ -299,12 +313,30 @@ screen ros_explorer(folder=None):
                 hbox:
                     xpos 20 ypos 22
                     spacing 10
-                    textbutton "Файл" style "ros_this_pc_menu" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_idle" action ToggleVariable("ros_explorer_menu_file_opened", True, False)
-                    textbutton "Правка" style "ros_this_pc_menu_edit" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_edit_selected" action ToggleVariable("ros_explorer_menu_edit_opened", True, False)
-                    textbutton "Вид" style "ros_this_pc_menu_view" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_view_selected" action ToggleVariable("ros_explorer_menu_view_opened", True, False)
-                    textbutton "Избранное" style "ros_this_pc_menu_favorites" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_favorites_selected" action ToggleVariable("ros_explorer_menu_favorites_opened", True, False)
-                    textbutton "Сервис" style "ros_this_pc_menu_edit" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_edit_selected" action ToggleVariable("ros_explorer_menu_services_opened", True, False)
-                    textbutton "Справка" style "ros_this_pc_menu_help" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_help_selected" action ToggleVariable("ros_explorer_menu_help_opened", True, False)
+                    textbutton "Файл" style "ros_this_pc_menu" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_idle" action [
+                        ToggleVariable("ros_explorer_menu_file_opened", True, False),
+                        SensitiveIf(ros_explorer_menu_edit_opened == ros_explorer_menu_view_opened == ros_explorer_menu_favorites_opened == ros_explorer_menu_services_opened == ros_explorer_menu_help_opened == False)
+                        ]
+                    textbutton "Правка" style "ros_this_pc_menu_edit" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_edit_selected" action [
+                        ToggleVariable("ros_explorer_menu_edit_opened", True, False),
+                        SensitiveIf(ros_explorer_menu_file_opened == ros_explorer_menu_view_opened == ros_explorer_menu_favorites_opened == ros_explorer_menu_services_opened == ros_explorer_menu_help_opened == False)
+                        ]
+                    textbutton "Вид" style "ros_this_pc_menu_view" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_view_selected" action [
+                        ToggleVariable("ros_explorer_menu_view_opened", True, False),
+                        SensitiveIf(ros_explorer_menu_file_opened == ros_explorer_menu_edit_opened == ros_explorer_menu_favorites_opened == ros_explorer_menu_services_opened == ros_explorer_menu_help_opened == False)
+                        ]
+                    textbutton "Избранное" style "ros_this_pc_menu_favorites" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_favorites_selected" action [
+                        ToggleVariable("ros_explorer_menu_favorites_opened", True, False),
+                        SensitiveIf(ros_explorer_menu_file_opened == ros_explorer_menu_edit_opened == ros_explorer_menu_view_opened == ros_explorer_menu_services_opened == ros_explorer_menu_help_opened == False)
+                        ]
+                    textbutton "Сервис" style "ros_this_pc_menu_edit" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_edit_selected" action [
+                        ToggleVariable("ros_explorer_menu_services_opened", True, False),
+                        SensitiveIf(ros_explorer_menu_file_opened == ros_explorer_menu_edit_opened == ros_explorer_menu_view_opened == ros_explorer_menu_favorites_opened == ros_explorer_menu_help_opened == False)
+                        ]
+                    textbutton "Справка" style "ros_this_pc_menu_help" text_style "ros_this_pc_menu_text" focus_mask "ros_this_pc_menu_help_selected" action [
+                        ToggleVariable("ros_explorer_menu_help_opened", True, False),
+                        SensitiveIf(ros_explorer_menu_file_opened == ros_explorer_menu_edit_opened == ros_explorer_menu_view_opened == ros_explorer_menu_favorites_opened == ros_explorer_menu_services_opened == False)
+                        ]
                 hbox:
                     xpos 11 ypos 42
                     textbutton "Назад" style "ros_this_pc_back_button" text_style "ros_this_pc_back_button_text" focus_mask "gui/window/this_pc/buttons/back_idle.png"

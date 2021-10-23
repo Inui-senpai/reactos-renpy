@@ -152,7 +152,7 @@ screen ros_notepad(file=None):
                 text "Безымянный - Блокнот" style "ros_notepad_window_title"
             else:
                 text "[file] - Блокнот" style "ros_notepad_window_title"
-            imagebutton idle "gui/window/common/close_idle.png" action [
+            imagebutton auto "gui/window/common/close_%s.png" action [
                 SetVariable("ros_notepad_menu_file_opened", False),
                 SetVariable("ros_notepad_menu_edit_opened", False),
                 SetVariable("ros_notepad_menu_format_opened", False),
@@ -160,18 +160,33 @@ screen ros_notepad(file=None):
                 SetVariable("ros_notepad_menu_help_opened", False),
                 Hide("ros_notepad")]:
                 xanchor -544 yanchor -2
-            imagebutton idle "gui/window/common/expand_idle.png" action NullAction():
+            imagebutton auto "gui/window/common/expand_%s.png" action NullAction():
                 xanchor -526 yanchor -2
-            imagebutton idle "gui/window/common/minimize_idle.png" action NullAction():
+            imagebutton auto "gui/window/common/minimize_%s.png" action NullAction():
                 xanchor -510 yanchor -2
             hbox:
                 xpos 10 ypos 22
                 spacing 10
-                textbutton "Файл" style "ros_notepad_menu" text_style "ros_notepad_menu_text" action ToggleVariable("ros_notepad_menu_file_opened", True, False)
-                textbutton "Правка" style "ros_notepad_menu_edit" text_style "ros_notepad_menu_text" action ToggleVariable("ros_notepad_menu_edit_opened", True, False)
-                textbutton "Формат" style "ros_notepad_menu_format" text_style "ros_notepad_menu_text" action ToggleVariable("ros_notepad_menu_format_opened", True, False)
-                textbutton "Вид" style "ros_notepad_menu_view" text_style "ros_notepad_menu_text" action ToggleVariable("ros_notepad_menu_view_opened", True, False)
-                textbutton "Справка" style "ros_notepad_menu_help" text_style "ros_notepad_menu_text" action ToggleVariable("ros_notepad_menu_help_opened", True, False)
+                textbutton "Файл" style "ros_notepad_menu" text_style "ros_notepad_menu_text" action [
+                    ToggleVariable("ros_notepad_menu_file_opened", True, False),
+                    SensitiveIf(ros_notepad_menu_edit_opened == ros_notepad_menu_format_opened == ros_notepad_menu_view_opened == ros_notepad_menu_help_opened == False)
+                    ]
+                textbutton "Правка" style "ros_notepad_menu_edit" text_style "ros_notepad_menu_text" action [
+                    ToggleVariable("ros_notepad_menu_edit_opened", True, False),
+                    SensitiveIf(ros_notepad_menu_file_opened == ros_notepad_menu_format_opened == ros_notepad_menu_view_opened == ros_notepad_menu_help_opened == False)
+                    ]
+                textbutton "Формат" style "ros_notepad_menu_format" text_style "ros_notepad_menu_text" action [
+                    ToggleVariable("ros_notepad_menu_format_opened", True, False),
+                    SensitiveIf(ros_notepad_menu_file_opened == ros_notepad_menu_edit_opened == ros_notepad_menu_view_opened == ros_notepad_menu_help_opened == False),
+                    ]
+                textbutton "Вид" style "ros_notepad_menu_view" text_style "ros_notepad_menu_text" action [
+                    ToggleVariable("ros_notepad_menu_view_opened", True, False),
+                    SensitiveIf(ros_notepad_menu_file_opened == ros_notepad_menu_edit_opened == ros_notepad_menu_format_opened == ros_notepad_menu_help_opened == False)
+                    ]
+                textbutton "Справка" style "ros_notepad_menu_help" text_style "ros_notepad_menu_text" action [
+                    ToggleVariable("ros_notepad_menu_help_opened", True, False),
+                    SensitiveIf(ros_notepad_menu_file_opened == ros_notepad_menu_edit_opened == ros_notepad_menu_format_opened == ros_notepad_menu_view_opened == False)
+                    ]
             frame:
                 style "ros_notepad_viewport"
                 viewport:

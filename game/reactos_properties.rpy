@@ -70,6 +70,10 @@ style ros_properties_text:
     font "gui/font/tahoma.ttf"
     size 11
     color "#000"
+style ros_properties_text_insensitive:
+    font "gui/font/tahoma.ttf"
+    size 11
+    color "#808080"
 style ros_properties_license_button:
     idle_background "gui/window/properties/license_button_idle.png"
     hover_background "gui/window/properties/license_button_hover.png"
@@ -110,6 +114,8 @@ style ros_properties_tabs_text_6 is ros_properties_tabs_text:
     xpos 9
 style ros_properties_tabs_text_7 is ros_properties_tabs_text:
     xpos 13
+style ros_properties_tabs_text_8 is ros_properties_tabs_text:
+    xpos 16
 style ros_properties_submenu_frame_title:
     insensitive_background Solid("#d4d0c8")
     font "gui/font/tahoma.ttf"
@@ -265,8 +271,10 @@ style ros_properties_submenu_frame_mini:
     xsize 173 ysize 65
 image ros_properties_slider = "gui/window/properties/horizontal_idle_bar.png"
 image ros_properties_slider_thumb = "gui/window/properties/horizontal_idle_thumb.png"
+image ros_properties_slider_thumb_insensitive = "gui/window/properties/horizontal_insensitive_thumb.png"
 image ros_properties_slider_marks = "gui/window/properties/horizontal_idle_bar_marks.png"
 image ros_properties_slider_marks_2 = "gui/window/properties/horizontal_idle_bar_marks_2.png"
+image ros_properties_slider_marks_3 = "gui/window/properties/horizontal_idle_bar_marks_3.png"
 style ros_properties_color_quality_frame:
     background Frame("gui/window/properties/color_quality_frame.png")
     xsize 155 ysize 15
@@ -306,6 +314,15 @@ style ros_properties_mouse_mouse_scheme_content_viewport_item_text:
     hover_color "#000"
     selected_color "#fff"
     xpos 6 ypos 11
+style ros_properties_mouse_wheel_adjust_box:
+    background Frame("gui/window/properties/mouse_wheel_adjust_box_idle.png")
+    xsize 82 ysize 20
+style ros_properties_mouse_wheel_adjust_box_text:
+    font "gui/font/tahoma.ttf"
+    size 11
+    color "#000"
+    text_align 1.0
+    xpos 50 ypos 3
 
 # Окно - Свойства: Система
 screen ros_properties_system():
@@ -318,7 +335,7 @@ screen ros_properties_system():
             xsize 410 ysize 467
             add "gui/desktop/menu_icons/submenu/system_properties.png" xpos 3
             text "Свойства: Система" style "ros_properties_window_title"
-            imagebutton idle "gui/window/common/close_idle.png" action [
+            imagebutton auto "gui/window/common/close_%s.png" action [
                 SetVariable("properties_current_tab", "general"),
                 Hide("ros_properties_system_general_license"),
                 Hide("ros_properties_system_advanced_system_config"),
@@ -538,7 +555,7 @@ screen ros_properties_screen():
             xsize 395 ysize 440
             add "gui/desktop/menu_icons/submenu/screen_properties.png" xpos 3
             text "Свойства: Экран" style "ros_properties_window_title"
-            imagebutton idle "gui/window/common/close_idle.png" action [
+            imagebutton auto "gui/window/common/close_%s.png" action [
                 SetVariable("properties_current_tab", "general"),
                 Hide("ros_properties_screen")]:
                 xanchor -370 yanchor 0
@@ -874,7 +891,7 @@ screen ros_properties_taskbar():
             xsize 404 ysize 449
             add "gui/desktop/menu_icons/submenu/start_menu.png" xpos 3
             text "Свойства: Меню \"Пуск\" и панель задач" style "ros_properties_window_title"
-            imagebutton idle "gui/window/common/close_idle.png" action [
+            imagebutton auto "gui/window/common/close_%s.png" action [
                 SetVariable("properties_current_tab", "general"),
                 Hide("ros_properties_taskbar")]:
                 xanchor -379 yanchor 0
@@ -1019,8 +1036,9 @@ screen ros_properties_mouse():
             xsize 395 ysize 440
             add "gui/desktop/menu_icons/submenu/mouse_properties.png" xpos 3
             text "Свойства: Мышь" style "ros_properties_window_title"
-            imagebutton idle "gui/window/common/close_idle.png" action [
+            imagebutton auto "gui/window/common/close_%s.png" action [
                 SetVariable("properties_current_tab", "general"),
+                SetVariable("current_content_viewport_item", "default"),
                 Hide("ros_properties_mouse")]:
                 xanchor -370 yanchor 0
             if properties_current_tab == "general":
@@ -1029,8 +1047,8 @@ screen ros_properties_mouse():
                 use ros_properties_mouse_pointers
             elif properties_current_tab == "pointer_options":
                 use ros_properties_mouse_pointer_options
-            # elif properties_current_tab == "settings":
-            #     use ros_properties_screen_settings
+            elif properties_current_tab == "wheel":
+                use ros_properties_mouse_pointer_wheel
             hbox:
                 xpos 3 ypos 26
                 textbutton "Кнопки мыши" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_4" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "general")
@@ -1038,15 +1056,19 @@ screen ros_properties_mouse():
                 textbutton "Указатели" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_7" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "pointers")
                 null width 20
                 textbutton "Параметры указателя" style "ros_properties_tabs_extra_large" text_style "ros_properties_tabs_text_6" focus_mask "ros_properties_tab_extra_large_idle" action SetVariable("properties_current_tab", "pointer_options")
+                null width 10
+                textbutton "Колёсико" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_8" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "wheel")
             if ros_properties_show_bottom_buttons:
                 hbox:
                     xpos 125 ypos 403
                     textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" action [
                     SetVariable("properties_current_tab", "general"),
+                    SetVariable("current_content_viewport_item", "default"),
                     Hide("ros_properties_mouse")]
                     null width 72
                     textbutton "Отмена" style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action [
                     SetVariable("properties_current_tab", "general"),
+                    SetVariable("current_content_viewport_item", "default"),
                     Hide("ros_properties_mouse")]
                     null width 48
                     textbutton "Применить" style "ros_properties_buttons" text_style "ros_properties_buttons_text"
@@ -1217,9 +1239,73 @@ screen ros_properties_mouse_pointer_options():
             text "Ниже" style "ros_properties_text" xpos 48 ypos 32
             text "Выше" style "ros_properties_text" xpos 185 ypos 32
             add "ros_properties_slider" xpos 85 ypos 35 xsize 89 ysize 4
-            add "ros_properties_slider_thumb" xpos 130 ypos 26
+            add "ros_properties_slider_thumb" xpos 129 ypos 26
             add "ros_properties_slider_marks_2" xpos 90 ypos 50
             hbox:
                 xpos 48 ypos 65
                 style_prefix "ros_check"
                 textbutton "Включить повышенную точность установки указателя" action NullAction()
+        frame:
+            style "ros_properties_submenu_frame"
+            xsize 354 ysize 63
+            xpos 13 ypos 123
+            textbutton "Исходное положение в диалоговом окне" style "ros_properties_submenu_frame_title" text_style "ros_properties_submenu_frame_title" xpos 4 ypos -10
+            add "gui/window/properties/mouse_opt_initial_place.png" xpos 11 ypos 12
+            hbox:
+                xpos 54 ypos 19
+                style_prefix "ros_check"
+                textbutton "На кнопке, выбираемой по умолчанию" action NullAction()
+        frame:
+            style "ros_properties_submenu_frame"
+            xsize 354 ysize 140
+            xpos 13 ypos 200
+            textbutton "Видимость" style "ros_properties_submenu_frame_title" text_style "ros_properties_submenu_frame_title" xpos 4 ypos -10
+            add "gui/window/properties/mouse_opt_trail.png" xpos 11 ypos 12
+            hbox:
+                xpos 54 ypos 11
+                style_prefix "ros_check"
+                textbutton "Отображать след указателя мыши" action NullAction()
+            text "Короче" style "ros_properties_text_insensitive" xpos 54 ypos 32
+            text "Длиннее" style "ros_properties_text_insensitive" xpos 208 ypos 32
+            add "ros_properties_slider" xpos 104 ypos 35 xsize 89 ysize 4
+            add "ros_properties_slider_thumb_insensitive" xpos 182 ypos 26
+            add "ros_properties_slider_marks_3" xpos 109 ypos 50
+            add "gui/window/properties/mouse_opt_hide_while_typing.png" xpos 11 ypos 55
+            hbox:
+                xpos 54 ypos 65
+                style_prefix "ros_check"
+                textbutton "Скрывать указатель во время ввода с клавиатуры" action NullAction()
+            add "gui/window/properties/mouse_opt_detection.png" xpos 11 ypos 93
+            hbox:
+                xpos 54 ypos 103
+                style_prefix "ros_check"
+                textbutton "Обозначить расположение указателя при нажатии\nCTRL" action NullAction()
+# Колёсико
+screen ros_properties_mouse_pointer_wheel():
+    frame:
+        style "ros_properties_viewport"
+        xsize 377 ysize 351
+        frame:
+            style "ros_properties_submenu_frame"
+            xsize 354 ysize 93
+            xpos 13 ypos 16
+            textbutton "Вертикальная прокрутка" style "ros_properties_submenu_frame_title" text_style "ros_properties_submenu_frame_title" xpos 4 ypos -10
+            add "gui/window/properties/mouse_vertical_scroll.png" xpos 11 ypos 12
+            text "Поворот колёсика на один щелчок служит для прокрутки:" style "ros_properties_text" xpos 48 ypos 6
+            hbox:
+                xpos 54 ypos 24
+                style_prefix "ros_radio"
+                textbutton "на указанное количество строк:" action NullAction()
+            textbutton "3" style "ros_properties_mouse_wheel_adjust_box" text_style "ros_properties_mouse_wheel_adjust_box_text" xpos 72 ypos 42
+            hbox:
+                xpos 54 ypos 68
+                style_prefix "ros_radio"
+                textbutton "на один экран" action NullAction()
+        frame:
+            style "ros_properties_submenu_frame"
+            xsize 354 ysize 93
+            xpos 13 ypos 123
+            textbutton "Горизонтальная прокрутка" style "ros_properties_submenu_frame_title" text_style "ros_properties_submenu_frame_title" xpos 4 ypos -10
+            add "gui/window/properties/mouse_horizontal_scroll.png" xpos 11 ypos 12
+            text "Наклон колёсика в сторону служит для\nгоризонтальной прокрутки на следующее\nчисло знаков:" style "ros_properties_text" xpos 48 ypos 6
+            textbutton "3" style "ros_properties_mouse_wheel_adjust_box" text_style "ros_properties_mouse_wheel_adjust_box_text" xpos 72 ypos 52

@@ -847,6 +847,7 @@ style ros_radio_button_text is radio_button_text:
     size 11
     color "#000"
     hover_color "#000"
+    ypos 2
 style ros_radio_vbox is radio_vbox
 
 

@@ -182,7 +182,12 @@ screen ros_calc():
                 style "ros_calc_frame"
                 add "gui/desktop/menu_icons/submenu/calc.png" xpos 3 ypos 0
                 text "Калькулятор ReactOS" style "ros_calc_header"
-                imagebutton auto "gui/window/common/close_%s.png" action Hide("ros_calc"):
+                imagebutton auto "gui/window/common/close_%s.png" action [
+                    Hide("ros_calc"),
+                    SetVariable("ros_calc_menu_edit_opened", False),
+                    SetVariable("ros_calc_menu_view_opened", False),
+                    SetVariable("ros_calc_menu_help_opened", False)
+                    ]:
                     xanchor -235 yanchor -1
                 imagebutton auto "gui/window/common/expand_%s.png":
                     xanchor -217 yanchor -1
@@ -191,9 +196,18 @@ screen ros_calc():
                 hbox:
                     xpos 5 ypos 18
                     spacing 10
-                    textbutton "Правка" style "ros_calc_menu_edit" text_style "ros_calc_menu_text" focus_mask "ros_calc_menu_idle" action ToggleVariable("ros_calc_menu_edit_opened", True, False)
-                    textbutton "Вид" style "ros_calc_menu_view" text_style "ros_calc_menu_text" focus_mask "ros_calc_menu_idle" action ToggleVariable("ros_calc_menu_view_opened", True, False)
-                    textbutton "Справка" style "ros_calc_menu_help" text_style "ros_calc_menu_text" focus_mask "ros_calc_menu_idle" action ToggleVariable("ros_calc_menu_help_opened", True, False)
+                    textbutton "Правка" style "ros_calc_menu_edit" text_style "ros_calc_menu_text" focus_mask "ros_calc_menu_idle" action [
+                        ToggleVariable("ros_calc_menu_edit_opened", True, False),
+                        SensitiveIf(ros_calc_menu_view_opened == ros_calc_menu_help_opened == False)
+                        ]
+                    textbutton "Вид" style "ros_calc_menu_view" text_style "ros_calc_menu_text" focus_mask "ros_calc_menu_idle" action [
+                        ToggleVariable("ros_calc_menu_view_opened", True, False),
+                        SensitiveIf(ros_calc_menu_edit_opened == ros_calc_menu_help_opened == False)
+                        ]
+                    textbutton "Справка" style "ros_calc_menu_help" text_style "ros_calc_menu_text" focus_mask "ros_calc_menu_idle" action [
+                        ToggleVariable("ros_calc_menu_help_opened", True, False),
+                        SensitiveIf(ros_calc_menu_edit_opened == ros_calc_menu_view_opened == False)
+                        ]
                 frame:
                     # TODO: Сделать вывод цифр справа налево
                     style "ros_calc_input"

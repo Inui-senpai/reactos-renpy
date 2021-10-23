@@ -40,7 +40,7 @@ screen ros_about(name=None):
         frame:
             style "ros_about_frame"
             text "[friendly_name]: сведения" style "ros_about_title"
-            imagebutton idle "gui/window/common/close_idle.png" action [
+            imagebutton auto "gui/window/common/close_%s.png" action [
                 SetVariable("ros_authors_opened", False),
                 Hide("ros_about")]:
                 xanchor -394 yanchor -1
