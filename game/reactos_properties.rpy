@@ -411,6 +411,7 @@ screen ros_properties_system_general():
             text "Посетите" style "ros_properties_text"
             textbutton "{color=#0a246a}домашнюю страницу ReactOS{/color}" text_style "ros_properties_text" xpos -1 ypos -4 mouse "link" action OpenURL("https://reactos.org/")
             textbutton "Лицензия..." style "ros_properties_license_button" text_style "ros_properties_license_button_text" focus_mask "gui/window/properties/license_button_idle.png" xpos 30 ypos -4 action Show(screen="ros_properties_system_general_license")
+    timer 0.1 repeat True action SetScreenVariable("ros_system_runtime", ros_uptime_counter(renpy.get_game_runtime()))
 # Лицензия
 screen ros_properties_system_general_license():
     modal True

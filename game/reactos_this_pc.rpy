@@ -253,10 +253,31 @@ default ros_explorer_menu_view_go_opened = False
 default ros_explorer_menu_favorites_opened = False
 default ros_explorer_menu_services_opened = False
 default ros_explorer_menu_help_opened = False
+default ros_explorer_title = "Мой компьютер"
+default ros_explorer_title_icon = "device_manager"
 default is_explorer_window_opened = True
 
 # Окно
 screen ros_explorer(folder=None):
+    python:
+        if folder == "recycle_bin":
+            ros_explorer_title_icon = "recycle_bin"
+            ros_explorer_title = "Корзина"
+        elif folder == "docs":
+            ros_explorer_title_icon = "documents"
+            ros_explorer_title = "Мои документы"
+        elif folder == "network":
+            ros_explorer_title_icon = "network2"
+            ros_explorer_title = "Сетевое окружение"
+        elif folder == "pictures":
+            ros_explorer_title_icon = "pictures"
+            ros_explorer_title = "Мои рисунки"
+        elif folder == "control_panel":
+            ros_explorer_title_icon = "control_panel"
+            ros_explorer_title = "Панель управления"
+        else:
+            ros_explorer_title_icon = "device_manager"
+            ros_explorer_title = "Мой компьютер"
     if not is_explorer_window_opened:
         frame:
             style "ros_this_pc_frame_minimized"
@@ -267,24 +288,8 @@ screen ros_explorer(folder=None):
             xalign 0.5 yalign 0.5
             frame:
                 style "ros_this_pc_frame"
-                if folder == "recycle_bin":
-                    add "gui/desktop/menu_icons/submenu/recycle_bin.png" xpos 3 ypos 1
-                    text "Корзина" style "ros_notepad_window_title"
-                elif folder == "docs":
-                    add "gui/desktop/menu_icons/submenu/documents.png" xpos 3 ypos 1
-                    text "Мои документы" style "ros_notepad_window_title"
-                elif folder == "network":
-                    add "gui/desktop/menu_icons/submenu/network2.png" xpos 3 ypos 1
-                    text "Сетевое окружение" style "ros_notepad_window_title"
-                elif folder == "pictures":
-                    add "gui/desktop/menu_icons/submenu/pictures.png" xpos 3 ypos 1
-                    text "Мои рисунки" style "ros_notepad_window_title"
-                elif folder == "control_panel":
-                    add "gui/desktop/menu_icons/submenu/control_panel.png" xpos 3 ypos 1
-                    text "Панель управления" style "ros_notepad_window_title"
-                else:
-                    add "gui/desktop/menu_icons/submenu/device_manager.png" xpos 3 ypos 1
-                    text "Мой компьютер" style "ros_notepad_window_title"
+                add "gui/desktop/menu_icons/submenu/[ros_explorer_title_icon].png" xpos 3 ypos 1
+                text "[ros_explorer_title]" style "ros_notepad_window_title"
                 python:
                     if folder == "control_panel":
                         this_pc_up_arrow_action = Show(screen="ros_explorer")
@@ -358,24 +363,8 @@ screen ros_explorer(folder=None):
                     frame:
                         style "ros_this_pc_address"
                         xpos 7
-                        if folder == "recycle_bin":
-                            add "gui/desktop/menu_icons/submenu/recycle_bin.png" xpos 4 ypos 3
-                            textbutton "Корзина" text_style "ros_this_pc_address_bar_text" focus_mask "gui/window/this_pc/address_bar.png" action NullAction()
-                        elif folder == "docs":
-                            add "gui/desktop/menu_icons/submenu/documents.png" xpos 4 ypos 3
-                            textbutton "Мои документы" text_style "ros_this_pc_address_bar_text" focus_mask "gui/window/this_pc/address_bar.png" action NullAction()
-                        elif folder == "network":
-                            add "gui/desktop/menu_icons/submenu/network2.png" xpos 4 ypos 3
-                            textbutton "Сетевое окружение" text_style "ros_this_pc_address_bar_text" focus_mask "gui/window/this_pc/address_bar.png" action NullAction()
-                        elif folder == "pictures":
-                            add "gui/desktop/menu_icons/submenu/pictures.png" xpos 4 ypos 3
-                            textbutton "Мои рисунки" text_style "ros_this_pc_address_bar_text" focus_mask "gui/window/this_pc/address_bar.png" action NullAction()
-                        elif folder == "control_panel":
-                            add "gui/desktop/menu_icons/submenu/control_panel.png" xpos 4 ypos 3
-                            textbutton "Панель управления" text_style "ros_this_pc_address_bar_text" focus_mask "gui/window/this_pc/address_bar.png" action NullAction()
-                        else:
-                            add "gui/desktop/menu_icons/submenu/device_manager.png" xpos 4 ypos 3
-                            textbutton "Мой компьютер" text_style "ros_this_pc_address_bar_text" focus_mask "gui/window/this_pc/address_bar.png" action NullAction()
+                        add "gui/desktop/menu_icons/submenu/[ros_explorer_title_icon].png" xpos 4 ypos 3
+                        textbutton "[ros_explorer_title]" text_style "ros_this_pc_address_bar_text" focus_mask "gui/window/this_pc/address_bar.png" action NullAction()
                     textbutton "Переход" style "ros_this_pc_go" text_style "ros_this_pc_go_text" focus_mask "gui/window/this_pc/buttons/go_idle.png" xpos -100 action NullAction()
                 frame:
                     style "ros_this_pc_viewport"
