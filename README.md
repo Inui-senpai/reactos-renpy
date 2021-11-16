@@ -3,6 +3,8 @@
 # reactos-renpy
 Port of the ReactOS operating system on Ren'Py. For what? Because I can, of course.
 
+![ReactOS on RenPy](./sample.png)
+
 # Long story short
 I scroll through the ReactOS page on Twitter in my spare time, and one day I was so inspired by the successful attempts to run this OS on real hardware (and even on a PC-98 emulator called Neko Project) that I even thought to myself, why not port this system to the Ren'Py Visual Novel Engine? Well, after 2 months of hard work, I'm proud to present you this "port".
 

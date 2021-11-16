@@ -799,34 +799,34 @@ image ros_start_menu_submenu_settings_hover:
     xsize 187 ysize 18
 
 # Иконки в разделах меню "Пуск"
-image app_manager_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/app_manager.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image explorer_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/explorer.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image services_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/services.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image device_manager_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/device_manager.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image system_settings_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/system_settings.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image event_viewer_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/event_viewer.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image solitaire_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/solitaire.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image spider_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/spider.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image minesweeper_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/minesweeper.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image paint_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/paint.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image wordpad_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/wordpad.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image notepad_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/notepad.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image calc_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/calc.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image cmd_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/cmd.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image volume_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/volume.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image recorder_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/recorder.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image media_player_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/media_player.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image rdp_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/rdp.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image clipboard_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/clipboard.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image task_manager_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/task_manager.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image layout_switcher_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/layout_switcher.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image registry_editor_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/regedit.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image rxdiag_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/rxdiag.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image charmap_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/charmap.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image service_manager_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/service_manager.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image osk_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/osk.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image magnify_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/magnify.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
-image iexplore_shortcut = im.Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/iexplore.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image app_manager_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/app_manager.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image explorer_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/explorer.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image services_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/services.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image device_manager_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/device_manager.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image system_settings_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/system_settings.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image event_viewer_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/event_viewer.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image solitaire_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/solitaire.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image spider_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/spider.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image minesweeper_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/minesweeper.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image paint_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/paint.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image wordpad_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/wordpad.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image notepad_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/notepad.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image calc_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/calc.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image cmd_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/cmd.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image volume_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/volume.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image recorder_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/recorder.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image media_player_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/media_player.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image rdp_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/rdp.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image clipboard_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/clipboard.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image task_manager_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/task_manager.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image layout_switcher_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/layout_switcher.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image registry_editor_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/regedit.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image rxdiag_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/rxdiag.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image charmap_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/charmap.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image service_manager_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/service_manager.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image osk_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/osk.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image magnify_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/magnify.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
+image iexplore_shortcut = Composite((16, 16), (0, 0), "gui/desktop/menu_icons/submenu/iexplore.png", (0, 0), "gui/desktop/menu_icons/submenu/shortcut.png")
 
 # Иконки в обзоре Проводника
 image this_pc_disk_drive_idle = "gui/desktop/desktop_icons/disk_drive.png"
@@ -973,15 +973,15 @@ image desk_network_idle = "gui/desktop/desktop_icons/network.png"
 image desk_network_hover:
     "desk_network_idle",
     matrixcolor TintMatrix("#808db0")
-image desk_command_prompt_shortcut_idle = im.Composite((32, 32), (0, 0), "gui/desktop/desktop_icons/command_prompt.png", (0, 0), "gui/desktop/desktop_icons/shortcut.png")
+image desk_command_prompt_shortcut_idle = Composite((32, 32), (0, 0), "gui/desktop/desktop_icons/command_prompt.png", (0, 0), "gui/desktop/desktop_icons/shortcut.png")
 image desk_command_prompt_shortcut_hover:
     "desk_command_prompt_shortcut_idle",
     matrixcolor TintMatrix("#808db0")
-image desk_app_manager_shortcut_idle = im.Composite((32, 32), (0, 0), "gui/desktop/desktop_icons/app_manager.png", (0, 0), "gui/desktop/desktop_icons/shortcut.png")
+image desk_app_manager_shortcut_idle = Composite((32, 32), (0, 0), "gui/desktop/desktop_icons/app_manager.png", (0, 0), "gui/desktop/desktop_icons/shortcut.png")
 image desk_app_manager_shortcut_hover:
     "desk_app_manager_shortcut_idle",
     matrixcolor TintMatrix("#808db0")
-image desk_readme_shortcut_idle = im.Composite((32, 32), (0, 0), "gui/desktop/desktop_icons/readme.png", (0, 0), "gui/desktop/desktop_icons/shortcut.png")
+image desk_readme_shortcut_idle = Composite((32, 32), (0, 0), "gui/desktop/desktop_icons/readme.png", (0, 0), "gui/desktop/desktop_icons/shortcut.png")
 image desk_readme_shortcut_hover:
     "desk_readme_shortcut_idle",
     matrixcolor TintMatrix("#808db0")
@@ -1021,25 +1021,38 @@ init python:
             bytes /= factor
 
 # Узнаём техническую информацию реального ПК для окна Свойств системы
+# Модель ПК, изготовитель процессора и модель последнего, базовая частота
 init python:
+    total_ram = 0
     if renpy.windows:
         import subprocess
-        ros_pc_model, ros_processor_manufacturer, ros_processor_name, ros_processor_frequency, ros_ram_capacity = [
+        ros_pc_model, ros_processor_manufacturer, ros_processor_name, ros_processor_frequency = [
             line.strip()
             for line in subprocess.check_output(
                 " && ".join((
                     "wmic computersystem get model",
                     "wmic cpu get manufacturer",
                     "wmic cpu get name",
-                    "wmic cpu get currentclockspeed",
-                    "wmic memorychip get capacity"
+                    "wmic cpu get currentclockspeed"
                 )),
                 universal_newlines=True,
                 shell=True
             ).split("\n")
             if line
         ][1::2]
-        ros_ram_capacity = get_size(int(ros_ram_capacity))
+# Количество физической оперативной памяти
+        ros_ram_capacity = [
+            line.strip()
+            for line in subprocess.check_output(
+                "wmic memorychip get capacity",
+                universal_newlines=True,
+                shell=True
+            ).split("\n")
+            if line
+        ][1:]
+        for i in range(len(ros_ram_capacity)):
+            total_ram = total_ram + int(ros_ram_capacity[i])
+        ros_ram_capacity = get_size(int(total_ram))
     elif renpy.linux or renpy.macintosh:
         # местозаполнители
         ros_pc_model, ros_processor_manufacturer, ros_processor_name, ros_processor_frequency, ros_ram_capacity = [
