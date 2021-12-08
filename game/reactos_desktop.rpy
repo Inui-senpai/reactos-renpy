@@ -16,6 +16,41 @@ style ros_taskbar_system_tray_tooltip_text:
     color "#000"
     xpos 3 ypos 2
 
+# Языковая панель
+image ros_language_bar:
+    Solid("#0a246a")
+    size(16, 16)
+style ros_language_bar_text:
+    font "gui/font/tahoma.ttf"
+    size 11
+    color "#fff"
+    hover_color "#fff"
+    insensitive_color "#fff"
+    align(0.5, 0.5)
+init python:
+    def ros_get_layout():
+        import platform
+        if platform.system() == "Windows":
+            from ctypes import windll
+            user32 = windll.user32
+            w = user32.GetForegroundWindow()
+            tid = user32.GetWindowThreadProcessId(w, 0)
+            layout_id = hex(user32.GetKeyboardLayout(tid) & (2**16 - 1))
+        elif platform.system() == "Linux":
+            layout_id = subprocess.check_output(["xkblayout-state", "print", "%s"])
+        if layout_id == "0x419" or layout_id.startswith("ru"):
+            return "RU"
+        elif layout_id == "0x409" or layout_id.startswith("en"):
+            return "EN"
+screen ros_lang_layout():
+    python:
+        layout_pretty = ros_get_layout()
+    add "ros_language_bar":
+        xpos 1145 ypos 699
+    textbutton "[layout_pretty]" text_style "ros_language_bar_text" focus_mask "ros_language_bar" action NullAction():
+        xpos 1143 ypos 696
+    timer 0.1 repeat True action SetScreenVariable("layout_pretty", ros_get_layout())
+
 screen ros_taskbar_system_tray_tooltip_volume():
     frame:
         style "ros_taskbar_system_tray_tooltip"
@@ -60,6 +95,7 @@ screen ros_taskbar():
         use ros_desktop_context_menu_trigger
         use ros_desktop_taskbar_context_menu_trigger
     use ros_desktop_taskbar_clock_trigger
+    use ros_lang_layout
     textbutton "Пуск" style "ros_start_button" text_style "ros_start_button_text" focus_mask "gui/desktop/start_button.png" action [
         Hide(screen="ros_start_menu_entertainment_frame"),
         Hide(screen="ros_start_menu_communications_frame"),
