@@ -11,12 +11,14 @@ I scroll through the ReactOS page on Twitter in my spare time, and one day I was
 # Pros
 1. You can launch this "port" on an already booted system, whether it be Windows, Linux, or macOS. No virtual machine is required.
 2. Practically full OS experience: booting, install, post-install, desktop environment, and much more. Just click on the "Start" ("Начать") button in the main menu.
-3. (something else?)
+3. Some missing features and interface translations was "borrowed" from Windows XP. The Russian localization of ReactOS was also proofread.
+4. (something else?)
 
 # Cons
 1. Currently only Russian language is available. More languages will be available in the near future.
 2. Not all OS features are implemented, but I'll update this project occasionally. And you, of course, can help me, if you know the Ren'Py and/or Python language quite well.
 3. You can encounter some bugs and exceptions at this moment of time, because this "port" was made initially for Windows.
+4. You may also encounter some visual "bugs", because some textures have been stretched with Ren'Py's native tools.
 
 # How to cook
 1. Download the latest version of the Ren'Py SDK: https://www.renpy.org/latest.html
