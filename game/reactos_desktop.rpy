@@ -1,15 +1,6 @@
 # Подсказки иконок в системном лотке
 style ros_taskbar_system_tray_tooltip:
-    background Frame("gui/desktop/tooltip.png")
-    # background Composite((58,19), (0,0), Solid("#000"), (1,1), Solid("#ffffe1"))
-style ros_taskbar_system_tray_tooltip_2:
-    background Frame("gui/desktop/tooltip_2.png")
-style ros_taskbar_system_tray_tooltip_3:
-    background Frame("gui/desktop/tooltip_3.png")
-style ros_taskbar_system_tray_tooltip_4:
-    background Frame("gui/desktop/tooltip_4.png")
-style ros_taskbar_system_tray_tooltip_5:
-    background Frame("gui/desktop/tooltip_5.png")
+    background Composite((None,19), (0,0), Solid("#000"), (1,1), Solid("#ffffe1"))
 style ros_taskbar_system_tray_tooltip_text:
     font "gui/font/tahoma.ttf"
     size 11
@@ -46,46 +37,62 @@ screen ros_lang_layout():
     python:
         layout_pretty = ros_get_layout()
     add "ros_language_bar":
-        xpos 1145 ypos 699
-    textbutton "[layout_pretty]" text_style "ros_language_bar_text" focus_mask "ros_language_bar" action NullAction():
-        xpos 1143 ypos 696
+        xpos 1222 ypos 699
+    textbutton "[layout_pretty]" text_style "ros_language_bar_text" focus_mask "ros_language_bar" hovered Show("ros_taskbar_system_tray_tooltip_lang_layout") unhovered Hide("ros_taskbar_system_tray_tooltip_lang_layout") action NullAction():
+        xpos 1220 ypos 696
+    timer 0.1 repeat True action SetScreenVariable("layout_pretty", ros_get_layout())
+# Подсказка языковой панели
+screen ros_taskbar_system_tray_tooltip_lang_layout():
+    python:
+        layout_pretty = ros_get_layout()
+        if layout_pretty == "RU":
+            lang_str = "Русская (Россия)"
+        elif layout_pretty == "EN":
+            lang_str = "Английская (США)"
+    frame:
+        style "ros_taskbar_system_tray_tooltip"
+        xsize None ysize 19
+        xpos 1180 ypos 684
+        vbox:
+            text "[lang_str] " style "ros_taskbar_system_tray_tooltip_text"
     timer 0.1 repeat True action SetScreenVariable("layout_pretty", ros_get_layout())
 
+# Подсказки прочих иконок в системном лотке
 screen ros_taskbar_system_tray_tooltip_volume():
     frame:
         style "ros_taskbar_system_tray_tooltip"
         xsize 58 ysize 19
-        xpos 1180 ypos 684
+        xpos 1153 ypos 684
         vbox:
             text "Громкость" style "ros_taskbar_system_tray_tooltip_text"
 screen ros_taskbar_system_tray_tooltip_safe_remove():
     frame:
-        style "ros_taskbar_system_tray_tooltip_2"
+        style "ros_taskbar_system_tray_tooltip"
         xsize 187 ysize 19
         xpos 1094 ypos 684
         vbox:
             text "Безопасное извлечение устройства" style "ros_taskbar_system_tray_tooltip_text"
 screen ros_taskbar_system_tray_tooltip_power():
     frame:
-        style "ros_taskbar_system_tray_tooltip_3"
+        style "ros_taskbar_system_tray_tooltip"
         xsize 140 ysize 19
         xpos 1141 ypos 684
         vbox:
             text "От сети переменного тока" style "ros_taskbar_system_tray_tooltip_text"
 screen ros_taskbar_system_tray_tooltip_network():
     frame:
-        style "ros_taskbar_system_tray_tooltip_4"
+        style "ros_taskbar_system_tray_tooltip"
         xsize 120 ysize 19
         xpos 1161 ypos 684
         vbox:
             text "Сетевое подключение" style "ros_taskbar_system_tray_tooltip_text"
 screen ros_taskbar_system_tray_tooltip_date_and_time():
     frame:
-        style "ros_taskbar_system_tray_tooltip_5"
-        xsize 98 ysize 19
+        style "ros_taskbar_system_tray_tooltip"
+        xsize None ysize 19
         xpos 1182 ypos 684
         vbox:
-            text "[cur_date] г." style "ros_taskbar_system_tray_tooltip_text"
+            text "[cur_date] г. " style "ros_taskbar_system_tray_tooltip_text"
 
 # Панель задач
 screen ros_taskbar():
@@ -95,7 +102,6 @@ screen ros_taskbar():
         use ros_desktop_context_menu_trigger
         use ros_desktop_taskbar_context_menu_trigger
     use ros_desktop_taskbar_clock_trigger
-    use ros_lang_layout
     textbutton "Пуск" style "ros_start_button" text_style "ros_start_button_text" focus_mask "gui/desktop/start_button.png" action [
         Hide(screen="ros_start_menu_entertainment_frame"),
         Hide(screen="ros_start_menu_communications_frame"),
@@ -135,15 +141,15 @@ screen ros_taskbar():
                 focus_mask "gui/desktop/taskbar_window_idle.png" action ToggleVariable("is_calc_window_opened", True, False)
     add "gui/desktop/system_tray.png":
         xalign 0.998 yalign 0.998
-    add myClock xpos 1234 ypos 700
+    add myClock xpos 1234 ypos 699
     imagebutton idle "gui/desktop/systray_icons/network.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_network") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_network") action NullAction():
-        xpos 1222 ypos 700
+        xpos 1202 ypos 699
     imagebutton idle "gui/desktop/systray_icons/ac_powerline.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_power") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_power") action NullAction():
-        xpos 1205 ypos 700
+        xpos 1183 ypos 699
     imagebutton idle "gui/desktop/systray_icons/safe_remove.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_safe_remove") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_safe_remove") action NullAction():
-        xpos 1189 ypos 700
+        xpos 1166 ypos 699
     imagebutton idle "gui/desktop/systray_icons/volume.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_volume") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_volume") action NullAction():
-        xpos 1171 ypos 700
+        xpos 1147 ypos 699
     key "K_ESCAPE" action [
         Hide(screen="ros_start_menu_entertainment_frame"),
         Hide(screen="ros_start_menu_communications_frame"),
@@ -167,6 +173,7 @@ screen ros_taskbar():
         Hide(screen="ros_start_menu_new_system_tools_frame"),
         Hide(screen="ros_start_menu_new_all_programs"),
         SetVariable("start_menu_opened", False)]
+    use ros_lang_layout
 
 # Меню "Пуск" (классический вариант)
 screen ros_start_menu():

@@ -56,7 +56,7 @@ label graphic_boot:
     show graphic_boot_loading_bar_back
     show graphic_boot_loading_bar
     show graphic_boot_text "React{color=#b3cbd5}OS{/color}"
-    show copyright_text "Авторское право © 1996-2021\nКоманда ReactOS и вкладчики"
+    show copyright_text "Авторское право © 1996-2022\nКоманда ReactOS и вкладчики"
     with Dissolve(1.5)
     $ renpy.pause(1.5, hard=True)
     hide graphic_boot_loading_bar

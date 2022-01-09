@@ -37,12 +37,12 @@ style ros_blackshade_message_window_ok_button_text:
     color "#000"
     hover_color "#000"
     xpos 28 ypos 10
-image ros_blackshade_minimize_button_idle = im.Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button.png", (10, 8), "gui/window/themed/blackshade/minimize_sign.png")
-image ros_blackshade_maximize_button_idle = im.Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button.png", (10, 4), "gui/window/themed/blackshade/maximize_sign.png")
-image ros_blackshade_close_button_idle = im.Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button.png", (10, 4), "gui/window/themed/blackshade/close_sign.png")
-image ros_blackshade_minimize_button_hover = im.Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button_minimize_hover.png", (10, 8), "gui/window/themed/blackshade/minimize_sign.png")
-image ros_blackshade_maximize_button_hover = im.Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button_maximize_hover.png", (10, 4), "gui/window/themed/blackshade/maximize_sign.png")
-image ros_blackshade_close_button_hover = im.Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button_close_hover.png", (10, 4), "gui/window/themed/blackshade/close_sign.png")
+image ros_blackshade_minimize_button_idle = Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button.png", (10, 8), "gui/window/themed/blackshade/minimize_sign.png")
+image ros_blackshade_maximize_button_idle = Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button.png", (10, 4), "gui/window/themed/blackshade/maximize_sign.png")
+image ros_blackshade_close_button_idle = Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button.png", (10, 4), "gui/window/themed/blackshade/close_sign.png")
+image ros_blackshade_minimize_button_hover = Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button_minimize_hover.png", (10, 8), "gui/window/themed/blackshade/minimize_sign.png")
+image ros_blackshade_maximize_button_hover = Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button_maximize_hover.png", (10, 4), "gui/window/themed/blackshade/maximize_sign.png")
+image ros_blackshade_close_button_hover = Composite((30, 16), (0, 0), "gui/window/themed/blackshade/window_button_close_hover.png", (10, 4), "gui/window/themed/blackshade/close_sign.png")
 
 # Оформление: Окна для образца темы
 # BlackShade

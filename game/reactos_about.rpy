@@ -58,12 +58,10 @@ screen ros_about(name=None):
                 text "Авторское право 1998-2021 Команда ReactOS" style "ros_about_description"
             vbox:
                 if not ros_authors_opened:
-                    if name == "notepad":
-                        use ros_about_general_notepad
-                    elif name == "calc":
-                        use ros_about_general_calc
-                    else:
+                    if name == "reactos":
                         use ros_about_general_placeholder
+                    else:
+                        use expression "ros_about_general_" + name
                     use ros_about_general
                 else:
                     use ros_about_general_authors

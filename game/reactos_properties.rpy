@@ -10,6 +10,16 @@ style ros_properties_tabs:
     idle_background "gui/window/properties/tab_idle.png"
     hover_background "gui/window/properties/tab_idle.png"
     selected_background "gui/window/properties/tab_selected.png"
+style ros_properties_tabs_small:
+    idle_background "ros_properties_tabs_small_idle"
+    hover_background "ros_properties_tabs_small_idle"
+    selected_background "ros_properties_tabs_small_selected"
+image ros_properties_tabs_small_idle:
+    "gui/window/properties/tab_idle.png"
+    xsize 42 subpixel True
+image ros_properties_tabs_small_selected:
+    "gui/window/properties/tab_selected.png"
+    xsize 42 subpixel True
 style ros_properties_tabs_large:
     idle_background "ros_properties_tab_large_idle"
     hover_background "ros_properties_tab_large_idle"
@@ -116,6 +126,8 @@ style ros_properties_tabs_text_7 is ros_properties_tabs_text:
     xpos 13
 style ros_properties_tabs_text_8 is ros_properties_tabs_text:
     xpos 16
+style ros_properties_tabs_text_0 is ros_properties_tabs_text:
+    xpos 9
 style ros_properties_submenu_frame_title:
     insensitive_background Solid("#d4d0c8")
     font "gui/font/tahoma.ttf"
@@ -323,9 +335,30 @@ style ros_properties_mouse_wheel_adjust_box_text:
     color "#000"
     text_align 1.0
     xpos 50 ypos 3
+style ros_properties_screen_theme_choice_frame:
+    background Frame("gui/window/properties/dropdown_menu_theme_idle.png")
+    xsize 192 ysize 21
+style ros_properties_screen_theme_save_as_button_text is ros_properties_screen_appearance_buttons_text:
+    xpos 8
+style ros_classic_theme_sample_window:
+    background Frame("gui/window/properties/theme_sample_window.png")
+    xysize(231, 113)
+style ros_classic_theme_sample_window_viewport:
+    background Frame("gui/window/properties/theme_sample_window_viewport.png")
+    xysize(223, 66)
+style ros_properties_screen_theme_choice_menu_entry:
+    idle_background "ros_properties_screen_theme_choice_menu_idle"
+    hover_background "ros_properties_screen_theme_choice_menu_hover"
+image ros_properties_screen_theme_choice_menu_idle:
+    Solid("#fff")
+    xsize 190 ysize 13
+image ros_properties_screen_theme_choice_menu_hover:
+    Solid("#0a246a")
+    xsize 190 ysize 13
 
 # Окно - Свойства: Система
 screen ros_properties_system():
+    default properties_current_tab = "general"
     drag:
         drag_name "ros_properties"
         drag_handle (0, 0, 410, 21)
@@ -335,42 +368,23 @@ screen ros_properties_system():
             xsize 410 ysize 467
             add "gui/desktop/menu_icons/submenu/system_properties.png" xpos 3
             text "Свойства: Система" style "ros_properties_window_title"
-            imagebutton auto "gui/window/common/close_%s.png" action [
-                SetVariable("properties_current_tab", "general"),
-                Hide("ros_properties_system_general_license"),
-                Hide("ros_properties_system_advanced_system_config"),
-                Hide("ros_properties_system")]:
+            imagebutton auto "gui/window/common/close_%s.png" action Hide("ros_properties_system"):
                 xanchor -385 yanchor -1
-            if properties_current_tab == "general":
-                use ros_properties_system_general
-            elif properties_current_tab == "pc_name":
-                use ros_properties_system_pc_name
-            elif properties_current_tab == "hardware":
-                use ros_properties_system_hardware
-            elif properties_current_tab == "advanced":
-                use ros_properties_system_advanced
+            use expression "ros_properties_system_" + properties_current_tab
             hbox:
                 xpos 3 ypos 26
-                textbutton "Общие" style "ros_properties_tabs" text_style "ros_properties_tabs_text" focus_mask "gui/window/properties/tab_idle.png" action SetVariable("properties_current_tab", "general")
+                textbutton "Общие" style "ros_properties_tabs" text_style "ros_properties_tabs_text" focus_mask "gui/window/properties/tab_idle.png" action SetScreenVariable("properties_current_tab", "general")
                 null width 20
-                textbutton "Имя компьютера" style "ros_properties_tabs_large" text_style "ros_properties_tabs_text" focus_mask "ros_properties_tab_large_idle" action SetVariable("properties_current_tab", "pc_name")
+                textbutton "Имя компьютера" style "ros_properties_tabs_large" text_style "ros_properties_tabs_text" focus_mask "ros_properties_tab_large_idle" action SetScreenVariable("properties_current_tab", "pc_name")
                 null width 18
-                textbutton "Оборудование" style "ros_properties_tabs_large" text_style "ros_properties_tabs_text_2" focus_mask "ros_properties_tab_large_idle" action SetVariable("properties_current_tab", "hardware")
+                textbutton "Оборудование" style "ros_properties_tabs_large" text_style "ros_properties_tabs_text_2" focus_mask "ros_properties_tab_large_idle" action SetScreenVariable("properties_current_tab", "hardware")
                 null width 25
-                textbutton "Дополнительно" style "ros_properties_tabs_large" text_style "ros_properties_tabs_text" focus_mask "ros_properties_tab_large_idle" action SetVariable("properties_current_tab", "advanced")
+                textbutton "Дополнительно" style "ros_properties_tabs_large" text_style "ros_properties_tabs_text" focus_mask "ros_properties_tab_large_idle" action SetScreenVariable("properties_current_tab", "advanced")
             hbox:
                 xpos 140 ypos 430
-                textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" action [
-                SetVariable("properties_current_tab", "general"),
-                Hide("ros_properties_system_general_license"),
-                Hide("ros_properties_system_advanced_system_config"),
-                Hide("ros_properties_system")]
+                textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" action Hide("ros_properties_system")
                 null width 72
-                textbutton "Отмена" style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action [
-                SetVariable("properties_current_tab", "general"),
-                Hide("ros_properties_system_general_license"),
-                Hide("ros_properties_system_advanced_system_config"),
-                Hide("ros_properties_system")]
+                textbutton "Отмена" style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action Hide("ros_properties_system")
                 null width 48
                 textbutton "Применить" style "ros_properties_buttons" text_style "ros_properties_buttons_text"
 # Общие
@@ -547,6 +561,7 @@ screen ros_properties_system_advanced_system_config():
 
 # Окно - Свойства: Экран
 screen ros_properties_screen():
+    default properties_current_tab = "general"
     drag:
         drag_name "ros_properties"
         drag_handle (0, 0, 395, 21)
@@ -556,47 +571,83 @@ screen ros_properties_screen():
             xsize 395 ysize 440
             add "gui/desktop/menu_icons/submenu/screen_properties.png" xpos 3
             text "Свойства: Экран" style "ros_properties_window_title"
-            imagebutton auto "gui/window/common/close_%s.png" action [
-                SetVariable("properties_current_tab", "general"),
-                Hide("ros_properties_screen")]:
-                xanchor -370 yanchor 0
-            if properties_current_tab == "general":
-                use ros_properties_screen_desktop
-            elif properties_current_tab == "screensaver":
-                use ros_properties_screen_screensaver
-            elif properties_current_tab == "appearance":
-                use ros_properties_screen_appearance
-            elif properties_current_tab == "settings":
-                use ros_properties_screen_settings
-            hbox:
-                xpos 3 ypos 26
-                textbutton "Рабочий стол" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_3" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "general")
-                null width 10
-                textbutton "Заставка" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_2" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "screensaver")
-                null width 32
-                textbutton "Оформление" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_4" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "appearance")
-                null width 14
-                textbutton "Параметры" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "settings")
+            if ros_properties_show_bottom_buttons:
+                imagebutton auto "gui/window/common/close_%s.png" action Hide("ros_properties_screen"):
+                    xanchor -370 yanchor 0
+            use expression "ros_properties_screen_" + properties_current_tab
             if ros_properties_show_bottom_buttons:
                 hbox:
+                    xpos 3 ypos 26
+                    textbutton "Тема" style "ros_properties_tabs_small" text_style "ros_properties_tabs_text_0" focus_mask "ros_properties_tabs_small_idle" action SetScreenVariable("properties_current_tab", "general")
+                    null width 17
+                    textbutton "Рабочий стол" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_3" focus_mask "ros_properties_tab_medium_idle" action SetScreenVariable("properties_current_tab", "desktop")
+                    null width 10
+                    textbutton "Заставка" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_2" focus_mask "ros_properties_tab_medium_idle" action SetScreenVariable("properties_current_tab", "screensaver")
+                    null width 32
+                    textbutton "Оформление" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_4" focus_mask "ros_properties_tab_medium_idle" action SetScreenVariable("properties_current_tab", "appearance")
+                    null width 14
+                    textbutton "Параметры" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text" focus_mask "ros_properties_tab_medium_idle" action SetScreenVariable("properties_current_tab", "settings")
+                hbox:
                     xpos 125 ypos 403
-                    textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" action [
-                    SetVariable("properties_current_tab", "general"),
-                    Hide("ros_properties_screen")]
+                    textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" action Hide("ros_properties_screen")
                     null width 72
-                    textbutton "Отмена" style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action [
-                    SetVariable("properties_current_tab", "general"),
-                    Hide("ros_properties_screen")]
+                    textbutton "Отмена" style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action Hide("ros_properties_screen")
                     null width 48
                     textbutton "Применить" style "ros_properties_buttons" text_style "ros_properties_buttons_text"
+# Тема
+screen ros_properties_screen_general():
+    python:
+        if persistent.wallpaper and ros_theme == "classic":
+            theme_name = "Изменённая тема"
+        elif not persistent.wallpaper and ros_theme == "classic":
+            theme_name = "Классическая тема"
+        # TODO: Сделать хук для остальных аспектов темы и возможность смены самой темы
+    frame:
+        style "ros_properties_viewport"
+        xsize 377 ysize 351
+        text "Тема рабочего стола - это набор из фонового рисунка, звуковой\nсхемы, значков и других элементов рабочего стола, используемый\nдля настройки вида системы по вашему вкусу одним щелчком мыши." style "ros_properties_text":
+            xpos 10 ypos 10
+        text "Тема:" style "ros_properties_text" xpos 10 ypos 60
+        textbutton theme_name style "ros_properties_screen_theme_choice_frame" text_style "ros_properties_text" focus_mask "gui/window/properties/dropdown_menu_theme_idle.png" xpos 10 ypos 76 action ToggleVariable("dropdown4", True, False)
+        textbutton "Сохранить..." style "ros_properties_mouse_mouse_scheme_remove_buttons" text_style "ros_properties_screen_theme_save_as_button_text" focus_mask "gui/window/postinstall/button_idle.png" xpos 207 ypos 75 action NullAction()
+        textbutton "Удалить" style "ros_properties_mouse_mouse_scheme_remove_buttons" text_style "ros_properties_mouse_mouse_scheme_remove_buttons_text" xpos 287 ypos 75
+        text "Образец:" style "ros_properties_text" xpos 10 ypos 101
+        add "gui/window/properties/theme_sample_frame.png" xpos 12 ypos 117
+        if persistent.wallpaper:
+            add persistent.wallpaper xsize 346 ysize 219 xpos 14 ypos 119
+        else:
+            add "postinstall" xsize 346 ysize 219 xpos 14 ypos 119
+        vbox:
+            use ros_properties_screen_theme_sample_window
+            add "desk_recycle_bin_idle" xpos 312 ypos 183
+    if dropdown4:
+        use ros_properties_screen_general_choice_menu
+# Выбор темы
+screen ros_properties_screen_general_choice_menu():
+    frame:
+        style "ros_properties_screen_appearance_choice_menu_frame"
+        xsize 192 ysize 155
+        xpos 13 ypos 142
+        vbox:
+            xpos -3 ypos -3
+            textbutton "Изменённая тема" style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "Моя текущая тема" style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "BlackShade" style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "Lautus" style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "Lunar" style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "MetaVerse" style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "Mizu" style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "Modern" style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "Классическая тема" style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "Другие темы в Интернете..." style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action [
+                SetVariable("dropdown4", False),
+                Show("ros_app_manager")]
+            textbutton "Обзор..." style "ros_properties_screen_theme_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+
 # Рабочий стол
 screen ros_properties_screen_desktop():
     python:
-        my_wallpapers = [
-            fil.replace(".png", "").replace("images/wallpapers/", "") \
-            for fil in renpy.list_files() \
-            if fil.startswith("images/wallpapers/") and fil.endswith(".png")
-        ]
+        my_wallpapers = [ fil.replace(".png", "").replace("images/wallpapers/", "") for fil in renpy.list_files() if fil.startswith("images/wallpapers/") and fil.endswith(".png") ]
     frame:
         style "ros_properties_viewport"
         xsize 377 ysize 351
@@ -622,7 +673,7 @@ screen ros_properties_screen_desktop():
                     textbutton "(нет)" style "ros_properties_screen_choice" text_style "ros_properties_screen_choice" action SetVariable("persistent.wallpaper", None)
                 for i in my_wallpapers:
                     python:
-                        i2 = i.replace("Silhouette/","").replace("Angelus/Bliss/","").replace("Angelus/BlueHorizon/","").replace("Angelus/DeepSea/","").replace("Angelus/Fisherman/","").replace("Angelus/Flower/","").replace("Angelus/Rain/","").replace("Angelus/ReactOS/","").replace("Angelus/ReactOSNewHope/","").replace("Angelus/ReactOSSea/","").replace("Angelus/ReactOSSunset/","").replace("Angelus/Sea/","").replace("Angelus/Sky/","").replace("Angelus/VistaReactOS/","")
+                        i2 = i.split("/")[-1]
                     hbox:
                         add "gui/desktop/menu_icons/submenu/image.png"
                         textbutton i2 style "ros_properties_screen_choice" text_style "ros_properties_screen_choice" xpos 2 action SetVariable("persistent.wallpaper", "wallpapers/"+i+".png")
@@ -762,7 +813,10 @@ screen ros_properties_screen_appearance_scheme_choice_menu():
             vbox:
                 xpos -3 ypos -3
                 textbutton "ReactOS классическая" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
-                textbutton "ReactOS стандартная" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+                textbutton "ReactOS стандартная" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action [
+                    SetVariable("default_color_scheme", "ReactOS стандартная"),
+                    SetVariable("dropdown2", False),
+                    SetVariable("ros_properties_show_bottom_buttons", True)]
                 textbutton "Баклажан" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
                 textbutton "Высокая контрастность-1" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
                 textbutton "Высокая контрастность-2" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
@@ -798,11 +852,41 @@ screen ros_properties_screen_appearance_font_size_choice_menu():
         xpos 16 ypos 332
         vbox:
             xpos -3 ypos -3
-            textbutton "Обычный" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
+            textbutton "Обычный" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action [
+                # SetVariable("font_size", "Обычный"),
+                SetVariable("dropdown3", False),
+                SetVariable("ros_properties_show_bottom_buttons", True)
+                ]
             textbutton "Большой" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
             textbutton "Огромный" style "ros_properties_screen_appearance_choice_menu_entry" text_style "ros_properties_screen_appearance_choice_menu_entry_text" focus_mask "ros_properties_screen_appearance_choice_menu_idle" action NullAction()
 # Оформление: Окна для образца темы
 # Классическая тема
+# Активное окно (вкладка Тема)
+screen ros_properties_screen_theme_sample_window():
+    frame:
+        style "ros_classic_theme_sample_window"
+        xpos 148 ypos 255
+        text "Активное окно" style "ros_classic_active_window_title" xpos 6 ypos 8
+        imagebutton idle "gui/window/common/close_idle.png" xpos 210 ypos 6
+        imagebutton idle "gui/window/common/expand_idle.png" xpos 192 ypos 6
+        imagebutton idle "gui/window/common/minimize_idle.png" xpos 176 ypos 6
+        hbox:
+            xpos 10 ypos 25
+            spacing 5
+            textbutton "Обычная" style "ros_classic_active_window_menu" text_style "ros_classic_active_window_menu_text" action NullAction()
+            textbutton "Отключённая" style "ros_classic_active_window_menu" text_style "ros_classic_active_window_menu_text"
+            textbutton "Выбранная" style "ros_classic_active_window_menu_selected" text_style "ros_classic_active_window_menu_selected_text" action NullAction()
+        frame:
+            style "ros_classic_theme_sample_window_viewport" xpos 4 ypos 41
+            add "gui/window/properties/theme_sample_window_scrollbars.png" xpos 205 ypos 2
+            viewport:
+                yinitial 0.0
+                scrollbars None
+                mousewheel True
+                draggable True
+                side_yfill True
+                vbox:
+                    text "Текст окна" style "ros_properties_text" xpos 4 ypos 2
 # Неактивное окно
 screen ros_properties_screen_appearance_inactive_window():
     frame:
@@ -883,6 +967,7 @@ screen ros_properties_screen_settings():
 
 # Окно - Свойства: Меню "Пуск" и панель задач
 screen ros_properties_taskbar():
+    default properties_current_tab = "general"
     drag:
         drag_name "ros_properties"
         drag_handle (0, 0, 395, 21)
@@ -892,32 +977,23 @@ screen ros_properties_taskbar():
             xsize 404 ysize 449
             add "gui/desktop/menu_icons/submenu/start_menu.png" xpos 3
             text "Свойства: Меню \"Пуск\" и панель задач" style "ros_properties_window_title"
-            imagebutton auto "gui/window/common/close_%s.png" action [
-                SetVariable("properties_current_tab", "general"),
-                Hide("ros_properties_taskbar")]:
+            imagebutton auto "gui/window/common/close_%s.png" action Hide("ros_properties_taskbar"):
                 xanchor -379 yanchor 0
-            if properties_current_tab == "general":
-                use ros_properties_taskbar_taskbar_settings
-            elif properties_current_tab == "start_menu":
-                use ros_properties_taskbar_start_menu_settings
+            use expression "ros_properties_taskbar_" + properties_current_tab
             hbox:
                 xpos 3 ypos 26
-                textbutton "Панель задач" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_5" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "general")
+                textbutton "Панель задач" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_5" focus_mask "ros_properties_tab_medium_idle" action SetScreenVariable("properties_current_tab", "general")
                 null width 10
-                textbutton "Меню \"Пуск\"" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_6" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "start_menu")
+                textbutton "Меню \"Пуск\"" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_6" focus_mask "ros_properties_tab_medium_idle" action SetScreenVariable("properties_current_tab", "start_menu")
             hbox:
                 xpos 134 ypos 410
-                textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" action [
-                SetVariable("properties_current_tab", "general"),
-                Hide("ros_properties_taskbar")]
+                textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" action Hide("ros_properties_taskbar")
                 null width 72
-                textbutton "Отмена" style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action [
-                SetVariable("properties_current_tab", "general"),
-                Hide("ros_properties_taskbar")]
+                textbutton "Отмена" style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action Hide("ros_properties_taskbar")
                 null width 48
                 textbutton "Применить" style "ros_properties_buttons" text_style "ros_properties_buttons_text"
 # Панель задач
-screen ros_properties_taskbar_taskbar_settings():
+screen ros_properties_taskbar_general():
     frame:
         style "ros_properties_viewport"
         xsize 386 ysize 360
@@ -939,7 +1015,7 @@ screen ros_properties_taskbar_taskbar_settings():
                     add "gui/window/properties/start_menu_settings/150.png" xpos 6 ypos 11
                 elif not persistent.taskbar_settings_group_similar_taskbar_buttons and not persistent.taskbar_settings_show_quick_launch:
                     add "gui/window/properties/start_menu_settings/152.png" xpos 6 ypos 11
-            elif not persistent.taskbar_settings_lock_taskbar:
+            else:
                 if persistent.taskbar_settings_group_similar_taskbar_buttons and persistent.taskbar_settings_show_quick_launch:
                     add "gui/window/properties/start_menu_settings/147.png" xpos 6 ypos 11
                 elif persistent.taskbar_settings_show_quick_launch and not persistent.taskbar_settings_group_similar_taskbar_buttons:
@@ -975,7 +1051,7 @@ screen ros_properties_taskbar_taskbar_settings():
         else:
             if persistent.taskbar_settings_hide_inactive_icons:
                 add "gui/window/properties/start_menu_settings/181.png" xpos 6 ypos 11
-            elif not persistent.taskbar_settings_hide_inactive_icons:
+            else:
                 add "gui/window/properties/start_menu_settings/183.png" xpos 6 ypos 11
         vbox:
             style_prefix "ros_check"
@@ -997,7 +1073,7 @@ screen ros_properties_taskbar_taskbar_settings():
                 else:
                     textbutton "Настроить..." style "ros_properties_buttons" text_style "ros_properties_buttons_text" xpos 60 ypos -6
 # Меню "Пуск"
-screen ros_properties_taskbar_start_menu_settings():
+screen ros_properties_taskbar_start_menu():
     frame:
         style "ros_properties_viewport"
         xsize 386 ysize 360
@@ -1028,6 +1104,7 @@ screen ros_properties_taskbar_start_menu_settings():
 
 # Окно - Свойства: Мышь
 screen ros_properties_mouse():
+    default properties_current_tab = "general"
     drag:
         drag_name "ros_properties"
         drag_handle (0, 0, 395, 21)
@@ -1038,43 +1115,33 @@ screen ros_properties_mouse():
             add "gui/desktop/menu_icons/submenu/mouse_properties.png" xpos 3
             text "Свойства: Мышь" style "ros_properties_window_title"
             imagebutton auto "gui/window/common/close_%s.png" action [
-                SetVariable("properties_current_tab", "general"),
                 SetVariable("current_content_viewport_item", "default"),
                 Hide("ros_properties_mouse")]:
                 xanchor -370 yanchor 0
-            if properties_current_tab == "general":
-                use ros_properties_mouse_mouse_buttons
-            elif properties_current_tab == "pointers":
-                use ros_properties_mouse_pointers
-            elif properties_current_tab == "pointer_options":
-                use ros_properties_mouse_pointer_options
-            elif properties_current_tab == "wheel":
-                use ros_properties_mouse_pointer_wheel
+            use expression "ros_properties_mouse_" + properties_current_tab
             hbox:
                 xpos 3 ypos 26
-                textbutton "Кнопки мыши" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_4" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "general")
+                textbutton "Кнопки мыши" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_4" focus_mask "ros_properties_tab_medium_idle" action SetScreenVariable("properties_current_tab", "general")
                 null width 10
-                textbutton "Указатели" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_7" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "pointers")
+                textbutton "Указатели" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_7" focus_mask "ros_properties_tab_medium_idle" action SetScreenVariable("properties_current_tab", "pointers")
                 null width 20
-                textbutton "Параметры указателя" style "ros_properties_tabs_extra_large" text_style "ros_properties_tabs_text_6" focus_mask "ros_properties_tab_extra_large_idle" action SetVariable("properties_current_tab", "pointer_options")
+                textbutton "Параметры указателя" style "ros_properties_tabs_extra_large" text_style "ros_properties_tabs_text_6" focus_mask "ros_properties_tab_extra_large_idle" action SetScreenVariable("properties_current_tab", "pointer_options")
                 null width 10
-                textbutton "Колёсико" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_8" focus_mask "ros_properties_tab_medium_idle" action SetVariable("properties_current_tab", "wheel")
+                textbutton "Колёсико" style "ros_properties_tabs_medium" text_style "ros_properties_tabs_text_8" focus_mask "ros_properties_tab_medium_idle" action SetScreenVariable("properties_current_tab", "wheel")
             if ros_properties_show_bottom_buttons:
                 hbox:
                     xpos 125 ypos 403
                     textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" action [
-                    SetVariable("properties_current_tab", "general"),
                     SetVariable("current_content_viewport_item", "default"),
                     Hide("ros_properties_mouse")]
                     null width 72
                     textbutton "Отмена" style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action [
-                    SetVariable("properties_current_tab", "general"),
                     SetVariable("current_content_viewport_item", "default"),
                     Hide("ros_properties_mouse")]
                     null width 48
                     textbutton "Применить" style "ros_properties_buttons" text_style "ros_properties_buttons_text"
 # Кнопки мыши
-screen ros_properties_mouse_mouse_buttons():
+screen ros_properties_mouse_general():
     frame:
         style "ros_properties_viewport"
         xsize 377 ysize 351
@@ -1282,7 +1349,7 @@ screen ros_properties_mouse_pointer_options():
                 style_prefix "ros_check"
                 textbutton "Обозначить расположение указателя при нажатии\nCTRL" action NullAction()
 # Колёсико
-screen ros_properties_mouse_pointer_wheel():
+screen ros_properties_mouse_wheel():
     frame:
         style "ros_properties_viewport"
         xsize 377 ysize 351
