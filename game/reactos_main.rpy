@@ -994,6 +994,7 @@ init python:
     now = datetime.datetime.now()
     month = now.month
     months = (None, "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря")
+    weekdays = ("Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб")
     cur_date = now.strftime("%d {0} %Y").format(months[month])
     cur_time = now.strftime("%H:%M:%S")
     cur_tz = time.tzname[0][:6]

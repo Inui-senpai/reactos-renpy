@@ -540,7 +540,12 @@ screen ros_start_menu_system_tools_frame():
                 Hide(screen="ros_start_menu_entertainment_frame"),
                 Hide(screen="ros_start_menu_communications_frame"),
                 Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame")] action NullAction():
+                Hide(screen="ros_start_menu_accessibility_frame")] action [
+                    SetVariable("start_menu_opened", False),
+                    Hide(screen="ros_start_menu_system_tools_frame"),
+                    Hide(screen="ros_start_menu_programs_frame"),
+                    Show(screen="ros_command_prompt")
+                ]:
                 ypos -96
             add "cmd_shortcut":
                 xpos 6 ypos -108
@@ -1124,7 +1129,12 @@ screen ros_start_menu_new_system_tools_frame():
                 Hide(screen="ros_start_menu_new_entertainment_frame"),
                 Hide(screen="ros_start_menu_new_communications_frame"),
                 Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame")] action NullAction():
+                Hide(screen="ros_start_menu_new_accessibility_frame")] action [
+                    SetVariable("start_menu_opened", False),
+                    Hide(screen="ros_start_menu_new_all_programs"),
+                    Hide(screen="ros_start_menu_new_system_tools_frame"),
+                    Show(screen="ros_command_prompt")
+                ]:
                 ypos -96
             add "cmd_shortcut":
                 xpos 6 ypos -108
@@ -1274,7 +1284,9 @@ screen ros_desktop_icons():
 
 # Область для триггера контекстного меню Рабочего стола
 screen ros_desktop_context_menu_trigger():
-    if not renpy.get_screen(["ros_properties_screen", "ros_explorer", "ros_properties_system", "ros_properties_taskbar", "ros_command_prompt", "ros_app_manager", "ros_notepad", "ros_calc"]):
+    if not renpy.get_screen([
+        "ros_properties_screen", "ros_explorer", "ros_properties_system", "ros_properties_taskbar", "ros_command_prompt", "ros_app_manager", "ros_notepad", "ros_calc", "ros_command_prompt"
+    ]):
         imagebutton idle "gui/desktop/desktop_trigger_frame.png" focus_mask "gui/desktop/desktop_trigger_frame_focus_mask.png" action NullAction() alternate [
             SetVariable("sort_entry", False),
             SetVariable("create_entry", False),
@@ -1285,7 +1297,9 @@ screen ros_desktop_context_menu_trigger():
 
 # Область для триггера контекстного меню Панели задач
 screen ros_desktop_taskbar_context_menu_trigger():
-    if not renpy.get_screen(["ros_properties_screen", "ros_explorer", "ros_properties_system", "ros_properties_taskbar", "ros_command_prompt", "ros_app_manager", "ros_notepad", "ros_calc"]):
+    if not renpy.get_screen([
+        "ros_properties_screen", "ros_explorer", "ros_properties_system", "ros_properties_taskbar", "ros_command_prompt", "ros_app_manager", "ros_notepad", "ros_calc", "ros_command_prompt"
+    ]):
         imagebutton idle "gui/desktop/desktop_trigger_frame.png" focus_mask "gui/desktop/taskbar_trigger_frame_focus_mask.png" action NullAction() alternate [
             SetVariable("sort_entry", False),
             SetVariable("create_entry", False),

@@ -55,7 +55,7 @@ screen ros_about(name=None):
                 spacing 2
                 text "[friendly_name]" style "ros_about_description"
                 text "Версия [config.version] ([ros_build_wo_compiler])" style "ros_about_description"
-                text "Авторское право 1998-2021 Команда ReactOS" style "ros_about_description"
+                text "Авторское право 1998-2022 Команда ReactOS" style "ros_about_description"
             vbox:
                 if not ros_authors_opened:
                     if name == "reactos":
@@ -105,6 +105,6 @@ screen ros_about_general_authors():
             style "ros_authors_viewport"
             vbox:
                 xpos 3 ypos 2
-                text "Copyright 1993-2021 WINE team" style "ros_about_description"
-                text "Copyright 1998-2021 ReactOS Team" style "ros_about_description"
+                text "Copyright 1993-2022 WINE team" style "ros_about_description"
+                text "Copyright 1998-2022 ReactOS Team" style "ros_about_description"
                 text "Porting to Ren'Py: MtnDewSmoker420, special for RG Smoking Room" style "ros_about_description"
