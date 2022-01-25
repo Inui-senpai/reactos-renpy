@@ -44,10 +44,7 @@ screen ros_about(name=None):
                 SetVariable("ros_authors_opened", False),
                 Hide("ros_about")]:
                 xanchor -394 yanchor -1
-            if persistent.selected_edition == "workstation":
-                add "gui/window/system_info/reactosworkstation.png" xpos -1 ypos 19
-            else:
-                add "gui/window/system_info/reactosserver.png" xpos -1 ypos 19
+            add "gui/window/system_info/reactos[persistent.selected_edition].png" xpos -1 ypos 19
             add "gui/window/system_info/line.png" xpos -1 ypos 90
             add "gui/desktop/desktop_icons/[name].png" xpos 10 ypos 107
             vbox:
