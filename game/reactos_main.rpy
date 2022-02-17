@@ -73,11 +73,17 @@ init python:
     elif renpy.linux or renpy.macintosh:
         import pwd
         username = pwd.getpwuid(os.getuid()).pw_gecos.replace(",","")
-        # местозаполнители
+        # Если не нашлось читабельного имени
+        if not username:
+            username = os.environ.get("USER")
+        # Местозаполнители названий организации и рабочей группы
         organization, workgroup_name = ["", "WORKGROUP"]
-        for i in range(7):
-            computer_id = str(computer_id) + renpy.random.choice(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"])
-        computer_name = "REACTOS-" + computer_id
+        try:
+            computer_name = os.uname().nodename.replace(".local","")
+        except:
+            for i in range(7):
+                computer_id = str(computer_id) + renpy.random.choice(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"])
+            computer_name = "REACTOS-" + computer_id
 
 # Закручивание гаек
 define config.developer = False

@@ -41,7 +41,7 @@ image cmd_caret:
 
 # Основные переменные
 default cmd_history = []
-default prompt = "C:\\Documents and Settings\\Administrator>"
+default prompt = "C:\\Documents and Settings\\Администратор>"
 default command = ""
 default cmd_display = ""
 

@@ -20,7 +20,7 @@ screen setup_step1():
                 textbutton "Далее >" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_2")
 
 # Второй и последующие шаги установщика
-screen setup_step2():
+screen setup_step3():
     drag:
         drag_name "ros_setup2"
         drag_handle (0, 0, 503, 22)
@@ -53,11 +53,11 @@ screen setup_step2():
                 xpos 124 ypos 162
             hbox:
                 pos(195,310)
-                textbutton "< Назад" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_1_5")
+                textbutton "< Назад" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_2")
                 null width 33
-                textbutton "Далее >" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_3")
+                textbutton "Далее >" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_4")
 
-screen setup_step3():
+screen setup_step2():
     drag:
         drag_name "ros_setup2"
         drag_handle (0, 0, 503, 22)
@@ -103,9 +103,9 @@ screen setup_step3():
                 xpos 338 ypos 232
             hbox:
                 pos(195,310)
-                textbutton "< Назад" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_2")
+                textbutton "< Назад" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_1_5")
                 null width 33
-                textbutton "Далее >" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_4")
+                textbutton "Далее >" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_3")
 
 screen ros_setup_license():
     drag:
@@ -217,7 +217,7 @@ screen setup_step6():
                 xpos 196 ypos 115
             add "gui/window/postinstall/users_icon.png":
                 xpos 4 ypos 153
-            text "При установке будет создан профиль пользователя с именем\nAdministrator. Вы можете использовать этот профиль, если вам нужно\nполучить права администратора.\n\nВведите пароль администратора (не более 127 символов)" style "ros_setup_description":
+            text "При установке будет создан профиль пользователя с именем\nАдминистратор. Вы можете использовать этот профиль, если вам нужно\nполучить права администратора.\n\nВведите пароль администратора (не более 127 символов)" style "ros_setup_description":
                 xpos 48 ypos 150
             text "Пароль администратора:" style "ros_setup_description":
                 xpos 48 ypos 234

@@ -28,7 +28,8 @@ init python:
             tid = user32.GetWindowThreadProcessId(w, 0)
             layout_id = hex(user32.GetKeyboardLayout(tid) & (2**16 - 1))
         elif platform.system() == "Linux":
-            layout_id = subprocess.check_output(["xkblayout-state", "print", "%s"])
+            import subprocess
+            layout_id = subprocess.check_output([config.gamedir + "/python-packages/xkblayout-state", "print", "%s"])
         if layout_id == "0x419" or layout_id.startswith("ru"):
             return "RU"
         elif layout_id == "0x409" or layout_id.startswith("en"):
@@ -276,7 +277,7 @@ screen ros_start_menu():
                     yalign 0.62
                 add "gui/desktop/menu_icons/run.png":
                     xpos 2 ypos 161
-                textbutton "Завершение сеанса Administrator..." style "ros_start_menu_entry" text_style "ros_start_menu_entry_text" focus_mask "ros_start_menu_entry_idle" hovered [
+                textbutton "Завершение сеанса Администратор..." style "ros_start_menu_entry" text_style "ros_start_menu_entry_text" focus_mask "ros_start_menu_entry_idle" hovered [
                     Hide(screen="ros_start_menu_entertainment_frame"),
                     Hide(screen="ros_start_menu_communications_frame"),
                     Hide(screen="ros_start_menu_services_frame"),
@@ -689,7 +690,7 @@ screen ros_start_menu_new():
         xsize 380 ysize 444
         xpos 4 ypos 253
         vbox:
-            text "Administrator" style "ros_start_menu_new_username"
+            text "Администратор" style "ros_start_menu_new_username"
         vbox:
             xpos 9 ypos 44
             textbutton "(пусто)" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_text"
@@ -1517,12 +1518,25 @@ screen ros_taskbar_context_menu_toolbars():
 
 # Вывод рабочего стола
 label ros_desktop:
+    scene black
+    $ renpy.pause(0.2, hard=True)
     $ mouse_visible = True
     scene postinstall
-    show corner_text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]"
-    show screen please_wait("Загружаются персональные настройки...")
-    $ renpy.pause(0.5, hard=True)
-    hide screen please_wait
+    if persistent.selected_edition == "workstation":
+        if not is_user_entry_selected:
+            show screen ros_logonui
+            $ renpy.pause(1.0, hard=True)
+            hide screen ros_logonui
+        else:
+            show screen ros_logonui(in_login=True)
+            $ renpy.pause(1.0, hard=True)
+            $ is_user_entry_selected = False
+            hide screen ros_logonui
+    else:
+        show corner_text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]"
+        show screen please_wait("Загружаются персональные настройки...")
+        $ renpy.pause(0.5, hard=True)
+        hide screen please_wait
     play sound "audio/ReactOS_LogOn.wav"
     show screen ros_desktop_icons
     show screen ros_taskbar
