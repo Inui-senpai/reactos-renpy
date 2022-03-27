@@ -493,7 +493,7 @@ screen setup_step12():
 label ros_postinstall:
     $ mouse_visible = True
     scene postinstall
-    show corner_text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]"
+    show corner_text
     $ renpy.pause(0.2, hard=True)
     show screen please_wait("Установка оборудования...")
     $ renpy.pause(1.5, hard=True)

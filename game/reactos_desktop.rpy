@@ -34,29 +34,30 @@ init python:
             return "RU"
         elif layout_id == "0x409" or layout_id.startswith("en"):
             return "EN"
+    def ros_layout_text(st, at):
+        d = Text(ros_get_layout(), style="ros_language_bar_text")
+        return d, 0.1
+    def ros_lang_str(st, at):
+        lang_str = "Русская (Россия) " if ros_get_layout() == "RU" else "Английская (США) "
+        d = Text(lang_str, style="ros_taskbar_system_tray_tooltip_text")
+        return d, 0.1
+
+image ros_language_layout = DynamicDisplayable(ros_layout_text)
+image ros_language_tooltip = DynamicDisplayable(ros_lang_str)
+
 screen ros_lang_layout():
-    python:
-        layout_pretty = ros_get_layout()
     add "ros_language_bar":
         xpos 1222 ypos 699
-    textbutton "[layout_pretty]" text_style "ros_language_bar_text" focus_mask "ros_language_bar" hovered Show("ros_taskbar_system_tray_tooltip_lang_layout") unhovered Hide("ros_taskbar_system_tray_tooltip_lang_layout") action NullAction():
-        xpos 1220 ypos 696
-    timer 0.1 repeat True action SetScreenVariable("layout_pretty", ros_get_layout())
+    imagebutton idle "ros_language_layout" focus_mask "ros_language_bar" hovered Show("ros_taskbar_system_tray_tooltip_lang_layout") unhovered Hide("ros_taskbar_system_tray_tooltip_lang_layout") action NullAction():
+        xpos 1224 ypos 700
 # Подсказка языковой панели
 screen ros_taskbar_system_tray_tooltip_lang_layout():
-    python:
-        layout_pretty = ros_get_layout()
-        if layout_pretty == "RU":
-            lang_str = "Русская (Россия)"
-        elif layout_pretty == "EN":
-            lang_str = "Английская (США)"
     frame:
         style "ros_taskbar_system_tray_tooltip"
         xsize None ysize 19
         xpos 1180 ypos 684
         vbox:
-            text "[lang_str] " style "ros_taskbar_system_tray_tooltip_text"
-    timer 0.1 repeat True action SetScreenVariable("layout_pretty", ros_get_layout())
+            add "ros_language_tooltip"
 
 # Подсказки прочих иконок в системном лотке
 screen ros_taskbar_system_tray_tooltip_volume():
@@ -149,7 +150,7 @@ screen ros_taskbar():
         xpos 1183 ypos 699
     imagebutton idle "gui/desktop/systray_icons/safe_remove.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_safe_remove") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_safe_remove") action NullAction():
         xpos 1166 ypos 699
-    imagebutton idle "gui/desktop/systray_icons/volume.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_volume") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_volume") action NullAction():
+    imagebutton idle "gui/desktop/systray_icons/volume.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_volume") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_volume") action (Show("ros_mixer_volume") if not renpy.get_screen("ros_mixer_volume") else Hide("ros_mixer_volume")):
         xpos 1147 ypos 699
     key "K_ESCAPE" action [
         Hide(screen="ros_start_menu_entertainment_frame"),
@@ -1241,7 +1242,7 @@ screen ros_desktop_icons():
             fit "fill"
     vbox:
         xalign 1.0 yalign 0.95
-        text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]" style "corner_text"
+        add "corner_text"
     vbox:
         xpos 20 ypos 12
         spacing 20
@@ -1278,7 +1279,7 @@ screen ros_desktop_icons():
             text "Менеджер\nприложений" style "ros_desktop_icon_text":
                 xpos -10
         vbox:
-            imagebutton auto "desk_readme_shortcut_%s" mouse "link" action Show(screen="ros_notepad", file="readme.txt"):
+            imagebutton auto "desk_readme_shortcut_%s" mouse "link" action Show(screen="ros_notepad", file=config.gamedir+"/readme.txt"):
                 xpos 4
             text "Прочти\nменя" style "ros_desktop_icon_text":
                 xpos 2
@@ -1376,6 +1377,7 @@ screen ros_desktop_context_menu():
                 xpos 138 ypos 111
                 use ros_desktop_context_menu_create
     key "K_ESCAPE" action [SetVariable("sort_entry", False), SetVariable("create_entry", False), Hide("ros_desktop_context_menu")]
+# Упорядочить значки
 screen ros_desktop_context_menu_sort_by():
     frame:
         style "ros_desktop_context_menu"
@@ -1393,6 +1395,7 @@ screen ros_desktop_context_menu_sort_by():
             add "gui/desktop/context_menu_separator.png" xsize 105 ypos 2
             null height 1
             textbutton "Автоматически" style "ros_context_menu_sort_by" text_style "ros_context_menu_text" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_sort_by_idle" action NullAction()
+# Создать
 screen ros_desktop_context_menu_create():
     frame:
         style "ros_desktop_context_menu"
@@ -1533,13 +1536,13 @@ label ros_desktop:
             $ is_user_entry_selected = False
             hide screen ros_logonui
     else:
-        show corner_text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]"
+        show corner_text
         show screen please_wait("Загружаются персональные настройки...")
         $ renpy.pause(0.5, hard=True)
         hide screen please_wait
     play sound "audio/ReactOS_LogOn.wav"
     show screen ros_desktop_icons
     show screen ros_taskbar
-    show corner_text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]":
+    show corner_text:
         yalign 0.95
     $ renpy.pause(hard=True)

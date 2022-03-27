@@ -26,15 +26,69 @@ style ros_shutdown_tooltip_text:
     font "gui/font/tahoma.ttf"
     size 11
     color "#000"
+style ros_shutdown_legacy_choice:
+    background Frame("gui/window/properties/dropdown_menu_shutdown_variant_idle.png")
+    xysize(248, 21)
+style ros_shutdown_legacy_choice_text:
+    font "gui/font/tahoma.ttf"
+    size 11
+    color "#000"
+    pos(3, 3)
+style ros_shutdown_legacy_buttons:
+    idle_background Frame("gui/window/properties/mouse_scheme_delete_button_idle.png")
+    hover_background Frame("gui/window/properties/mouse_scheme_delete_button_hover.png")
+    xysize(75, 23)
+style ros_shutdown_legacy_buttons_text:
+    font "gui/font/tahoma.ttf"
+    size 11
+    color "#000"
+    pos(19, 4)
+style ros_shutdown_legacy_buttons_text_ok is ros_shutdown_legacy_buttons_text:
+    xpos 31
+style ros_shutdown_legacy_buttons_text_logoff is ros_shutdown_legacy_buttons_text:
+    xpos 21
+style ros_shutdown_legacy_dropdown:
+    background Frame("gui/window/properties/dropdown_list.png")
+    xysize(248, 44)
+style ros_shutdown_legacy_dropdown_menu_entry:
+    idle_background "ros_shutdown_legacy_dropdown_menu_idle"
+    hover_background "ros_shutdown_legacy_dropdown_menu_hover"
+image ros_shutdown_legacy_dropdown_menu_idle:
+    Solid("#fff")
+    xsize 246 ysize 14
+image ros_shutdown_legacy_dropdown_menu_hover:
+    Solid("#0a246a")
+    xsize 246 ysize 14
+style ros_shutdown_legacy_dropdown_menu_entry_text:
+    font "gui/font/tahoma.ttf"
+    size 11
+    idle_color "#000"
+    hover_color "#fff"
+    pos(2, 0)
+style ros_logoff_legacy_window:
+    background Frame("gui/window/common/window_small.png")
+    xysize(288, 123)
 transform ros_shutdown_background:
     matrixcolor SaturationMatrix(1.0)
     linear 1.5 matrixcolor SaturationMatrix(0.0)
+
+# Основные переменные
+default is_shutdown_variants_menu_opened = False
 
 # Выход из системы / Завершение работы
 screen ros_logoff_frame():
     modal True
     on "show" action [Function(SetThumbnailFull), FileTakeScreenshot(), Function(SetThumbnailOriginal)]
     add FileCurrentScreenshot() at ros_shutdown_background
+    use expression "ros_logoff_" + persistent.selected_edition
+screen ros_shutdown_frame():
+    modal True
+    on "show" action [Function(SetThumbnailFull), FileTakeScreenshot(), Function(SetThumbnailOriginal)]
+    add FileCurrentScreenshot() at ros_shutdown_background
+    use expression "ros_shutdown_" + persistent.selected_edition
+
+# Выход из системы (рабочая станция)
+screen ros_logoff_workstation():
     frame:
         style "ros_shutdown"
         xsize 312 ysize 198
@@ -55,10 +109,31 @@ screen ros_logoff_frame():
         hbox:
             xpos 244 ypos 168
             textbutton "Отмена" style "ros_shutdown_cancel_button" text_style "ros_shutdown_cancel_text" focus_mask "gui/shutdown/cancel_idle.png" action Hide("ros_logoff_frame")
-screen ros_shutdown_frame():
-    modal True
-    on "show" action [Function(SetThumbnailFull), FileTakeScreenshot(), Function(SetThumbnailOriginal)]
-    add FileCurrentScreenshot() at ros_shutdown_background
+
+# Выход из системы (сервер)
+screen ros_logoff_server():
+    drag:
+        drag_name "ros_logoff"
+        drag_handle (0, 0, 419, 22)
+        xalign 0.5 yalign 0.5
+        frame:
+            style "ros_logoff_legacy_window"
+            text "Выход из ReactOS" style "ros_wait_header_text":
+                xpos -14 ypos 1
+            imagebutton auto "gui/window/common/close_%s.png" action Hide("ros_logoff_frame"):
+                xanchor -267 yanchor -5
+            add "gui/desktop/desktop_icons/logoff.png":
+                pos(13, 32)
+            text "Вы уверены, что хотите выйти из ReactOS?" style "ros_shutdown_tooltip_text":
+                pos(50, 37)
+            hbox:
+                align(0.5, 0.8)
+                spacing 5
+                textbutton "Выход" style "ros_shutdown_legacy_buttons" text_style "ros_shutdown_legacy_buttons_text_logoff" action Jump("ros_logout")
+                textbutton "Отмена" style "ros_shutdown_legacy_buttons" text_style "ros_shutdown_legacy_buttons_text" action Hide("ros_logoff_frame")
+
+# Завершение работы (рабочая станция)
+screen ros_shutdown_workstation():
     frame:
         style "ros_shutdown"
         xsize 312 ysize 198
@@ -85,6 +160,79 @@ screen ros_shutdown_frame():
         hbox:
             xpos 244 ypos 168
             textbutton "Отмена" style "ros_shutdown_cancel_button" text_style "ros_shutdown_cancel_text" focus_mask "gui/shutdown/cancel_idle.png" action Hide("ros_shutdown_frame")
+
+# Завершение работы (сервер)
+screen ros_shutdown_server():
+    python:
+        shutdown_legacy_tooltip = {
+            "shutdown":"Закрывает все программы, завершает работу ReactOS\nи выключает компьютер.",
+            "logout":"Завершает текущий сеанс и позволяет другим\nпользователям войти в систему.",
+            "restart":"Завершает текущий сеанс и перезагружает систему."
+        }
+        shutdown_choice_pretty = {
+            "shutdown":"Завершение работы",
+            "logout":"Выйти \"Администратор\"",
+            "restart":"Перезагрузка"
+        }
+        shutdown_action = "ros_"+persistent.last_shutdown_choice
+    drag:
+        drag_name "ros_shutdown"
+        drag_handle (0, 0, 419, 22)
+        xalign 0.5 yalign 0.5
+        frame:
+            style "ros_logon_frame_legacy"
+            text "Завершение работы ReactOS" style "ros_wait_header_text":
+                xpos -24 ypos 1
+            add "gui/window/pleasewait/poster.png":
+                xalign 0.5 ypos 22
+            add "ros_wait_loading_bar":
+                yoffset 40
+            imagebutton auto "gui/window/common/close_%s.png" action [
+                SetVariable("is_shutdown_variants_menu_opened", False),
+                Hide("ros_shutdown_frame")
+            ]:
+                xanchor -398 yanchor -5
+            add "gui/desktop/desktop_icons/shutdown.png":
+                pos(17, 115)
+            vbox:
+                pos(61, 116)
+                spacing 2
+                text "Выберите желаемое действие:" style "ros_shutdown_tooltip_text"
+                textbutton shutdown_choice_pretty[persistent.last_shutdown_choice] style "ros_shutdown_legacy_choice" text_style "ros_shutdown_legacy_choice_text" focus_mask "gui/window/properties/dropdown_menu_shutdown_variant_idle.png" action ToggleVariable("is_shutdown_variants_menu_opened", True, False)
+                null height 5
+                text shutdown_legacy_tooltip[persistent.last_shutdown_choice] style "ros_shutdown_tooltip_text"
+            hbox:
+                pos(230, 221)
+                spacing 10
+                textbutton "ОК" style "ros_shutdown_legacy_buttons" text_style "ros_shutdown_legacy_buttons_text_ok" focus_mask "gui/window/properties/mouse_scheme_delete_button_idle.png" action [
+                    SetVariable("is_shutdown_variants_menu_opened", False),
+                    Jump(shutdown_action)
+                ]
+                textbutton "Отмена" style "ros_shutdown_legacy_buttons" text_style "ros_shutdown_legacy_buttons_text" focus_mask "gui/window/properties/mouse_scheme_delete_button_idle.png" action [
+                    SetVariable("is_shutdown_variants_menu_opened", False),
+                    Hide("ros_shutdown_frame")
+                ]
+            if is_shutdown_variants_menu_opened:
+                use ros_shutdown_server_variants
+# Варианты выбора желаемого действия
+screen ros_shutdown_server_variants():
+    frame:
+        style "ros_shutdown_legacy_dropdown"
+        pos(61, 153)
+        vbox:
+            pos(1, 1)
+            textbutton "Выйти \"Администратор\"" style "ros_shutdown_legacy_dropdown_menu_entry" text_style "ros_shutdown_legacy_dropdown_menu_entry_text" focus_mask "ros_shutdown_legacy_dropdown_menu_idle" action [
+                SetVariable("persistent.last_shutdown_choice", "logout"),
+                SetVariable("is_shutdown_variants_menu_opened", False)
+            ]
+            textbutton "Завершение работы" style "ros_shutdown_legacy_dropdown_menu_entry" text_style "ros_shutdown_legacy_dropdown_menu_entry_text" focus_mask "ros_shutdown_legacy_dropdown_menu_idle" action [
+                SetVariable("persistent.last_shutdown_choice", "shutdown"),
+                SetVariable("is_shutdown_variants_menu_opened", False)
+            ]
+            textbutton "Перезагрузка" style "ros_shutdown_legacy_dropdown_menu_entry" text_style "ros_shutdown_legacy_dropdown_menu_entry_text" focus_mask "ros_shutdown_legacy_dropdown_menu_idle" action [
+                SetVariable("persistent.last_shutdown_choice", "restart"),
+                SetVariable("is_shutdown_variants_menu_opened", False)
+            ]
 
 # Подсказки в Выходе из системы / Завершении работы
 screen ros_shutdown_tooltip_logoff():
@@ -208,6 +356,7 @@ label ros_logout:
     hide screen ros_taskbar
     hide screen ros_logoff_frame
     hide screen ros_shutdown_tooltip_logoff
+    hide screen ros_shutdown_frame
     if persistent.selected_edition == "workstation":
         show screen ros_logonui(in_logoff=True)
         $ renpy.pause(1.0, hard=True)
@@ -227,7 +376,7 @@ label ros_login:
         $ renpy.pause(hard=True)
     else:
         scene postinstall
-        show corner_text "{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]":
+        show corner_text:
             yalign 0.95
         show screen ros_welcome
         $ renpy.pause(hard=True)

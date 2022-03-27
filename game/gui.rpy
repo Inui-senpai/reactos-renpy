@@ -311,7 +311,7 @@ define gui.frame_tile = False
 ## Высота горизонтальных панелей, полос прокрутки и ползунков. Ширина
 ## вертикальных панелей, полос прокрутки и ползунков.
 define gui.bar_size = 25
-define gui.scrollbar_size = 12
+define gui.scrollbar_size = 16
 define gui.slider_size = 25
 
 ## True, если изображения панелей должны моститься. False, если они должны быть

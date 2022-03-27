@@ -239,6 +239,9 @@ style ros_this_pc_menu_entry_text:
     insensitive_outlines [(0, "#fff", 1, 1)]
     xpos 20
 style ros_this_pc_frame_minimized is empty
+style ros_this_pc_scroll_vertical is ros_scrollbar_vertical:
+    ysize 264
+    unscrollable None
 
 # Основные переменные
 default ros_explorer_menu_file_opened = False
@@ -368,9 +371,8 @@ screen ros_explorer(folder=None):
                     textbutton "Переход" style "ros_this_pc_go" text_style "ros_this_pc_go_text" focus_mask "gui/window/this_pc/buttons/go_idle.png" xpos -100 action NullAction()
                 frame:
                     style "ros_this_pc_viewport"
-                    viewport:
+                    viewport id "ros_this_pc":
                         yinitial 0.0
-                        scrollbars "vertical"
                         mousewheel True
                         draggable True
                         side_yfill True
@@ -504,6 +506,11 @@ screen ros_explorer(folder=None):
                                         imagebutton auto "this_pc_system_registry_%s" xalign 0.5 mouse "link" action NullAction()
                                         text "Системный\nреестр" style "ros_this_pc_viewport_text"
                             transclude
+                    vbox:
+                        pos(574, 2)
+                        imagebutton idle "ros_scroll_up" action Scroll("ros_this_pc", "vertical decrease")
+                        vbar value YScrollValue("ros_this_pc") style "ros_this_pc_scroll_vertical"
+                        imagebutton idle "ros_scroll_down" action Scroll("ros_this_pc", "vertical increase")
                 frame:
                     style "ros_this_pc_counter_bar"
                     if folder in ["recycle_bin", "network", "pictures"]:

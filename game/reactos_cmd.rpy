@@ -38,6 +38,9 @@ image cmd_caret:
         alpha 0
         0.55
         repeat
+style ros_cmd_scroll_vertical is ros_scrollbar_vertical:
+    ysize 368
+    unscrollable None
 
 # Основные переменные
 default cmd_history = []
@@ -142,6 +145,8 @@ VOL      Вывод метки и серийного номера тома дл�
 """.format(config.version, ros_build_wo_compiler))
         elif name.lower() == "winver":
             renpy.show_screen("ros_about", name="reactos")
+        elif name.lower().endswith(" /?"):
+            cmd_history.append("Местозаполнитель. Контент будет добавлен позже.")
         else:
             cmd_history.append("\"" + name + "\" не является внутренней или внешней командой, исполняемой программой или пакетным файлом.")
 
@@ -173,9 +178,8 @@ screen ros_command_prompt():
                 xanchor -612 yanchor -6
             frame:
                 style "ros_cmd_viewport"
-                viewport:
-                    yinitial 0.0
-                    scrollbars "vertical"
+                viewport id "ros_cmd":
+                    yinitial 1.0
                     mousewheel True
                     draggable True
                     side_yfill True
@@ -194,3 +198,8 @@ screen ros_command_prompt():
                                 text "[cmd_display]" style "ros_cmd_text"
                                 use cmd_input
                         transclude
+                vbox:
+                    pos(642, 2)
+                    imagebutton idle "ros_scroll_up" action Scroll("ros_cmd", "vertical decrease")
+                    vbar value YScrollValue("ros_cmd") style "ros_cmd_scroll_vertical"
+                    imagebutton idle "ros_scroll_down" action Scroll("ros_cmd", "vertical increase")

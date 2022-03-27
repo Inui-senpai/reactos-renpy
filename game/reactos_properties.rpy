@@ -355,6 +355,12 @@ image ros_properties_screen_theme_choice_menu_idle:
 image ros_properties_screen_theme_choice_menu_hover:
     Solid("#0a246a")
     xsize 190 ysize 13
+style ros_properties_license_scroll_vertical is ros_scrollbar_vertical:
+    ysize 177
+style ros_properties_walls_scroll_vertical is ros_scrollbar_vertical:
+    ysize 104
+style ros_properties_mouse_scroll_vertical is ros_scrollbar_vertical:
+    ysize 148
 
 # Окно - Свойства: Система
 screen ros_properties_system():
@@ -441,15 +447,19 @@ screen ros_properties_system_general_license():
                 xanchor -386 yanchor -5
             frame:
                 style "ros_properties_license_window_viewport"
-                viewport:
+                viewport id "ros_properties_license":
                     yinitial 0.0
-                    scrollbars "vertical"
                     mousewheel True
                     draggable True
                     side_yfill True
                     vbox:
                         text license_text style "ros_setup_developers_description"
                         transclude
+                vbox:
+                    pos(365, 2)
+                    imagebutton idle "ros_scroll_up" action Scroll("ros_properties_license", "vertical decrease")
+                    vbar value YScrollValue("ros_properties_license") style "ros_properties_license_scroll_vertical"
+                    imagebutton idle "ros_scroll_down" action Scroll("ros_properties_license", "vertical increase")
             textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" action Hide("ros_properties_system_general_license"):
                 xpos 160 ypos 250
 # Имя компьютера
@@ -464,7 +474,7 @@ screen ros_properties_system_pc_name():
         hbox:
             xpos 11 ypos 67
             text "Описание:" style "ros_properties_text" ypos 4
-            textbutton "" style "ros_input_field" text_style "ros_input_field_text" focus_mask "gui/window/postinstall/input_field.png" xpos 70
+            textbutton "" style "ros_input_field" text_style "ros_input_field_text" focus_mask "gui/window/postinstall/input_field.png" mouse "beam" action NullAction() xpos 70
         hbox:
             xpos 11 ypos 110
             text "Полное имя:" style "ros_properties_text" ypos 4
@@ -660,9 +670,8 @@ screen ros_properties_screen_desktop():
     frame:
         style "ros_properties_screen_choice_frame"
         xpos 16 ypos 219
-        viewport:
+        viewport id "ros_properties_walls":
             yinitial 0.0
-            scrollbars "vertical"
             mousewheel True
             draggable True
             side_yfill True
@@ -677,6 +686,11 @@ screen ros_properties_screen_desktop():
                     hbox:
                         add "gui/desktop/menu_icons/submenu/image.png"
                         textbutton i2 style "ros_properties_screen_choice" text_style "ros_properties_screen_choice" xpos 2 action SetVariable("persistent.wallpaper", "wallpapers/"+i+".png")
+        vbox:
+            pos(239, -2)
+            imagebutton idle "ros_scroll_up" action Scroll("ros_properties_walls", "vertical decrease")
+            vbar value YScrollValue("ros_properties_walls") style "ros_properties_walls_scroll_vertical"
+            imagebutton idle "ros_scroll_down" action Scroll("ros_properties_walls", "vertical increase")
     vbox:
         xpos 285 ypos 219
         textbutton "Обзор..." style "ros_properties_buttons" text_style "ros_properties_buttons_text_cancel" focus_mask "gui/window/postinstall/button_idle.png" action NullAction()
@@ -1230,9 +1244,8 @@ screen ros_properties_mouse_pointers():
         frame:
             style "ros_properties_mouse_mouse_scheme_content_viewport"
             xpos 13 ypos 117
-            viewport:
+            viewport id "ros_properties_mouse_pointers":
                 yinitial 0.0
-                scrollbars "vertical"
                 mousewheel True
                 draggable True
                 side_yfill True
@@ -1283,6 +1296,13 @@ screen ros_properties_mouse_pointers():
                     hbox:
                         textbutton "Выбор ссылки" style "ros_properties_mouse_mouse_scheme_content_viewport_item" text_style "ros_properties_mouse_mouse_scheme_content_viewport_item_text" focus_mask "mouse_scheme_content_viewport_item_idle" action SetVariable("current_content_viewport_item", "link")
                         add config.mouse["link"][0][0] xpos 227 ypos 7
+                    hbox:
+                        null height 4
+            vbox:
+                pos(335, 2)
+                imagebutton idle "ros_scroll_up" action Scroll("ros_properties_mouse_pointers", "vertical decrease")
+                vbar value YScrollValue("ros_properties_mouse_pointers") style "ros_properties_mouse_scroll_vertical"
+                imagebutton idle "ros_scroll_down" action Scroll("ros_properties_mouse_pointers", "vertical increase")
         hbox:
             xpos 13 ypos 313
             style_prefix "ros_check"

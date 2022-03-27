@@ -2,10 +2,11 @@
 default persistent.provisioned = False
 default persistent.installed = False
 default install_lang = "english"
-define ros_build = "20220101-0.4.15-dev-3603-ge0a47b7.GNU_8.4.0"
+define ros_build = "20220326-0.4.15-dev-4283-g2ba6b09.GNU_8.4.0"
 define ros_build_short = ros_build[9:33]
 define ros_build_wo_compiler = ros_build[:33]
-default ros_install_directory = "ReactOS"
+# На будущее
+# default persistent.ros_install_directory = "ReactOS"
 default apply_settings = False
 default partition_hovered = False
 default format_method = None
@@ -43,6 +44,7 @@ default persistent.taskbar_settings_show_clock = True
 default persistent.taskbar_settings_show_seconds = False
 default persistent.taskbar_settings_hide_inactive_icons = False
 default current_content_viewport_item = "default"
+default persistent.last_shutdown_choice = "shutdown"
 
 # Запись действия для кнопки "Вверх" в Проводнике
 default this_pc_up_arrow_action = NullAction()
@@ -421,8 +423,9 @@ style ros_setup_license_button_ok is ros_setup_button_text:
 style ros_setup_set_up_button is ros_setup_license_button:
     xpos 6
 style ros_input_field:
-    insensitive_background "gui/window/postinstall/input_field.png"
     idle_background "gui/window/postinstall/input_field.png"
+    hover_background "gui/window/postinstall/input_field.png"
+    insensitive_background "gui/window/postinstall/input_field.png"
 style ros_input_field_text:
     font "gui/font/tahoma.ttf"
     size 11
@@ -993,6 +996,16 @@ image desk_readme_shortcut_hover:
     "desk_readme_shortcut_idle",
     matrixcolor TintMatrix("#808db0")
 
+# Полоса прокрутки
+# Кнопки
+image ros_scroll_up = "gui/scrollbar/scroll_up.png"
+image ros_scroll_down = "gui/scrollbar/scroll_down.png"
+image ros_scroll_left = "gui/scrollbar/scroll_left.png"
+image ros_scroll_right = "gui/scrollbar/scroll_right.png"
+# Полоска
+style ros_scrollbar_vertical is vscrollbar
+style ros_scrollbar_horizontal is scrollbar
+
 # Узнаём системные дату и время
 init python:
     import datetime
@@ -1073,8 +1086,8 @@ image ros_wait_loading_bar:
     xalign 0.5 ypos 54
 # TODO: Анимировать полосу загрузки в окне (и сделать более грамотное исполнение самих окон)
 
-# Настраиваемые текстовые элементы; чтобы не использовать show expression Text
-image corner_text = ParameterizedText(style="corner_text") # "ReactOS Version [config.version]\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\[ros_install_directory]"
+# Текст в углу и прочие настраиваемые текстовые элементы
+image corner_text = Text("{b}ReactOS Version [config.version]{/b}\nBuild [ros_build]\nReporting NT 5.2 (Build 3790: Service Pack 2)\nC:\\ReactOS", style="corner_text")
 image ros_boot_text = ParameterizedText(style="boot_text") # "Загрузка системного куста..." / "Loading system hive..."
 image border_text = ParameterizedText(style="install_border_text") # Текст в нижней плашке в установке
 image install_text = ParameterizedText(style="install_text") # Надписи в установке

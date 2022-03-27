@@ -24,13 +24,16 @@ style ros_authors_viewport:
     background Frame("gui/window/system_info/authors_viewport.png")
     xsize 248 ysize 116
 
-# Основные переменные
-default ros_authors_opened = False
-
 # Окно
 screen ros_about(name=None):
+    default ros_authors_opened = False
     python:
-        friendly_name = name.replace("notepad", "Блокнот").replace("reactos", "ReactOS").replace("calc", "Калькулятор ReactOS")
+        program_names = {
+            "notepad":"Блокнот",
+            "reactos":"ReactOS",
+            "calc":"Калькулятор ReactOS"
+        }
+        friendly_name = program_names[name]
         authors_button_text = "Авторы" if not ros_authors_opened else "< Назад"
     modal True
     drag:
@@ -40,9 +43,7 @@ screen ros_about(name=None):
         frame:
             style "ros_about_frame"
             text "[friendly_name]: сведения" style "ros_about_title"
-            imagebutton auto "gui/window/common/close_%s.png" action [
-                SetVariable("ros_authors_opened", False),
-                Hide("ros_about")]:
+            imagebutton auto "gui/window/common/close_%s.png" action Hide("ros_about"):
                 xanchor -394 yanchor -1
             add "gui/window/system_info/reactos[persistent.selected_edition].png" xpos -1 ypos 19
             add "gui/window/system_info/line.png" xpos -1 ypos 90
@@ -62,10 +63,8 @@ screen ros_about(name=None):
                     use ros_about_general
                 else:
                     use ros_about_general_authors
-            textbutton authors_button_text style "ros_authors_button" text_style "ros_authors_button_text" focus_mask "gui/window/system_info/authors_button_idle.png" xpos 8 ypos 307 action ToggleVariable("ros_authors_opened", True, False)
-            textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" xpos 321 ypos 307 action [
-                SetVariable("ros_authors_opened", False),
-                Hide(screen="ros_about")]
+            textbutton authors_button_text style "ros_authors_button" text_style "ros_authors_button_text" focus_mask "gui/window/system_info/authors_button_idle.png" xpos 8 ypos 307 action ToggleScreenVariable("ros_authors_opened", True, False)
+            textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" xpos 321 ypos 307 action Hide(screen="ros_about")
 # Основное
 screen ros_about_general_notepad():
     hbox:

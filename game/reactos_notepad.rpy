@@ -126,6 +126,12 @@ style ros_notepad_counter_bar_text:
     size 11
     color "#000"
     xpos 7
+style ros_notepad_scroll_vertical is ros_scrollbar_vertical:
+    ysize 310
+    unscrollable None
+style ros_notepad_scroll_horizontal is ros_scrollbar_horizontal:
+    xsize 511
+    unscrollable None
 
 # Основные переменные
 default ros_notepad_menu_file_opened = False
@@ -146,12 +152,14 @@ screen ros_notepad(file=None):
                 xpos 3 ypos 1
             if file:
                 python:
-                    try: file_text = renpy.file(file).read()
+                    try:
+                        file_text = open(file).read()
+                        file_name = file.split("/")[-1]
                     except: file = None
             if not file:
                 text "Безымянный - Блокнот" style "ros_notepad_window_title"
             else:
-                text "[file] - Блокнот" style "ros_notepad_window_title"
+                text "[file_name] - Блокнот" style "ros_notepad_window_title"
             imagebutton auto "gui/window/common/close_%s.png" action [
                 SetVariable("ros_notepad_menu_file_opened", False),
                 SetVariable("ros_notepad_menu_edit_opened", False),
@@ -189,15 +197,25 @@ screen ros_notepad(file=None):
                     ]
             frame:
                 style "ros_notepad_viewport"
-                viewport:
+                viewport id "ros_notepad":
+                    child_size(542, 341)
                     xinitial 0.0 yinitial 0.0
-                    scrollbars "both"
+                    ymaximum 341
                     mousewheel True
                     draggable True
-                    side_yfill True
                     vbox:
                         text (file_text if file else "") style "ros_notepad_viewport_text"
                         transclude
+                vbox:
+                    xpos 544 ypos 2
+                    imagebutton idle "ros_scroll_up" action Scroll("ros_notepad", "vertical decrease")
+                    vbar value YScrollValue("ros_notepad") style "ros_notepad_scroll_vertical"
+                    imagebutton idle "ros_scroll_down" action Scroll("ros_notepad", "vertical increase")
+                hbox:
+                    xpos 2 ypos 343
+                    imagebutton idle "ros_scroll_left" action Scroll("ros_notepad", "horizontal decrease")
+                    bar value XScrollValue("ros_notepad") style "ros_notepad_scroll_horizontal"
+                    imagebutton idle "ros_scroll_right" action Scroll("ros_notepad", "horizontal increase")
             frame:
                 style "ros_notepad_counter_bar"
                 text "Строка 1, столбец 1" style "ros_notepad_counter_bar_text"
