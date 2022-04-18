@@ -28,11 +28,11 @@ init python:
             tid = user32.GetWindowThreadProcessId(w, 0)
             layout_id = hex(user32.GetKeyboardLayout(tid) & (2**16 - 1))
         elif platform.system() == "Linux":
-            import subprocess
-            layout_id = subprocess.check_output([config.gamedir + "/python-packages/xkblayout-state", "print", "%s"])
+            import subprocess, ast
+            layout_id = ast.literal_eval(subprocess.check_output("gsettings get org.gnome.desktop.input-sources mru-sources", universal_newlines=True, shell=True).strip())[0][1]
         if layout_id == "0x419" or layout_id.startswith("ru"):
             return "RU"
-        elif layout_id == "0x409" or layout_id.startswith("en"):
+        elif layout_id == "0x409" or layout_id.startswith(("us", "gb")):
             return "EN"
     def ros_layout_text(st, at):
         d = Text(ros_get_layout(), style="ros_language_bar_text")

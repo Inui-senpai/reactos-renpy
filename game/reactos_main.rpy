@@ -1038,15 +1038,15 @@ init python:
         for unit in ["", "К", "М", "Г", "Т", "П"]:
             if bytes < factor:
                 # return f"{bytes:.2f}{unit}{suffix}"
-                return "{0} {1}{2}".format(bytes, unit, suffix)
+                return "{0} {1}{2}".format(int(round(bytes)), unit, suffix)
             bytes /= factor
 
 # Узнаём техническую информацию реального ПК для окна Свойств системы
 # Модель ПК, изготовитель процессора и модель последнего, базовая частота
 init python:
     total_ram = 0
+    import subprocess
     if renpy.windows:
-        import subprocess
         ros_pc_model, ros_processor_manufacturer, ros_processor_name, ros_processor_frequency = [
             line.strip()
             for line in subprocess.check_output(
@@ -1074,7 +1074,13 @@ init python:
         for i in range(len(ros_ram_capacity)):
             total_ram = total_ram + int(ros_ram_capacity[i])
         ros_ram_capacity = get_size(int(total_ram))
-    elif renpy.linux or renpy.macintosh:
+    elif renpy.linux:
+        ros_pc_model = subprocess.check_output("cat /sys/devices/virtual/dmi/id/product_name", universal_newlines=True, shell=True).strip()
+        ros_processor_manufacturer = subprocess.check_output("cat /proc/cpuinfo | grep vendor | uniq", universal_newlines=True, shell=True).strip().replace("vendor_id\t: ","")
+        ros_processor_name = subprocess.check_output("cat /proc/cpuinfo | grep 'model name' | uniq", universal_newlines=True, shell=True).strip().replace("model name\t: ","")
+        ros_processor_frequency = round(float(subprocess.check_output("cat /proc/cpuinfo | grep -i mhz | uniq", universal_newlines=True, shell=True).strip().replace("cpu MHz\t\t: ","")))
+        ros_ram_capacity = get_size(int(subprocess.check_output("free --bytes | awk '/Память/ {print $2}'", universal_newlines=True, shell=True))).strip()
+    elif renpy.macintosh:
         # местозаполнители
         ros_pc_model, ros_processor_manufacturer, ros_processor_name, ros_processor_frequency, ros_ram_capacity = [
             "", "", "", "", ""
