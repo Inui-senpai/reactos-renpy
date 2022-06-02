@@ -45,6 +45,7 @@ default persistent.taskbar_settings_show_seconds = False
 default persistent.taskbar_settings_hide_inactive_icons = False
 default current_content_viewport_item = "default"
 default persistent.last_shutdown_choice = "shutdown"
+default persistent.computer_id = ""
 
 # Запись действия для кнопки "Вверх" в Проводнике
 default this_pc_up_arrow_action = NullAction()
@@ -81,11 +82,11 @@ init python:
         # Местозаполнители названий организации и рабочей группы
         organization, workgroup_name = ["", "WORKGROUP"]
         try:
-            computer_name = os.uname().nodename.replace(".local","")
+            computer_name = os.uname()[1].replace(".local","")
         except:
             for i in range(7):
-                computer_id = str(computer_id) + renpy.random.choice(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"])
-            computer_name = "REACTOS-" + computer_id
+                persistent.computer_id = str(persistent.computer_id) + renpy.random.choice(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"])
+            computer_name = "REACTOS-" + persistent.computer_id
 
 # Закручивание гаек
 define config.developer = False
