@@ -424,7 +424,10 @@ screen ros_properties_system_general():
             text "[ros_pc_model]" style "ros_properties_text" xpos 10
             text "[ros_processor_manufacturer]" style "ros_properties_text" xpos 10
             text "[ros_processor_name]" style "ros_properties_text" xpos 10
-            text "[ros_processor_frequency] МГц" style "ros_properties_text" xpos 10
+            if not renpy.macintosh:
+                text "[ros_processor_frequency] МГц" style "ros_properties_text" xpos 10
+            else:
+                text "[ros_processor_frequency]" style "ros_properties_text" xpos 10
             text "[ros_ram_capacity] ОЗУ" style "ros_properties_text" xpos 10
         hbox:
             xpos 20 ypos 335

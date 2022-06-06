@@ -1082,10 +1082,11 @@ init python:
         ros_processor_frequency = round(float(subprocess.check_output("cat /proc/cpuinfo | grep -i mhz | uniq", universal_newlines=True, shell=True).strip().replace("cpu MHz\t\t: ","")))
         ros_ram_capacity = get_size(int(subprocess.check_output("free --bytes | awk '/Память/ {print $2}'", universal_newlines=True, shell=True))).strip()
     elif renpy.macintosh:
-        # местозаполнители
-        ros_pc_model, ros_processor_manufacturer, ros_processor_name, ros_processor_frequency, ros_ram_capacity = [
-            "", "", "", "", ""
-        ]
+        ros_pc_model = subprocess.check_output("system_profiler SPHardwareDataType | grep 'Model Name'", universal_newlines=True, shell=True).strip().replace("Model Name: ", "")
+        ros_processor_name = subprocess.check_output("system_profiler SPHardwareDataType | grep 'Processor Name'", universal_newlines=True, shell=True).strip().replace("Processor Name: ", "")
+        ros_processor_manufacturer = "GeniuneIntel" if ros_processor_name.startswith("Intel") else "Apple" if ros_processor_name.startswith("Apple") else "Unknown"
+        ros_processor_frequency = subprocess.check_output("system_profiler SPHardwareDataType | grep 'Processor Speed'", universal_newlines=True, shell=True).strip().replace("Processor Speed: ", "").replace("GHz", "ГГц")
+        ros_ram_capacity = subprocess.check_output("system_profiler SPHardwareDataType | grep 'Memory'", universal_newlines=True, shell=True).strip().replace("Memory: ", "").replace("GB", "ГБ")
 
 # Полоса загрузки в окне "Пожалуйста, подождите"
 image ros_wait_loading_bar:
