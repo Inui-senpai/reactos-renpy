@@ -64,7 +64,7 @@ screen ros_about(name=None):
                 else:
                     use ros_about_general_authors
             textbutton authors_button_text style "ros_authors_button" text_style "ros_authors_button_text" focus_mask "gui/window/system_info/authors_button_idle.png" xpos 8 ypos 307 action ToggleScreenVariable("ros_authors_opened", True, False)
-            textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" xpos 321 ypos 307 action Hide(screen="ros_about")
+            textbutton "ОК" style "ros_properties_buttons" text_style "ros_properties_buttons_text_ok" focus_mask "gui/window/postinstall/button_idle.png" xpos 321 ypos 307 action Hide("ros_about")
 # Основное
 screen ros_about_general_notepad():
     hbox:

@@ -106,28 +106,28 @@ screen ros_taskbar():
         use ros_desktop_context_menu_trigger
         use ros_desktop_taskbar_context_menu_trigger
     use ros_desktop_taskbar_clock_trigger
-    textbutton "Пуск" style "ros_start_button" text_style "ros_start_button_text" focus_mask "gui/desktop/start_button.png" action [
-        Hide(screen="ros_start_menu_entertainment_frame"),
-        Hide(screen="ros_start_menu_communications_frame"),
-        Hide(screen="ros_start_menu_services_frame"),
-        Hide(screen="ros_start_menu_accessibility_frame"),
-        Hide(screen="ros_start_menu_autostart_frame"),
-        Hide(screen="ros_start_menu_administration_frame"),
-        Hide(screen="ros_start_menu_games_frame"),
-        Hide(screen="ros_start_menu_system_tools_frame"),
-        Hide(screen="ros_start_menu_programs_frame"),
-        Hide(screen="ros_start_menu_documents_frame"),
-        Hide(screen="ros_start_menu_settings_frame"),
-        Hide(screen="ros_start_menu_new_recent_docs"),
-        Hide(screen="ros_start_menu_new_entertainment_frame"),
-        Hide(screen="ros_start_menu_new_communications_frame"),
-        Hide(screen="ros_start_menu_new_services_frame"),
-        Hide(screen="ros_start_menu_new_accessibility_frame"),
-        Hide(screen="ros_start_menu_new_autostart_frame"),
-        Hide(screen="ros_start_menu_new_administration_frame"),
-        Hide(screen="ros_start_menu_new_games_frame"),
-        Hide(screen="ros_start_menu_new_system_tools_frame"),
-        Hide(screen="ros_start_menu_new_all_programs"),
+    imagebutton auto "ros_start_button_%s" focus_mask True action [
+        Hide("ros_start_menu_entertainment_frame"),
+        Hide("ros_start_menu_communications_frame"),
+        Hide("ros_start_menu_services_frame"),
+        Hide("ros_start_menu_accessibility_frame"),
+        Hide("ros_start_menu_autostart_frame"),
+        Hide("ros_start_menu_administration_frame"),
+        Hide("ros_start_menu_games_frame"),
+        Hide("ros_start_menu_system_tools_frame"),
+        Hide("ros_start_menu_programs_frame"),
+        Hide("ros_start_menu_documents_frame"),
+        Hide("ros_start_menu_settings_frame"),
+        Hide("ros_start_menu_new_recent_docs"),
+        Hide("ros_start_menu_new_entertainment_frame"),
+        Hide("ros_start_menu_new_communications_frame"),
+        Hide("ros_start_menu_new_services_frame"),
+        Hide("ros_start_menu_new_accessibility_frame"),
+        Hide("ros_start_menu_new_autostart_frame"),
+        Hide("ros_start_menu_new_administration_frame"),
+        Hide("ros_start_menu_new_games_frame"),
+        Hide("ros_start_menu_new_system_tools_frame"),
+        Hide("ros_start_menu_new_all_programs"),
         ToggleVariable("start_menu_opened", True, False)]:
         xpos 4 ypos 696
     if start_menu_opened:
@@ -146,36 +146,36 @@ screen ros_taskbar():
     add "gui/desktop/system_tray.png":
         xalign 0.998 yalign 0.998
     add myClock xpos 1234 ypos 699
-    imagebutton idle "gui/desktop/systray_icons/network.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_network") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_network") action NullAction():
+    imagebutton idle "gui/desktop/systray_icons/network.png" hovered Show("ros_taskbar_system_tray_tooltip_network") unhovered Hide("ros_taskbar_system_tray_tooltip_network") action NullAction():
         xpos 1202 ypos 699
-    imagebutton idle "gui/desktop/systray_icons/ac_powerline.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_power") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_power") action NullAction():
+    imagebutton idle "gui/desktop/systray_icons/ac_powerline.png" hovered Show("ros_taskbar_system_tray_tooltip_power") unhovered Hide("ros_taskbar_system_tray_tooltip_power") action NullAction():
         xpos 1183 ypos 699
-    imagebutton idle "gui/desktop/systray_icons/safe_remove.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_safe_remove") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_safe_remove") action NullAction():
+    imagebutton idle "gui/desktop/systray_icons/safe_remove.png" hovered Show("ros_taskbar_system_tray_tooltip_safe_remove") unhovered Hide("ros_taskbar_system_tray_tooltip_safe_remove") action NullAction():
         xpos 1166 ypos 699
-    imagebutton idle "gui/desktop/systray_icons/volume.png" hovered Show(screen="ros_taskbar_system_tray_tooltip_volume") unhovered Hide(screen="ros_taskbar_system_tray_tooltip_volume") action (Show("ros_mixer_volume") if not renpy.get_screen("ros_mixer_volume") else Hide("ros_mixer_volume")):
+    imagebutton idle "gui/desktop/systray_icons/volume.png" hovered Show("ros_taskbar_system_tray_tooltip_volume") unhovered Hide("ros_taskbar_system_tray_tooltip_volume") action (Show("ros_mixer_volume") if not renpy.get_screen("ros_mixer_volume") else Hide("ros_mixer_volume")):
         xpos 1147 ypos 699
     key "K_ESCAPE" action [
-        Hide(screen="ros_start_menu_entertainment_frame"),
-        Hide(screen="ros_start_menu_communications_frame"),
-        Hide(screen="ros_start_menu_services_frame"),
-        Hide(screen="ros_start_menu_accessibility_frame"),
-        Hide(screen="ros_start_menu_autostart_frame"),
-        Hide(screen="ros_start_menu_administration_frame"),
-        Hide(screen="ros_start_menu_games_frame"),
-        Hide(screen="ros_start_menu_system_tools_frame"),
-        Hide(screen="ros_start_menu_programs_frame"),
-        Hide(screen="ros_start_menu_documents_frame"),
-        Hide(screen="ros_start_menu_settings_frame"),
-        Hide(screen="ros_start_menu_new_recent_docs"),
-        Hide(screen="ros_start_menu_new_entertainment_frame"),
-        Hide(screen="ros_start_menu_new_communications_frame"),
-        Hide(screen="ros_start_menu_new_services_frame"),
-        Hide(screen="ros_start_menu_new_accessibility_frame"),
-        Hide(screen="ros_start_menu_new_autostart_frame"),
-        Hide(screen="ros_start_menu_new_administration_frame"),
-        Hide(screen="ros_start_menu_new_games_frame"),
-        Hide(screen="ros_start_menu_new_system_tools_frame"),
-        Hide(screen="ros_start_menu_new_all_programs"),
+        Hide("ros_start_menu_entertainment_frame"),
+        Hide("ros_start_menu_communications_frame"),
+        Hide("ros_start_menu_services_frame"),
+        Hide("ros_start_menu_accessibility_frame"),
+        Hide("ros_start_menu_autostart_frame"),
+        Hide("ros_start_menu_administration_frame"),
+        Hide("ros_start_menu_games_frame"),
+        Hide("ros_start_menu_system_tools_frame"),
+        Hide("ros_start_menu_programs_frame"),
+        Hide("ros_start_menu_documents_frame"),
+        Hide("ros_start_menu_settings_frame"),
+        Hide("ros_start_menu_new_recent_docs"),
+        Hide("ros_start_menu_new_entertainment_frame"),
+        Hide("ros_start_menu_new_communications_frame"),
+        Hide("ros_start_menu_new_services_frame"),
+        Hide("ros_start_menu_new_accessibility_frame"),
+        Hide("ros_start_menu_new_autostart_frame"),
+        Hide("ros_start_menu_new_administration_frame"),
+        Hide("ros_start_menu_new_games_frame"),
+        Hide("ros_start_menu_new_system_tools_frame"),
+        Hide("ros_start_menu_new_all_programs"),
         SetVariable("start_menu_opened", False)]
     use ros_lang_layout
 
@@ -192,125 +192,128 @@ screen ros_start_menu():
             frame:
                 style "ros_start_menu_entry"
                 textbutton "Программы                                          {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_entry" text_style "ros_start_menu_entry_text" focus_mask "ros_start_menu_entry_idle" hovered [
-                    Hide(screen="ros_start_menu_entertainment_frame"),
-                    Hide(screen="ros_start_menu_communications_frame"),
-                    Hide(screen="ros_start_menu_services_frame"),
-                    Hide(screen="ros_start_menu_accessibility_frame"),
-                    Hide(screen="ros_start_menu_autostart_frame"),
-                    Hide(screen="ros_start_menu_administration_frame"),
-                    Hide(screen="ros_start_menu_games_frame"),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_documents_frame"),
-                    Hide(screen="ros_start_menu_settings_frame"),
-                    Show(screen="ros_start_menu_programs_frame")] action NullAction()
+                    Hide("ros_start_menu_entertainment_frame"),
+                    Hide("ros_start_menu_communications_frame"),
+                    Hide("ros_start_menu_services_frame"),
+                    Hide("ros_start_menu_accessibility_frame"),
+                    Hide("ros_start_menu_autostart_frame"),
+                    Hide("ros_start_menu_administration_frame"),
+                    Hide("ros_start_menu_games_frame"),
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_documents_frame"),
+                    Hide("ros_start_menu_settings_frame"),
+                    Show("ros_start_menu_programs_frame")] action NullAction()
                 add "gui/desktop/menu_icons/programs.png":
                     xpos 2 ypos 1
                 textbutton "Документы                                          {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_entry" text_style "ros_start_menu_entry_text" focus_mask "ros_start_menu_entry_idle" hovered [
-                    Hide(screen="ros_start_menu_entertainment_frame"),
-                    Hide(screen="ros_start_menu_communications_frame"),
-                    Hide(screen="ros_start_menu_services_frame"),
-                    Hide(screen="ros_start_menu_accessibility_frame"),
-                    Hide(screen="ros_start_menu_autostart_frame"),
-                    Hide(screen="ros_start_menu_administration_frame"),
-                    Hide(screen="ros_start_menu_games_frame"),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Hide(screen="ros_start_menu_settings_frame"),
-                    Show(screen="ros_start_menu_documents_frame")] action NullAction():
+                    Hide("ros_start_menu_entertainment_frame"),
+                    Hide("ros_start_menu_communications_frame"),
+                    Hide("ros_start_menu_services_frame"),
+                    Hide("ros_start_menu_accessibility_frame"),
+                    Hide("ros_start_menu_autostart_frame"),
+                    Hide("ros_start_menu_administration_frame"),
+                    Hide("ros_start_menu_games_frame"),
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_programs_frame"),
+                    Hide("ros_start_menu_settings_frame"),
+                    Show("ros_start_menu_documents_frame")] action NullAction():
                     yalign 0.12
                 add "gui/desktop/menu_icons/documents.png":
                     xpos 2 ypos 32
                 textbutton "Настройка                                           {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_entry" text_style "ros_start_menu_entry_text" focus_mask "ros_start_menu_entry_idle" hovered [
-                    Hide(screen="ros_start_menu_entertainment_frame"),
-                    Hide(screen="ros_start_menu_communications_frame"),
-                    Hide(screen="ros_start_menu_services_frame"),
-                    Hide(screen="ros_start_menu_accessibility_frame"),
-                    Hide(screen="ros_start_menu_autostart_frame"),
-                    Hide(screen="ros_start_menu_administration_frame"),
-                    Hide(screen="ros_start_menu_games_frame"),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Hide(screen="ros_start_menu_documents_frame"),
-                    Show(screen="ros_start_menu_settings_frame")] action NullAction():
+                    Hide("ros_start_menu_entertainment_frame"),
+                    Hide("ros_start_menu_communications_frame"),
+                    Hide("ros_start_menu_services_frame"),
+                    Hide("ros_start_menu_accessibility_frame"),
+                    Hide("ros_start_menu_autostart_frame"),
+                    Hide("ros_start_menu_administration_frame"),
+                    Hide("ros_start_menu_games_frame"),
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_programs_frame"),
+                    Hide("ros_start_menu_documents_frame"),
+                    Show("ros_start_menu_settings_frame")] action NullAction():
                     yalign 0.24
                 add "gui/desktop/menu_icons/settings.png":
                     xpos 2 ypos 62
                 textbutton "Поиск" style "ros_start_menu_entry" text_style "ros_start_menu_entry_text" focus_mask "ros_start_menu_entry_idle" hovered [
-                    Hide(screen="ros_start_menu_entertainment_frame"),
-                    Hide(screen="ros_start_menu_communications_frame"),
-                    Hide(screen="ros_start_menu_services_frame"),
-                    Hide(screen="ros_start_menu_accessibility_frame"),
-                    Hide(screen="ros_start_menu_autostart_frame"),
-                    Hide(screen="ros_start_menu_administration_frame"),
-                    Hide(screen="ros_start_menu_games_frame"),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Hide(screen="ros_start_menu_documents_frame"),
-                    Hide(screen="ros_start_menu_settings_frame")] action NullAction():
+                    Hide("ros_start_menu_entertainment_frame"),
+                    Hide("ros_start_menu_communications_frame"),
+                    Hide("ros_start_menu_services_frame"),
+                    Hide("ros_start_menu_accessibility_frame"),
+                    Hide("ros_start_menu_autostart_frame"),
+                    Hide("ros_start_menu_administration_frame"),
+                    Hide("ros_start_menu_games_frame"),
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_programs_frame"),
+                    Hide("ros_start_menu_documents_frame"),
+                    Hide("ros_start_menu_settings_frame")] action NullAction():
                     yalign 0.37
                 add "gui/desktop/menu_icons/search.png":
                     xpos 2 ypos 97
                 textbutton "Справка и поддержка" style "ros_start_menu_entry" text_style "ros_start_menu_entry_text" focus_mask "ros_start_menu_entry_idle" hovered [
-                    Hide(screen="ros_start_menu_entertainment_frame"),
-                    Hide(screen="ros_start_menu_communications_frame"),
-                    Hide(screen="ros_start_menu_services_frame"),
-                    Hide(screen="ros_start_menu_accessibility_frame"),
-                    Hide(screen="ros_start_menu_autostart_frame"),
-                    Hide(screen="ros_start_menu_administration_frame"),
-                    Hide(screen="ros_start_menu_games_frame"),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Hide(screen="ros_start_menu_documents_frame"),
-                    Hide(screen="ros_start_menu_settings_frame")] action NullAction():
+                    Hide("ros_start_menu_entertainment_frame"),
+                    Hide("ros_start_menu_communications_frame"),
+                    Hide("ros_start_menu_services_frame"),
+                    Hide("ros_start_menu_accessibility_frame"),
+                    Hide("ros_start_menu_autostart_frame"),
+                    Hide("ros_start_menu_administration_frame"),
+                    Hide("ros_start_menu_games_frame"),
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_programs_frame"),
+                    Hide("ros_start_menu_documents_frame"),
+                    Hide("ros_start_menu_settings_frame")] action NullAction():
                     yalign 0.5
                 add "gui/desktop/menu_icons/help.png":
                     xpos 2 ypos 128
                 textbutton "Выполнить..." style "ros_start_menu_entry" text_style "ros_start_menu_entry_text" focus_mask "ros_start_menu_entry_idle" hovered [
-                    Hide(screen="ros_start_menu_entertainment_frame"),
-                    Hide(screen="ros_start_menu_communications_frame"),
-                    Hide(screen="ros_start_menu_services_frame"),
-                    Hide(screen="ros_start_menu_accessibility_frame"),
-                    Hide(screen="ros_start_menu_autostart_frame"),
-                    Hide(screen="ros_start_menu_administration_frame"),
-                    Hide(screen="ros_start_menu_games_frame"),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Hide(screen="ros_start_menu_documents_frame"),
-                    Hide(screen="ros_start_menu_settings_frame")] action NullAction():
+                    Hide("ros_start_menu_entertainment_frame"),
+                    Hide("ros_start_menu_communications_frame"),
+                    Hide("ros_start_menu_services_frame"),
+                    Hide("ros_start_menu_accessibility_frame"),
+                    Hide("ros_start_menu_autostart_frame"),
+                    Hide("ros_start_menu_administration_frame"),
+                    Hide("ros_start_menu_games_frame"),
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_programs_frame"),
+                    Hide("ros_start_menu_documents_frame"),
+                    Hide("ros_start_menu_settings_frame")] action [
+                        SetVariable("start_menu_opened", False),
+                        Show("ros_run")
+                    ]:
                     yalign 0.62
                 add "gui/desktop/menu_icons/run.png":
                     xpos 2 ypos 161
                 textbutton "Завершение сеанса Администратор..." style "ros_start_menu_entry" text_style "ros_start_menu_entry_text" focus_mask "ros_start_menu_entry_idle" hovered [
-                    Hide(screen="ros_start_menu_entertainment_frame"),
-                    Hide(screen="ros_start_menu_communications_frame"),
-                    Hide(screen="ros_start_menu_services_frame"),
-                    Hide(screen="ros_start_menu_accessibility_frame"),
-                    Hide(screen="ros_start_menu_autostart_frame"),
-                    Hide(screen="ros_start_menu_administration_frame"),
-                    Hide(screen="ros_start_menu_games_frame"),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Hide(screen="ros_start_menu_documents_frame"),
-                    Hide(screen="ros_start_menu_settings_frame")] action [
+                    Hide("ros_start_menu_entertainment_frame"),
+                    Hide("ros_start_menu_communications_frame"),
+                    Hide("ros_start_menu_services_frame"),
+                    Hide("ros_start_menu_accessibility_frame"),
+                    Hide("ros_start_menu_autostart_frame"),
+                    Hide("ros_start_menu_administration_frame"),
+                    Hide("ros_start_menu_games_frame"),
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_programs_frame"),
+                    Hide("ros_start_menu_documents_frame"),
+                    Hide("ros_start_menu_settings_frame")] action [
                         SetVariable("start_menu_opened", False),
-                        Show(screen="ros_logoff_frame")]:
+                        Show("ros_logoff_frame")]:
                     yalign 0.78
                 add "gui/desktop/menu_icons/logoff.png":
                     xpos 2 ypos 201
                 textbutton "Выключить компьютер..." style "ros_start_menu_entry" text_style "ros_start_menu_entry_text" focus_mask "ros_start_menu_entry_idle" hovered [
-                    Hide(screen="ros_start_menu_entertainment_frame"),
-                    Hide(screen="ros_start_menu_communications_frame"),
-                    Hide(screen="ros_start_menu_services_frame"),
-                    Hide(screen="ros_start_menu_accessibility_frame"),
-                    Hide(screen="ros_start_menu_autostart_frame"),
-                    Hide(screen="ros_start_menu_administration_frame"),
-                    Hide(screen="ros_start_menu_games_frame"),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Hide(screen="ros_start_menu_documents_frame"),
-                    Hide(screen="ros_start_menu_settings_frame")] action [
+                    Hide("ros_start_menu_entertainment_frame"),
+                    Hide("ros_start_menu_communications_frame"),
+                    Hide("ros_start_menu_services_frame"),
+                    Hide("ros_start_menu_accessibility_frame"),
+                    Hide("ros_start_menu_autostart_frame"),
+                    Hide("ros_start_menu_administration_frame"),
+                    Hide("ros_start_menu_games_frame"),
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_programs_frame"),
+                    Hide("ros_start_menu_documents_frame"),
+                    Hide("ros_start_menu_settings_frame")] action [
                         SetVariable("start_menu_opened", False),
-                        Show(screen="ros_shutdown_frame")]:
+                        Show("ros_shutdown_frame")]:
                     yalign 0.9
                 add "gui/desktop/menu_icons/shutdown.png":
                     xpos 2 ypos 233
@@ -325,88 +328,88 @@ screen ros_start_menu_programs_frame():
         vbox:
             xalign -0.01
             textbutton "Автозагрузка                                 {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame"),
-                Hide(screen="ros_start_menu_games_frame"),
-                Hide(screen="ros_start_menu_system_tools_frame"),
-                Hide(screen="ros_start_menu_administration_frame"),
-                Show(screen="ros_start_menu_autostart_frame")] action NullAction()
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame"),
+                Hide("ros_start_menu_games_frame"),
+                Hide("ros_start_menu_system_tools_frame"),
+                Hide("ros_start_menu_administration_frame"),
+                Show("ros_start_menu_autostart_frame")] action NullAction()
             add "gui/desktop/menu_icons/submenu/folder.png":
                 xpos 6 ypos -12
             textbutton "Администрирование                      {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame"),
-                Hide(screen="ros_start_menu_autostart_frame"),
-                Hide(screen="ros_start_menu_games_frame"),
-                Hide(screen="ros_start_menu_system_tools_frame"),
-                Show(screen="ros_start_menu_administration_frame")] action NullAction():
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame"),
+                Hide("ros_start_menu_autostart_frame"),
+                Hide("ros_start_menu_games_frame"),
+                Hide("ros_start_menu_system_tools_frame"),
+                Show("ros_start_menu_administration_frame")] action NullAction():
                 ypos -12
             add "gui/desktop/menu_icons/submenu/folder.png":
                 xpos 6 ypos -24
             textbutton "Игры                                               {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame"),
-                Hide(screen="ros_start_menu_autostart_frame"),
-                Hide(screen="ros_start_menu_administration_frame"),
-                Hide(screen="ros_start_menu_system_tools_frame"),
-                Show(screen="ros_start_menu_games_frame")] action NullAction():
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame"),
+                Hide("ros_start_menu_autostart_frame"),
+                Hide("ros_start_menu_administration_frame"),
+                Hide("ros_start_menu_system_tools_frame"),
+                Show("ros_start_menu_games_frame")] action NullAction():
                 ypos -24
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -36
             textbutton "Стандартные                                {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame"),
-                Hide(screen="ros_start_menu_autostart_frame"),
-                Hide(screen="ros_start_menu_administration_frame"),
-                Hide(screen="ros_start_menu_games_frame"),
-                Show(screen="ros_start_menu_system_tools_frame")] action NullAction():
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame"),
+                Hide("ros_start_menu_autostart_frame"),
+                Hide("ros_start_menu_administration_frame"),
+                Hide("ros_start_menu_games_frame"),
+                Show("ros_start_menu_system_tools_frame")] action NullAction():
                 ypos -36
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -48
             textbutton "Wine Internet Explorer" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame"),
-                Hide(screen="ros_start_menu_autostart_frame"),
-                Hide(screen="ros_start_menu_administration_frame"),
-                Hide(screen="ros_start_menu_games_frame"),
-                Hide(screen="ros_start_menu_system_tools_frame")] action NullAction():
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame"),
+                Hide("ros_start_menu_autostart_frame"),
+                Hide("ros_start_menu_administration_frame"),
+                Hide("ros_start_menu_games_frame"),
+                Hide("ros_start_menu_system_tools_frame")] action NullAction():
                 ypos -48
             add "iexplore_shortcut":
                 xpos 6 ypos -60
             textbutton "Менеджер приложений ReactOS" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame"),
-                Hide(screen="ros_start_menu_autostart_frame"),
-                Hide(screen="ros_start_menu_administration_frame"),
-                Hide(screen="ros_start_menu_games_frame"),
-                Hide(screen="ros_start_menu_system_tools_frame")] action NullAction():
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame"),
+                Hide("ros_start_menu_autostart_frame"),
+                Hide("ros_start_menu_administration_frame"),
+                Hide("ros_start_menu_games_frame"),
+                Hide("ros_start_menu_system_tools_frame")] action NullAction():
                 ypos -60
             add "app_manager_shortcut":
                 xpos 6 ypos -72
             textbutton "Проводник ReactOS" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame"),
-                Hide(screen="ros_start_menu_autostart_frame"),
-                Hide(screen="ros_start_menu_administration_frame"),
-                Hide(screen="ros_start_menu_games_frame"),
-                Hide(screen="ros_start_menu_system_tools_frame")] action [
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame"),
+                Hide("ros_start_menu_autostart_frame"),
+                Hide("ros_start_menu_administration_frame"),
+                Hide("ros_start_menu_games_frame"),
+                Hide("ros_start_menu_system_tools_frame")] action [
                     SetVariable("start_menu_opened", False),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Show(screen="ros_explorer")]:
+                    Hide("ros_start_menu_programs_frame"),
+                    Show("ros_explorer")]:
                 ypos -72
             add "explorer_shortcut":
                 xpos 6 ypos -84
@@ -470,85 +473,85 @@ screen ros_start_menu_system_tools_frame():
         vbox:
             xalign -0.01
             textbutton "Развлечения                          {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame"),
-                Show(screen="ros_start_menu_entertainment_frame")] action NullAction()
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame"),
+                Show("ros_start_menu_entertainment_frame")] action NullAction()
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -12
             textbutton "Связь                                      {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame"),
-                Show(screen="ros_start_menu_communications_frame")] action NullAction():
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame"),
+                Show("ros_start_menu_communications_frame")] action NullAction():
                 ypos -12
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -24
             textbutton "Служебные                             {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame"),
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Show(screen="ros_start_menu_services_frame")] action NullAction():
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_accessibility_frame"),
+                Hide("ros_start_menu_entertainment_frame"),
+                Show("ros_start_menu_services_frame")] action NullAction():
                 ypos -24
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -36
             textbutton "Специальные возможности  {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Show(screen="ros_start_menu_accessibility_frame")] action NullAction():
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_entertainment_frame"),
+                Show("ros_start_menu_accessibility_frame")] action NullAction():
                 ypos -36
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -48
             textbutton "Paint" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame")] action NullAction():
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame")] action NullAction():
                 ypos -48
             add "paint_shortcut":
                 xpos 6 ypos -60
             textbutton "WordPad" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame")] action NullAction():
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame")] action NullAction():
                 ypos -60
             add "wordpad_shortcut":
                 xpos 6 ypos -72
             textbutton "Блокнот" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame")] action [
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame")] action [
                     SetVariable("start_menu_opened", False),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Show(screen="ros_notepad")]:
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_programs_frame"),
+                    Show("ros_notepad")]:
                 ypos -72
             add "notepad_shortcut":
                 xpos 6 ypos -84
             textbutton "Калькулятор" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame")] action [
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame")] action [
                     SetVariable("start_menu_opened", False),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Show(screen="ros_calc")]:
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_programs_frame"),
+                    Show("ros_calc")]:
                 ypos -84
             add "calc_shortcut":
                 xpos 6 ypos -96
             textbutton "Командная строка" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_entertainment_frame"),
-                Hide(screen="ros_start_menu_communications_frame"),
-                Hide(screen="ros_start_menu_services_frame"),
-                Hide(screen="ros_start_menu_accessibility_frame")] action [
+                Hide("ros_start_menu_entertainment_frame"),
+                Hide("ros_start_menu_communications_frame"),
+                Hide("ros_start_menu_services_frame"),
+                Hide("ros_start_menu_accessibility_frame")] action [
                     SetVariable("start_menu_opened", False),
-                    Hide(screen="ros_start_menu_system_tools_frame"),
-                    Hide(screen="ros_start_menu_programs_frame"),
-                    Show(screen="ros_command_prompt")
+                    Hide("ros_start_menu_system_tools_frame"),
+                    Hide("ros_start_menu_programs_frame"),
+                    Show("ros_command_prompt")
                 ]:
                 ypos -96
             add "cmd_shortcut":
@@ -644,14 +647,14 @@ screen ros_start_menu_documents_frame():
             xalign -0.01
             textbutton "Мои документы" style "ros_start_menu_submenu_documents" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_documents_idle" action [
                 SetVariable("start_menu_opened", False),
-                Hide(screen="ros_start_menu_documents_frame"),
-                Show(screen="ros_explorer", folder="docs")]
+                Hide("ros_start_menu_documents_frame"),
+                Show("ros_explorer", folder="docs")]
             add "gui/desktop/menu_icons/submenu/documents.png":
                 xpos 6 ypos -12
             textbutton "Мои рисунки" style "ros_start_menu_submenu_documents" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_documents_idle" action [
                 SetVariable("start_menu_opened", False),
-                Hide(screen="ros_start_menu_documents_frame"),
-                Show(screen="ros_explorer", folder="pictures")]:
+                Hide("ros_start_menu_documents_frame"),
+                Show("ros_explorer", folder="pictures")]:
                 ypos -12
             add "gui/desktop/menu_icons/submenu/pictures.png":
                 xpos 6 ypos -24
@@ -698,177 +701,180 @@ screen ros_start_menu_new():
             xpos 9 ypos 44
             textbutton "(пусто)" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_text"
             textbutton "Все программы {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Show(screen="ros_start_menu_new_all_programs")] action NullAction():
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Show("ros_start_menu_new_all_programs")] action NullAction():
                 ypos 320
         vbox:
             xpos 195 ypos 44
             textbutton "Мои документы" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_title_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action [
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action [
                 SetVariable("start_menu_opened", False),
-                Show(screen="ros_explorer", folder="docs")]
+                Show("ros_explorer", folder="docs")]
             add "gui/desktop/desktop_icons/documents.png":
                 xpos 2 ypos -13
             textbutton "Недавние документы {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_title_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs"),
                 Show("ros_start_menu_new_recent_docs")] action NullAction():
                 ypos -14
             add "gui/desktop/desktop_icons/recent_docs.png":
                 xpos 2 ypos -29
             textbutton "Мои рисунки" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_title_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action [
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action [
                 SetVariable("start_menu_opened", False),
-                Show(screen="ros_explorer", folder="pictures")]:
+                Show("ros_explorer", folder="pictures")]:
                 ypos -28
             add "gui/desktop/desktop_icons/pictures.png":
                 xpos 2 ypos -42
             textbutton "Моя музыка" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_title_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action NullAction():
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action NullAction():
                 ypos -41
             add "gui/desktop/desktop_icons/music.png":
                 xpos 2 ypos -55
             textbutton "Мой компьютер" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_title_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action [
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action [
                 SetVariable("start_menu_opened", False),
-                Show(screen="ros_explorer")]:
+                Show("ros_explorer")]:
                 ypos -53
             add "gui/desktop/desktop_icons/this_pc.png":
                 xpos 2 ypos -66
             textbutton "Панель управления" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action [
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action [
                 SetVariable("start_menu_opened", False),
-                Show(screen="ros_explorer", folder="control_panel")]:
+                Show("ros_explorer", folder="control_panel")]:
                 ypos -62
             add "gui/desktop/desktop_icons/control_panel.png":
                 xpos 2 ypos -78
             textbutton "Выбор программ по\nумолчанию" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_text_two_rows" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action NullAction():
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action NullAction():
                 ypos -76
             add "gui/desktop/desktop_icons/favorites.png":
                 xpos 2 ypos -106
             textbutton "Принтеры и факсы" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action NullAction():
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action NullAction():
                 ypos -105
             add "gui/desktop/desktop_icons/printers_and_faxes.png":
                 xpos 2 ypos -121
             textbutton "Справка и поддержка" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action NullAction():
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action NullAction():
                 ypos -116
             add "gui/desktop/desktop_icons/help_and_support.png":
                 xpos 2 ypos -131
             textbutton "Поиск" style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action NullAction():
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action NullAction():
                 ypos -130
             add "gui/desktop/desktop_icons/search.png":
                 xpos 2 ypos -144
             textbutton "Выполнить..." style "ros_start_menu_new_entry" text_style "ros_start_menu_new_entry_text" focus_mask "ros_start_menu_new_entry_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action NullAction():
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action [
+                        SetVariable("start_menu_opened", False),
+                        Show("ros_run")
+                    ]:
                 ypos -145
             add "gui/desktop/desktop_icons/run.png":
                 xpos 2 ypos -160
@@ -876,33 +882,33 @@ screen ros_start_menu_new():
             xpos 138 ypos 410
             spacing 5
             textbutton "Выход из системы" style "ros_start_menu_new_logoff" text_style "ros_start_menu_new_logoff_text" focus_mask "ros_start_menu_new_logoff_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action [
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action [
                 SetVariable("start_menu_opened", False),
-                Show(screen="ros_logoff_frame")]
+                Show("ros_logoff_frame")]
             add "gui/desktop/desktop_icons/logoff.png":
                 xpos -97 ypos -1
             textbutton "Выключение" style "ros_start_menu_new_shutdown" text_style "ros_start_menu_new_shutdown_text" focus_mask "ros_start_menu_new_shutdown_idle" hovered [
-                Hide(screen="ros_start_menu_new_recent_docs"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_all_programs")] action [
+                Hide("ros_start_menu_new_recent_docs"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_all_programs")] action [
                 SetVariable("start_menu_opened", False),
-                Show(screen="ros_shutdown_frame")]
+                Show("ros_shutdown_frame")]
             add "gui/desktop/desktop_icons/shutdown.png":
                 xpos -68 ypos -1
 # Все программы
@@ -914,88 +920,88 @@ screen ros_start_menu_new_all_programs():
         vbox:
             xalign -0.01
             textbutton "Автозагрузка                                 {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Show(screen="ros_start_menu_new_autostart_frame")] action NullAction()
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Show("ros_start_menu_new_autostart_frame")] action NullAction()
             add "gui/desktop/menu_icons/submenu/folder.png":
                 xpos 6 ypos -12
             textbutton "Администрирование                      {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Show(screen="ros_start_menu_new_administration_frame")] action NullAction():
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Show("ros_start_menu_new_administration_frame")] action NullAction():
                 ypos -12
             add "gui/desktop/menu_icons/submenu/folder.png":
                 xpos 6 ypos -24
             textbutton "Игры                                               {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame"),
-                Show(screen="ros_start_menu_new_games_frame")] action NullAction():
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_system_tools_frame"),
+                Show("ros_start_menu_new_games_frame")] action NullAction():
                 ypos -24
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -36
             textbutton "Стандартные                                {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Show(screen="ros_start_menu_new_system_tools_frame")] action NullAction():
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Show("ros_start_menu_new_system_tools_frame")] action NullAction():
                 ypos -36
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -48
             textbutton "Wine Internet Explorer" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame")] action NullAction():
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame")] action NullAction():
                 ypos -48
             add "iexplore_shortcut":
                 xpos 6 ypos -60
             textbutton "Менеджер приложений ReactOS" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame")] action NullAction():
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame")] action NullAction():
                 ypos -60
             add "app_manager_shortcut":
                 xpos 6 ypos -72
             textbutton "Проводник ReactOS" style "ros_start_menu_submenu" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_autostart_frame"),
-                Hide(screen="ros_start_menu_new_administration_frame"),
-                Hide(screen="ros_start_menu_new_games_frame"),
-                Hide(screen="ros_start_menu_new_system_tools_frame")] action [
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_autostart_frame"),
+                Hide("ros_start_menu_new_administration_frame"),
+                Hide("ros_start_menu_new_games_frame"),
+                Hide("ros_start_menu_new_system_tools_frame")] action [
                     SetVariable("start_menu_opened", False),
-                    Hide(screen="ros_start_menu_new_all_programs"),
-                    Show(screen="ros_explorer")]:
+                    Hide("ros_start_menu_new_all_programs"),
+                    Show("ros_explorer")]:
                 ypos -72
             add "explorer_shortcut":
                 xpos 6 ypos -84
@@ -1059,85 +1065,85 @@ screen ros_start_menu_new_system_tools_frame():
         vbox:
             xalign -0.01
             textbutton "Развлечения                          {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Show(screen="ros_start_menu_new_entertainment_frame")] action NullAction()
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Show("ros_start_menu_new_entertainment_frame")] action NullAction()
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -12
             textbutton "Связь                                      {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Show(screen="ros_start_menu_new_communications_frame")] action NullAction():
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Show("ros_start_menu_new_communications_frame")] action NullAction():
                 ypos -12
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -24
             textbutton "Служебные                             {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Show(screen="ros_start_menu_new_services_frame")] action NullAction():
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_accessibility_frame"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Show("ros_start_menu_new_services_frame")] action NullAction():
                 ypos -24
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -36
             textbutton "Специальные возможности  {font=gui/font/arial.ttf}►{/font}" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Show(screen="ros_start_menu_new_accessibility_frame")] action NullAction():
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Show("ros_start_menu_new_accessibility_frame")] action NullAction():
                 ypos -36
             add "gui/desktop/menu_icons/submenu/programs.png":
                 xpos 6 ypos -48
             textbutton "Paint" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame")] action NullAction():
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame")] action NullAction():
                 ypos -48
             add "paint_shortcut":
                 xpos 6 ypos -60
             textbutton "WordPad" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame")] action NullAction():
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame")] action NullAction():
                 ypos -60
             add "wordpad_shortcut":
                 xpos 6 ypos -72
             textbutton "Блокнот" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame")] action [
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame")] action [
                     SetVariable("start_menu_opened", False),
-                    Hide(screen="ros_start_menu_new_all_programs"),
-                    Hide(screen="ros_start_menu_new_system_tools_frame"),
-                    Show(screen="ros_notepad")]:
+                    Hide("ros_start_menu_new_all_programs"),
+                    Hide("ros_start_menu_new_system_tools_frame"),
+                    Show("ros_notepad")]:
                 ypos -72
             add "notepad_shortcut":
                 xpos 6 ypos -84
             textbutton "Калькулятор" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame")] action [
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame")] action [
                     SetVariable("start_menu_opened", False),
-                    Hide(screen="ros_start_menu_new_all_programs"),
-                    Hide(screen="ros_start_menu_new_system_tools_frame"),
-                    Show(screen="ros_calc")]:
+                    Hide("ros_start_menu_new_all_programs"),
+                    Hide("ros_start_menu_new_system_tools_frame"),
+                    Show("ros_calc")]:
                 ypos -84
             add "calc_shortcut":
                 xpos 6 ypos -96
             textbutton "Командная строка" style "ros_start_menu_submenu_system_tools" text_style "ros_start_menu_submenu_text" focus_mask "ros_start_menu_submenu_system_tools_idle" hovered [
-                Hide(screen="ros_start_menu_new_entertainment_frame"),
-                Hide(screen="ros_start_menu_new_communications_frame"),
-                Hide(screen="ros_start_menu_new_services_frame"),
-                Hide(screen="ros_start_menu_new_accessibility_frame")] action [
+                Hide("ros_start_menu_new_entertainment_frame"),
+                Hide("ros_start_menu_new_communications_frame"),
+                Hide("ros_start_menu_new_services_frame"),
+                Hide("ros_start_menu_new_accessibility_frame")] action [
                     SetVariable("start_menu_opened", False),
-                    Hide(screen="ros_start_menu_new_all_programs"),
-                    Hide(screen="ros_start_menu_new_system_tools_frame"),
-                    Show(screen="ros_command_prompt")
+                    Hide("ros_start_menu_new_all_programs"),
+                    Hide("ros_start_menu_new_system_tools_frame"),
+                    Show("ros_command_prompt")
                 ]:
                 ypos -96
             add "cmd_shortcut":
@@ -1249,39 +1255,39 @@ screen ros_desktop_icons():
         xpos 20 ypos 12
         spacing 20
         vbox:
-            imagebutton auto "desk_recycle_bin_%s" mouse "link" action Show(screen="ros_explorer", folder="recycle_bin"):
+            imagebutton auto "desk_recycle_bin_%s" mouse "link" action Show("ros_explorer", folder="recycle_bin"):
                 xpos 4
             text "Корзина" style "ros_desktop_icon_text"
         vbox:
-            imagebutton auto "desk_documents_%s" mouse "link" action Show(screen="ros_explorer", folder="docs"):
+            imagebutton auto "desk_documents_%s" mouse "link" action Show("ros_explorer", folder="docs"):
                 xpos 4
             text "Мои\nдокументы" style "ros_desktop_icon_text":
                 xpos -7
         vbox:
-            imagebutton auto "desk_this_pc_%s" mouse "link" action Show(screen="ros_explorer") alternate [
-                Hide(screen="ros_taskbar_context_menu"),
-                Hide(screen="ros_desktop_context_menu"),
-                Show(screen="ros_desktop_context_menu_this_pc")]:
+            imagebutton auto "desk_this_pc_%s" mouse "link" action Show("ros_explorer") alternate [
+                Hide("ros_taskbar_context_menu"),
+                Hide("ros_desktop_context_menu"),
+                Show("ros_desktop_context_menu_this_pc")]:
                 xpos 5
             text "Мой\nкомпьютер" style "ros_desktop_icon_text":
                 xpos -7
         vbox:
-            imagebutton auto "desk_network_%s" mouse "link" action Show(screen="ros_explorer", folder="network"):
+            imagebutton auto "desk_network_%s" mouse "link" action Show("ros_explorer", folder="network"):
                 xpos 4
             text "Сетевое\nокружение" style "ros_desktop_icon_text":
                 xpos -7
         vbox:
-            imagebutton auto "desk_command_prompt_shortcut_%s" mouse "link" action Show(screen="ros_command_prompt"):
+            imagebutton auto "desk_command_prompt_shortcut_%s" mouse "link" action Show("ros_command_prompt"):
                 xpos 4
             text "Командная\nстрока" style "ros_desktop_icon_text":
                 xpos -7
         vbox:
-            imagebutton auto "desk_app_manager_shortcut_%s" mouse "link" action Show(screen="ros_app_manager"):
+            imagebutton auto "desk_app_manager_shortcut_%s" mouse "link" action Show("ros_app_manager"):
                 xpos 4
             text "Менеджер\nприложений" style "ros_desktop_icon_text":
                 xpos -10
         vbox:
-            imagebutton auto "desk_readme_shortcut_%s" mouse "link" action Show(screen="ros_notepad", file=config.gamedir+"/readme.txt"):
+            imagebutton auto "desk_readme_shortcut_%s" mouse "link" action Show("ros_notepad", file=config.gamedir+"/readme.txt"):
                 xpos 4
             text "Прочти\nменя" style "ros_desktop_icon_text":
                 xpos 2
@@ -1295,9 +1301,9 @@ screen ros_desktop_context_menu_trigger():
             SetVariable("sort_entry", False),
             SetVariable("create_entry", False),
             SetVariable("toolbars_entry", False),
-            Hide(screen="ros_taskbar_context_menu"),
-            Hide(screen="ros_desktop_context_menu_this_pc"),
-            Show(screen="ros_desktop_context_menu")]
+            Hide("ros_taskbar_context_menu"),
+            Hide("ros_desktop_context_menu_this_pc"),
+            Show("ros_desktop_context_menu")]
 
 # Область для триггера контекстного меню Панели задач
 screen ros_desktop_taskbar_context_menu_trigger():
@@ -1308,16 +1314,16 @@ screen ros_desktop_taskbar_context_menu_trigger():
             SetVariable("sort_entry", False),
             SetVariable("create_entry", False),
             SetVariable("toolbars_entry", False),
-            Hide(screen="ros_desktop_context_menu"),
-            Hide(screen="ros_desktop_context_menu_this_pc"),
-            Show(screen="ros_taskbar_context_menu")]
+            Hide("ros_desktop_context_menu"),
+            Hide("ros_desktop_context_menu_this_pc"),
+            Show("ros_taskbar_context_menu")]
 
 # Область для триггера часов на Панели задач
 screen ros_desktop_taskbar_clock_trigger():
     imagebutton idle "gui/desktop/desktop_trigger_frame.png":
         focus_mask "gui/desktop/taskbar_trigger_clock_focus_mask.png"
-        hovered Show(screen="ros_taskbar_system_tray_tooltip_date_and_time")
-        unhovered Hide(screen="ros_taskbar_system_tray_tooltip_date_and_time")
+        hovered Show("ros_taskbar_system_tray_tooltip_date_and_time")
+        unhovered Hide("ros_taskbar_system_tray_tooltip_date_and_time")
         action NullAction()
 
 # Контекстное меню: Рабочий стол
@@ -1369,7 +1375,7 @@ screen ros_desktop_context_menu():
                 SetVariable("create_entry", False),
                 SetVariable("hovered_button", True)] unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_idle" action [
                     Hide("ros_desktop_context_menu"),
-                    Show(screen="ros_properties_screen")]
+                    Show("ros_properties_screen")]
         if sort_entry:
             hbox:
                 xpos 138
@@ -1429,7 +1435,7 @@ screen ros_desktop_context_menu_this_pc():
         vbox:
             xpos 3 ypos 3
             spacing 2
-            textbutton "Открыть" style "ros_context_menu_this_pc" text_style "ros_context_menu_title" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_this_pc_idle" action [Hide("ros_desktop_context_menu_this_pc"), Show(screen="ros_explorer")]
+            textbutton "Открыть" style "ros_context_menu_this_pc" text_style "ros_context_menu_title" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_this_pc_idle" action [Hide("ros_desktop_context_menu_this_pc"), Show("ros_explorer")]
             textbutton "Поиск" style "ros_context_menu_this_pc" text_style "ros_context_menu_text" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_this_pc_idle" action NullAction()
             textbutton "Управление" style "ros_context_menu_this_pc" text_style "ros_context_menu_text" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_this_pc_idle" action NullAction()
             textbutton "Открыть в дереве" style "ros_context_menu_this_pc" text_style "ros_context_menu_text" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_this_pc_idle" action NullAction()
@@ -1444,7 +1450,7 @@ screen ros_desktop_context_menu_this_pc():
             null height 1
             textbutton "Свойства" style "ros_context_menu_this_pc" text_style "ros_context_menu_text" hovered SetVariable("hovered_button", True) unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_this_pc_idle" action [
                 Hide("ros_desktop_context_menu_this_pc"),
-                Show(screen="ros_properties_system")]
+                Show("ros_properties_system")]
     key "K_ESCAPE" action Hide("ros_desktop_context_menu_this_pc")
 # Контекстное меню: Панель задач
 screen ros_taskbar_context_menu():
@@ -1488,19 +1494,19 @@ screen ros_taskbar_context_menu():
                 textbutton "{font=gui/font/Marlett.ttf}{size=13}a{/font}{/size} Закрепить панель задач" style "ros_context_menu_taskbar" text_style "ros_context_menu_text_selected" hovered [
                     SetVariable("toolbars_entry", False),
                     SetVariable("hovered_button", True)] unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_taskbar_idle" action [
-                        Hide(screen="ros_taskbar_context_menu"),
+                        Hide("ros_taskbar_context_menu"),
                         SetVariable("persistent.taskbar_settings_lock_taskbar", False)]
             else:
                 textbutton "Закрепить панель задач" style "ros_context_menu_taskbar" text_style "ros_context_menu_text" hovered [
                     SetVariable("toolbars_entry", False),
                     SetVariable("hovered_button", True)] unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_taskbar_idle" action [
-                        Hide(screen="ros_taskbar_context_menu"),
+                        Hide("ros_taskbar_context_menu"),
                         SetVariable("persistent.taskbar_settings_lock_taskbar", True)]
             textbutton "Свойства" style "ros_context_menu_taskbar" text_style "ros_context_menu_text" hovered [
                 SetVariable("toolbars_entry", False),
                 SetVariable("hovered_button", True)] unhovered SetVariable("hovered_button", False) focus_mask "ros_context_menu_taskbar_idle" action [
-                    Hide(screen="ros_taskbar_context_menu"),
-                    Show(screen="ros_properties_taskbar")]
+                    Hide("ros_taskbar_context_menu"),
+                    Show("ros_properties_taskbar")]
         if toolbars_entry:
             hbox:
                 xpos 210

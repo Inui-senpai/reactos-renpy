@@ -2,7 +2,7 @@
 default persistent.provisioned = False
 default persistent.installed = False
 default install_lang = "english"
-define ros_build = "20220326-0.4.15-dev-4283-g2ba6b09.GNU_8.4.0"
+define ros_build = "20220617-0.4.15-dev-4680-g2be7af1.GNU_8.4.0"
 define ros_build_short = ros_build[9:33]
 define ros_build_wo_compiler = ros_build[:33]
 # На будущее
@@ -110,10 +110,6 @@ init python:
 init python:
     myClock = Clock(False, 0, 0, 46, False, True)
     myClock.runmode("real")
-
-# Указатели мыши
-define config.mouse = {"default":[("gui/mouse/arrow.png", 0, 0)], "helpsel":[("gui/mouse/helpsel.png", 0, 0)], "working":[("gui/mouse/working.png", 0, 0)], "busy":[("gui/mouse/busy.png", 15, 16)], "cross":[("gui/mouse/cross.png", 15, 15)], "beam":[("gui/mouse/beam.png", 15, 15)], "pen":[("gui/mouse/pen.png", 0, 0)], "unavail":[("gui/mouse/unavail.png", 16, 16)], "ns":[("gui/mouse/ns.png", 15, 15)], "ew":[("gui/mouse/ew.png", 15, 15)], "nwse":[("gui/mouse/nwse.png", 15, 15)], "nesw":[("gui/mouse/nesw.png", 15, 15)], "move":[("gui/mouse/move.png", 15, 15)], "up":[("gui/mouse/up.png", 15, 7)], "link":[("gui/mouse/link.png", 12, 4)]}
-define config.mouse_hide_time = None
 
 # Заливки сплошным цветом для загрузчика и установщика
 image black = Solid("#000")
@@ -513,17 +509,15 @@ style ros_taskbar_window_buttons_text:
     selected_color "#000"
     xpos 8 ypos 4
 # Кнопка "Пуск"
-style ros_start_button:
-    idle_background "gui/desktop/start_button.png"
-    hover_background "gui/desktop/start_button.png"
-    selected_background "gui/desktop/start_button_selected.png"
+image ros_start_button_idle = Composite((57, 22), (0, 0), "gui/desktop/start_button.png", (24, 5), Text("Пуск", style="ros_start_button_text"))
+image ros_start_button_selected_idle = Composite((57, 23), (0, 0), "gui/desktop/start_button_selected.png", (25, 7), Text("Пуск", style="ros_start_button_text"))
+image ros_start_button_selected_hover = "ros_start_button_selected_idle"
 style ros_start_button_text:
     font "gui/font/tahomabd.ttf"
     color "#000"
     hover_color "#000"
     selected_color "#000"
     size 11
-    xpos 20
 # Часы
 style ros_taskbar_clock_text:
     font "gui/font/tahoma.ttf"
@@ -1009,8 +1003,7 @@ style ros_scrollbar_horizontal is scrollbar
 
 # Узнаём системные дату и время
 init python:
-    import datetime
-    import time
+    import datetime, time
     now = datetime.datetime.now()
     month = now.month
     months = (None, "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря")

@@ -20,6 +20,7 @@ screen setup_step1():
                 textbutton "Далее >" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_2")
 
 # Второй и последующие шаги установщика
+# TODO: Сделать возможность смены типа продукта (после того, как этапы установки и пост-установки будут переписаны)
 screen setup_step3():
     drag:
         drag_name "ros_setup2"
@@ -150,11 +151,11 @@ screen setup_step4():
                 xpos 4 ypos 66
             text "Язык системы устанавливается и действует во всех приложениях. Можно\nвыбрать систему исчисления, формат чисел и даты.\n\n\n\n\n\nДля изменения языка системы нажмите \"Настроить...\"." style "ros_setup_description":
                 xpos 48 ypos 63
-            textbutton "Настроить..." style "ros_setup_button" text_style "ros_setup_set_up_button" focus_mask "gui/window/postinstall/button_idle.png" action Show(screen="dialog_placeholder", message="Местозаполнитель: контент появится позже", ok_action=Hide("dialog_placeholder")):
+            textbutton "Настроить..." style "ros_setup_button" text_style "ros_setup_set_up_button" focus_mask "gui/window/postinstall/button_idle.png" action Show("dialog_placeholder", message="Местозаполнитель: контент появится позже", ok_action=Hide("dialog_placeholder")):
                 xpos 347 ypos 155
             text "Выбрав раскладку, вы сможете вводить символы на вашем языке.\n\n\n\nДля изменения раскладки нажмите \"Настроить...\"." style "ros_setup_description":
                 xpos 48 ypos 200
-            textbutton "Настроить..." style "ros_setup_button" text_style "ros_setup_set_up_button" focus_mask "gui/window/postinstall/button_idle.png" action Show(screen="dialog_placeholder", message="Местозаполнитель: контент появится позже", ok_action=Hide("dialog_placeholder")):
+            textbutton "Настроить..." style "ros_setup_button" text_style "ros_setup_set_up_button" focus_mask "gui/window/postinstall/button_idle.png" action Show("dialog_placeholder", message="Местозаполнитель: контент появится позже", ok_action=Hide("dialog_placeholder")):
                 xpos 347 ypos 251
             hbox:
                 pos(195,310)
@@ -400,7 +401,7 @@ screen setup_step11():
                 textbutton "< Назад" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png"
                 null width 33
                 textbutton "Далее >" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png"
-    timer 5.0 action Show(screen="setup_step_gecko")
+    timer 5.0 action Show("setup_step_gecko")
 
 screen setup_step_gecko():
     drag:
@@ -420,7 +421,7 @@ screen setup_step_gecko():
                 pos(171,105)
                 textbutton "Отмена" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_12")
                 null width 38
-                textbutton "Установить" style "ros_setup_button" text_style "ros_setup_button_text_install" focus_mask "gui/window/postinstall/button_idle.png" action [Hide("setup_step_gecko"), Show(screen="setup_step_gecko1")]
+                textbutton "Установить" style "ros_setup_button" text_style "ros_setup_button_text_install" focus_mask "gui/window/postinstall/button_idle.png" action [Hide("setup_step_gecko"), Show("setup_step_gecko1")]
 
 screen setup_step_gecko1():
     drag:
@@ -442,7 +443,7 @@ screen setup_step_gecko1():
                 textbutton "Отмена" style "ros_setup_button" text_style "ros_setup_button_text" focus_mask "gui/window/postinstall/button_idle.png" action Call("ros_postinstall_12")
                 null width 38
                 textbutton "Установить" style "ros_setup_button" text_style "ros_setup_button_text_install" focus_mask "gui/window/postinstall/button_idle.png"
-    timer 30.0 action [Hide("setup_step_gecko1"), Show(screen="setup_step_gecko2")]
+    timer 30.0 action [Hide("setup_step_gecko1"), Show("setup_step_gecko2")]
 
 screen setup_step_gecko2():
     drag:

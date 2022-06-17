@@ -424,16 +424,13 @@ screen ros_properties_system_general():
             text "[ros_pc_model]" style "ros_properties_text" xpos 10
             text "[ros_processor_manufacturer]" style "ros_properties_text" xpos 10
             text "[ros_processor_name]" style "ros_properties_text" xpos 10
-            if not renpy.macintosh:
-                text "[ros_processor_frequency] МГц" style "ros_properties_text" xpos 10
-            else:
-                text "[ros_processor_frequency]" style "ros_properties_text" xpos 10
+            text "[ros_processor_frequency]" + (" МГЦ" if not renpy.macintosh else "") style "ros_properties_text" xpos 10
             text "[ros_ram_capacity] ОЗУ" style "ros_properties_text" xpos 10
         hbox:
             xpos 20 ypos 335
             text "Посетите" style "ros_properties_text"
             textbutton "{color=#0a246a}домашнюю страницу ReactOS{/color}" text_style "ros_properties_text" xpos -1 ypos -4 mouse "link" action OpenURL("https://reactos.org/")
-            textbutton "Лицензия..." style "ros_properties_license_button" text_style "ros_properties_license_button_text" focus_mask "gui/window/properties/license_button_idle.png" xpos 30 ypos -4 action Show(screen="ros_properties_system_general_license")
+            textbutton "Лицензия..." style "ros_properties_license_button" text_style "ros_properties_license_button_text" focus_mask "gui/window/properties/license_button_idle.png" xpos 30 ypos -4 action Show("ros_properties_system_general_license")
     timer 0.1 repeat True action SetScreenVariable("ros_system_runtime", ros_uptime_counter(renpy.get_game_runtime()))
 # Лицензия
 screen ros_properties_system_general_license():
@@ -547,7 +544,7 @@ screen ros_properties_system_advanced():
         hbox:
             xpos 14 ypos 347
             spacing 31
-            textbutton "Настройки системы" style "ros_properties_page2_buttons" text_style "ros_properties_page4_buttons_settings_text" focus_mask "gui/window/properties/button_page2_idle.png" action Show(screen="ros_properties_system_advanced_system_config")
+            textbutton "Настройки системы" style "ros_properties_page2_buttons" text_style "ros_properties_page4_buttons_settings_text" focus_mask "gui/window/properties/button_page2_idle.png" action Show("ros_properties_system_advanced_system_config")
             textbutton "Переменные среды" style "ros_properties_page2_buttons" text_style "ros_properties_page4_buttons_settings_text" focus_mask "gui/window/properties/button_page2_idle.png" action NullAction()
             textbutton "Отчёт об ошибках" style "ros_properties_page2_buttons" text_style "ros_properties_page4_buttons_text" focus_mask "gui/window/properties/button_page2_idle.png" action NullAction()
 # Настройки системы

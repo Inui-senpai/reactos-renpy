@@ -103,7 +103,7 @@ screen ros_logoff_workstation():
                 xpos -34 ypos 5
         vbox:
             xpos 199 ypos 76
-            imagebutton auto "gui/shutdown/log_off_%s.png" hovered Show(screen="ros_shutdown_tooltip_logoff") unhovered Hide(screen="ros_shutdown_tooltip_logoff") mouse "link" action Jump("ros_logout")
+            imagebutton auto "gui/shutdown/log_off_%s.png" hovered Show("ros_shutdown_tooltip_logoff") unhovered Hide("ros_shutdown_tooltip_logoff") mouse "link" action Jump("ros_logout")
             text "Выход" style "ros_shutdown_buttons_text":
                 ypos 5
         hbox:
@@ -149,12 +149,12 @@ screen ros_shutdown_workstation():
                 xpos -20 ypos 5
         vbox:
             xpos 141 ypos 76
-            imagebutton auto "gui/shutdown/shutdown_%s.png" hovered Show(screen="ros_shutdown_tooltip_shutdown") unhovered Hide(screen="ros_shutdown_tooltip_shutdown") mouse "link" action Jump("ros_shutdown")
+            imagebutton auto "gui/shutdown/shutdown_%s.png" hovered Show("ros_shutdown_tooltip_shutdown") unhovered Hide("ros_shutdown_tooltip_shutdown") mouse "link" action Jump("ros_shutdown")
             text "Выключить" style "ros_shutdown_buttons_text":
                 xpos -10 ypos 5
         vbox:
             xpos 226 ypos 76
-            imagebutton auto "gui/shutdown/restart_%s.png" hovered Show(screen="ros_shutdown_tooltip_restart") unhovered Hide(screen="ros_shutdown_tooltip_restart") mouse "link" action Jump("ros_restart")
+            imagebutton auto "gui/shutdown/restart_%s.png" hovered Show("ros_shutdown_tooltip_restart") unhovered Hide("ros_shutdown_tooltip_restart") mouse "link" action Jump("ros_restart")
             text "Перезапустить" style "ros_shutdown_buttons_text":
                 xpos -21 ypos 5
         hbox:

@@ -380,4 +380,4 @@ screen ros_calc_help():
             null height 1
             textbutton "О программе" style "ros_calc_menu_entry_help" text_style "ros_calc_menu_entry_text" focus_mask "ros_calc_menu_entry_help_idle" action [
                 SetVariable("ros_calc_menu_help_opened", False),
-                Show(screen="ros_about", name="calc")]
+                Show("ros_about", name="calc")]

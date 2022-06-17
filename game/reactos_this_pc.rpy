@@ -295,7 +295,7 @@ screen ros_explorer(folder=None):
                 text "[ros_explorer_title]" style "ros_notepad_window_title"
                 python:
                     if folder == "control_panel":
-                        this_pc_up_arrow_action = Show(screen="ros_explorer")
+                        this_pc_up_arrow_action = Show("ros_explorer")
                     else:
                         this_pc_up_arrow_action = NullAction()
                 imagebutton auto "gui/window/common/close_%s.png" action [
@@ -420,7 +420,7 @@ screen ros_explorer(folder=None):
                                                 text "Командная\nстрока" style "ros_this_pc_viewport_text"
                                             vbox:
                                                 xpos 10
-                                                imagebutton auto "cp_mouse_%s" xalign 0.5 mouse "link" action Show(screen="ros_properties_mouse")
+                                                imagebutton auto "cp_mouse_%s" xalign 0.5 mouse "link" action Show("ros_properties_mouse")
                                                 text "Мышь" style "ros_this_pc_viewport_text"
                                         hbox:
                                             spacing 13
@@ -448,7 +448,7 @@ screen ros_explorer(folder=None):
                                                 imagebutton auto "cp_netshell_%s" xalign 0.5 mouse "link" action NullAction()
                                                 text "Сетевые\nподключения" style "ros_this_pc_viewport_text"
                                             vbox:
-                                                imagebutton auto "cp_system_%s" xalign 0.5 mouse "link" action Show(screen="ros_properties_system")
+                                                imagebutton auto "cp_system_%s" xalign 0.5 mouse "link" action Show("ros_properties_system")
                                                 text "Система" style "ros_this_pc_viewport_text"
                                         hbox:
                                             spacing 13
@@ -478,7 +478,7 @@ screen ros_explorer(folder=None):
                                                 text "Шрифты" style "ros_this_pc_viewport_text"
                                             vbox:
                                                 xpos 13
-                                                imagebutton auto "cp_screen_settings_%s" xalign 0.5 mouse "link" action Show(screen="ros_properties_screen")
+                                                imagebutton auto "cp_screen_settings_%s" xalign 0.5 mouse "link" action Show("ros_properties_screen")
                                                 text "Экран" style "ros_this_pc_viewport_text"
                                         hbox:
                                             spacing 2
@@ -497,7 +497,7 @@ screen ros_explorer(folder=None):
                                         imagebutton auto "this_pc_cd_drive_%s" xalign 0.5 mouse "link" action NullAction()
                                         text "CD-дисковод\n(D:)" style "ros_this_pc_viewport_text"
                                     vbox:
-                                        imagebutton auto "this_pc_control_panel_%s" xalign 0.5 mouse "link" action Show(screen="ros_explorer", folder="control_panel")
+                                        imagebutton auto "this_pc_control_panel_%s" xalign 0.5 mouse "link" action Show("ros_explorer", folder="control_panel")
                                         text "Панель\nуправления" style "ros_this_pc_viewport_text"
                                     vbox:
                                         imagebutton auto "this_pc_namespaces_%s" xalign 0.5 mouse "link" action NullAction()
@@ -567,13 +567,13 @@ screen ros_explorer_menu_file():
             null height 1
             textbutton "Свойства" style "ros_this_pc_menu_entry" text_style "ros_this_pc_menu_entry_text" focus_mask "ros_this_pc_menu_entry_idle" hovered [
                 SetVariable("ros_explorer_menu_file_sort_opened", False),
-                SetVariable("ros_explorer_menu_file_view_opened", False)] action [SetVariable("ros_explorer_menu_file_opened", False), Show(screen="ros_properties_system")]
+                SetVariable("ros_explorer_menu_file_view_opened", False)] action [SetVariable("ros_explorer_menu_file_opened", False), Show("ros_properties_system")]
             null height 1
             add "gui/desktop/context_menu_separator.png" xsize 134 ypos 1
             null height 1
             textbutton "Закрыть" style "ros_this_pc_menu_entry" text_style "ros_this_pc_menu_entry_text" focus_mask "ros_this_pc_menu_entry_idle" hovered [
                 SetVariable("ros_explorer_menu_file_sort_opened", False),
-                SetVariable("ros_explorer_menu_file_view_opened", False)] action [SetVariable("ros_explorer_menu_file_opened", False), Hide(screen="ros_explorer")]
+                SetVariable("ros_explorer_menu_file_view_opened", False)] action [SetVariable("ros_explorer_menu_file_opened", False), Hide("ros_explorer")]
         vbox:
             if ros_explorer_menu_file_view_opened:
                 use ros_explorer_menu_file_view
@@ -818,4 +818,4 @@ screen ros_explorer_menu_help():
             spacing 2
             textbutton "О ReactOS" style "ros_this_pc_menu_help_entry" text_style "ros_this_pc_menu_entry_text" focus_mask "ros_this_pc_menu_help_entry_idle" action [
                 SetVariable("ros_explorer_menu_help_opened", False),
-                Show(screen="ros_about", name="reactos")]
+                Show("ros_about", name="reactos")]

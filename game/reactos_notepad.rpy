@@ -256,7 +256,7 @@ screen ros_notepad_menu_file():
             null height 1
             textbutton "Выход" style "ros_notepad_menu_entry" text_style "ros_notepad_menu_entry_text" focus_mask "ros_notepad_menu_entry_idle" action [
                 SetVariable("ros_notepad_menu_file_opened", False),
-                Hide(screen="ros_notepad")]
+                Hide("ros_notepad")]
 # Правка
 screen ros_notepad_menu_edit():
     frame:
@@ -328,4 +328,4 @@ screen ros_notepad_menu_help():
             null height 1
             textbutton "О программе" style "ros_notepad_menu_entry_help" text_style "ros_notepad_menu_entry_text" focus_mask "ros_notepad_menu_entry_help_idle" action [
                 SetVariable("ros_notepad_menu_help_opened", False),
-                Show(screen="ros_about", name="notepad")]
+                Show("ros_about", name="notepad")]
