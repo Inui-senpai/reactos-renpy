@@ -117,6 +117,7 @@ style ros_notepad_viewport_text:
     size 14
     color "#000"
     xpos 8 ypos 7
+    layout "nobreak"
 style ros_notepad_counter_bar:
     background Frame("gui/window/notepad/counter_bar.png")
     xsize 562 ysize 18
@@ -198,9 +199,8 @@ screen ros_notepad(file=None):
             frame:
                 style "ros_notepad_viewport"
                 viewport id "ros_notepad":
-                    child_size(542, 341)
                     xinitial 0.0 yinitial 0.0
-                    ymaximum 341
+                    xmaximum 542 ymaximum 341
                     mousewheel True
                     draggable True
                     vbox:
